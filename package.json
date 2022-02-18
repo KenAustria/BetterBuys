@@ -19,8 +19,8 @@
   "homepage": "https://github.com/KenAustria/BetterBuys#readme",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "mongoose": "^6.1.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.2.1",
     "nodemon": "^2.0.15"
   }
 }
