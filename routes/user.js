@@ -52,6 +52,32 @@ router.get('/find/:id', verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+// GET USER STATS
+router.get('/stats', verifyTokenAndAdmin, async (req, res) => {
+  const date = new Date();
+  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+
+  try {
+    const data = await User.aggregate([
+      { $match: { createdAt: { $gte: lastYear } } }, // condition to match for createdAt date
+      {
+        $project: {
+          month: { $month: '$createdAt' }, // take month number from createdAt date
+        },
+      },
+      {
+        $group: {
+          _id: '$month',
+          total: { $sum: 1 }, // sum every registered user
+        },
+      },
+    ]);
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // GET USERS
 router.get('/', verifyTokenAndAdmin, async (req, res) => {
   const query = req.query.new;
