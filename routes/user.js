@@ -1,12 +1,11 @@
 const User = require('../models/User');
 const router = require('express').Router();
 const {
-  verifyToken,
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
 } = require('./verifyToken');
 
-// UPDATE
+// UPDATE USER
 router.put('/:id', verifyTokenAndAuthorization, async (req, res) => {
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
@@ -31,7 +30,7 @@ router.put('/:id', verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
-// DELETE
+// DELETE USER
 router.delete('/:id', verifyTokenAndAuthorization, async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
