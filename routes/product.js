@@ -9,8 +9,8 @@ router.post('/', verifyTokenAndAdmin, async (req, res) => {
   try {
     const savedProduct = await newProduct.save();
     res.status(200).json(savedProduct);
-  } catch (err) {
-    res.status(500).json(err);
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
@@ -25,8 +25,8 @@ router.put('/:id', verifyTokenAndAdmin, async (req, res) => {
       { new: true }
     );
     res.status(200).json(updatedProduct);
-  } catch (err) {
-    res.status(500).json(err);
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
@@ -35,8 +35,18 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.status(200).json("Product has been deleted!");
-  } catch (err) {
-    res.status(500).json(err);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// GET PRODUCT
+router.get("/find/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
