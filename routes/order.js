@@ -1,6 +1,10 @@
 const Order = require('../models/Order');
 const router = require('express').Router();
-const { verifyToken, verifyTokenAndAdmin } = require('./verifyToken');
+const {
+  verifyToken,
+  verifyTokenAndAdmin,
+  verifyTokenAndAuthorization,
+} = require('./verifyToken');
 
 // CREATE ORDER
 router.post('/', verifyToken, async (req, res) => {
@@ -44,6 +48,16 @@ router.delete('/:id', verifyTokenAndAdmin, async (req, res) => {
 router.get('/find/:userId', verifyTokenAndAuthorization, async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.params.userId });
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// GET ALL ORDERS
+router.get('/', verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const orders = await Order.find();
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json(error);
