@@ -1,6 +1,11 @@
 const Cart = require('../models/Cart');
+const Cart = require('../models/Cart');
 const router = require('express').Router();
-const { verifyToken, verifyTokenAndAuthorization } = require('./verifyToken');
+const {
+  verifyToken,
+  verifyTokenAndAuthorization,
+  verifyTokenAndAdmin,
+} = require('./verifyToken');
 
 // CREATE CART
 router.post('/', verifyToken, async (req, res) => {
@@ -45,6 +50,16 @@ router.get('/find/:userId', verifyTokenAndAuthorization, async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.params.userId });
     res.status(200).json(cart);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// GET ALL CARTS
+router.get('/', verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const carts = await Cart.find();
+    res.status(200).json(carts);
   } catch (error) {
     res.status(500).json(error);
   }
