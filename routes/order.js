@@ -1,8 +1,6 @@
 const Order = require('../models/Order');
 const router = require('express').Router();
-const {
-  verifyToken
-} = require('./verifyToken');
+const { verifyToken, verifyTokenAndAdmin } = require('./verifyToken');
 
 // CREATE ORDER
 router.post('/', verifyToken, async (req, res) => {
@@ -11,6 +9,22 @@ router.post('/', verifyToken, async (req, res) => {
   try {
     const savedOrder = await newOrder.save();
     res.status(200).json(savedOrder);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// UPDATE ORDER
+router.put('/:id', verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedOrder);
   } catch (error) {
     res.status(500).json(error);
   }
