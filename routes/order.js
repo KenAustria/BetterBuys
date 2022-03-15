@@ -65,7 +65,7 @@ router.get('/', verifyTokenAndAdmin, async (req, res) => {
 });
 
 // GET MONTHLY INCOME
-router.get("/income", verifyTokenAndAdmin, async (req, res) => {
+router.get('/income', verifyTokenAndAdmin, async (req, res) => {
   const date = new Date();
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
   const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
@@ -75,20 +75,20 @@ router.get("/income", verifyTokenAndAdmin, async (req, res) => {
       { $match: { createdAt: { $gte: previousMonth } } }, // condition to match for createdAt date greater than previous month
       {
         $project: {
-          month: { $month: "$createdAt" },
-          sales: "$amount", // sum amount of all months
+          month: { $month: '$createdAt' },
+          sales: '$amount', // sum amount of all months
         },
       },
       {
         $group: {
-          _id: "$month",
-          total: { $sum: "$sales" },
+          _id: '$month',
+          total: { $sum: '$sales' },
         },
       },
     ]);
     res.status(200).json(income);
-  } catch (err) {
-    res.status(500).json(err);
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
