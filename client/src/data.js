@@ -21,3 +21,21 @@ export const carouselSlides = [
     bg: 'ead1dc',
   },
 ];
+
+export const categories = [
+  {
+    id: 1,
+    img: 'https://ibb.co/dbLyVmB',
+    title: 'Apple iPhone',
+  },
+  {
+    id: 2,
+    img: 'https://ibb.co/SBfQVXd',
+    title: 'Samsung Galaxy',
+  },
+  {
+    id: 3,
+    img: 'https://ibb.co/VNTZY6c',
+    title: 'Google Pixel',
+  },
+];
