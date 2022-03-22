@@ -39,3 +39,38 @@ export const categories = [
     title: 'Google Pixel',
   },
 ];
+
+export const trendingProducts = [
+  {
+    id: 1,
+    img: 'https://ibb.co/bmGcSPJ',
+  },
+  {
+    id: 2,
+    img: 'https://ibb.co/gMCZYzH',
+  },
+  {
+    id: 3,
+    img: 'https://ibb.co/zP4DYPM',
+  },
+  {
+    id: 4,
+    img: 'https://ibb.co/zPL2ynn',
+  },
+  {
+    id: 5,
+    img: 'https://ibb.co/bmGcSPJ',
+  },
+  {
+    id: 6,
+    img: 'https://ibb.co/gMCZYzH',
+  },
+  {
+    id: 7,
+    img: 'https://ibb.co/zP4DYPM',
+  },
+  {
+    id: 8,
+    img: 'https://ibb.co/zPL2ynn',
+  },
+];
