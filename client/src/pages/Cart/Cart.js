@@ -3,11 +3,13 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
+import { mobile } from '../../responsive';
 
 const CartContainer = styled.div``;
 
 const CartWrapper = styled.div`
   padding: 20px;
+  ${mobile({ padding: '10px' })}
 `;
 
 const CartTitle = styled.h1`
@@ -32,7 +34,9 @@ const CartTopButton = styled.button`
   color: ${props => props.type === 'filled' && 'white'};
 `;
 
-const CartTopTexts = styled.div``;
+const CartTopTexts = styled.div`
+  ${mobile({ display: 'none' })}
+`;
 
 const CartTopText = styled.span`
   text-decoration: underline;
@@ -43,6 +47,7 @@ const CartTopText = styled.span`
 const CartBottom = styled.div`
   display: flex;
   justify-content: space-between;
+  ${mobile({ flexDirection: 'column' })}
 `;
 
 const CartInfo = styled.div`
@@ -52,6 +57,7 @@ const CartInfo = styled.div`
 const CartProduct = styled.div`
   display: flex;
   justify-content: space-between;
+  ${mobile({ flexDirection: 'column' })}
 `;
 
 const CartProductDetail = styled.div`
@@ -100,11 +106,13 @@ const CartProductAmountContainer = styled.div`
 const CartProductAmount = styled.div`
   font-size: 24px;
   margin: 5px;
+  ${mobile({ margin: '5px 15px' })}
 `;
 
 const CartProductPrice = styled.div`
   font-size: 30px;
   font-weight: 200;
+  ${mobile({ marginBottom: '20px' })}
 `;
 
 const Hr = styled.hr`
