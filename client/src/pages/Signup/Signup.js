@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mobile } from '../.././responsive';
 
 const SignupContainer = styled.div`
   width: 100vw;
@@ -18,6 +19,7 @@ const SignupWrapper = styled.div`
   width: 40%;
   padding: 20px;
   background-color: white;
+  ${mobile({ width: '75%' })}
 `;
 
 const SignupTitle = styled.h1`
