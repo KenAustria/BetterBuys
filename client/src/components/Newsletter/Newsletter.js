@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Send } from '@material-ui/icons';
+import { mobile } from '../.././responsive';
 
 const NewsletterContainer = styled.div`
   height: 60vh;
@@ -18,6 +19,7 @@ const NewsletterDescription = styled.div`
   font-size: 24px;
   font-weight: 300;
   margin-bottom: 20px;
+  ${mobile({ textAlign: 'center' })}
 `;
 
 const NewsletterInputContainer = styled.div`
@@ -27,6 +29,7 @@ const NewsletterInputContainer = styled.div`
   display: flex;
   justify-content: space-between;
   border: 1px solid lightgray;
+  ${mobile({ width: '80%' })}
 `;
 
 const NewsletterInput = styled.input`
