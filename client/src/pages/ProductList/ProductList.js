@@ -4,6 +4,7 @@ import Products from '../../components/Products';
 import Newsletter from '../../components/Newsletter';
 import Footer from '../../components/Footer';
 import styled from 'styled-components';
+import { mobile } from '../.././responsive';
 
 const ProductListContainer = styled.div``;
 
@@ -11,24 +12,27 @@ const ProductListTitle = styled.h1`
   margin: 20px;
 `;
 
-const FilterContainer = styled.div`
+const ProductListFilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-const Filter = styled.div`
+const ProductListFilter = styled.div`
   margin: 20px;
+  ${mobile({ width: '0px 20px', display: 'flex', flexDirection: 'column' })}
 `;
 
-const FilterText = styled.span`
+const ProductListFilterText = styled.span`
   font-size: 20px;
   font-weight: 600;
   margin-right: 20px;
+  ${mobile({ marginRight: '0px' })}
 `;
 
-const Select = styled.select`
+const ProductListSelect = styled.select`
   padding: 10px;
   margin-right: 20px;
+  ${mobile({ margin: '10px 0px' })}
 `;
 const FilterOption = styled.option``;
 
@@ -38,10 +42,10 @@ const ProductList = () => {
       <Navbar />
       <Promotion />
       <ProductListTitle>Phones</ProductListTitle>
-      <FilterContainer>
-        <Filter>
-          <FilterText>Filter Products:</FilterText>
-          <Select>
+      <ProductListFilterContainer>
+        <ProductListFilter>
+          <ProductListFilterText>Filter Products:</ProductListFilterText>
+          <ProductListSelect>
             <FilterOption disabled selected>
               Phones
             </FilterOption>
@@ -58,8 +62,8 @@ const ProductList = () => {
             <FilterOption>Google Pixel 5</FilterOption>
             <FilterOption>Google Pixel 3a</FilterOption>
             <FilterOption>Google Pixel 4 XL</FilterOption>
-          </Select>
-          <Select>
+          </ProductListSelect>
+          <ProductListSelect>
             <FilterOption disabled selected>
               Color
             </FilterOption>
@@ -68,17 +72,17 @@ const ProductList = () => {
             <FilterOption>Green</FilterOption>
             <FilterOption>Grey</FilterOption>
             <FilterOption>Gold</FilterOption>
-          </Select>
-        </Filter>
-        <Filter>
-          <FilterText>Sort Products:</FilterText>
-          <Select>
+          </ProductListSelect>
+        </ProductListFilter>
+        <ProductListFilter>
+          <ProductListFilterText>Sort Products:</ProductListFilterText>
+          <ProductListSelect>
             <FilterOption selected>Newest</FilterOption>
             <FilterOption>Price (asc)</FilterOption>
             <FilterOption>Price (desc)</FilterOption>
-          </Select>
-        </Filter>
-      </FilterContainer>
+          </ProductListSelect>
+        </ProductListFilter>
+      </ProductListFilterContainer>
       <Products />
       <Newsletter />
       <Footer />
