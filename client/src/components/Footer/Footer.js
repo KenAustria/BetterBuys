@@ -8,9 +8,11 @@ import {
   Room,
   Twitter,
 } from '@material-ui/icons';
+import { mobile } from '../.././responsive';
 
 const FooterContainer = styled.div`
   display: flex;
+  ${mobile({ flexDirection: 'column' })}
 `;
 
 const LeftFooter = styled.div`
@@ -45,6 +47,7 @@ const SocialIcon = styled.div`
 const FooterCenter = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ display: 'none' })}
 `;
 
 const FooterTitle = styled.h3`
@@ -67,6 +70,7 @@ const FooterListItem = styled.li`
 const FooterRight = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ backgroundColor: '#fff8f8' })}
 `;
 
 const ContactItem = styled.div`
