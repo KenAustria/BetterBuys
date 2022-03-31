@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Promotion from '../../components/Promotion/Promotion';
 import Products from '../../components/Products/Products';
 import Newsletter from '../../components/Newsletter/Newsletter';
 import Footer from '../../components/Footer/Footer';
 import styled from 'styled-components';
+import { useLocation } from 'react-router';
 import { mobile } from '../.././responsive';
 
 const ProductListContainer = styled.div``;
@@ -37,6 +39,18 @@ const ProductListSelect = styled.select`
 const FilterOption = styled.option``;
 
 const ProductList = () => {
+  const [filters, setFilters] = useState({});
+  const location = useLocation();
+  console.log(location.pathname.split('/')[2]);
+
+  const handleFilters = event => {
+    const value = event.target.value;
+    setFilters({
+      ...filters,
+      [event.target.name]: value,
+    });
+  };
+  console.log(filters);
   return (
     <ProductListContainer>
       <Navbar />
@@ -45,7 +59,7 @@ const ProductList = () => {
       <ProductListFilterContainer>
         <ProductListFilter>
           <ProductListFilterText>Filter Products:</ProductListFilterText>
-          <ProductListSelect>
+          <ProductListSelect name='phone' onChange={handleFilters}>
             <FilterOption disabled selected>
               Phones
             </FilterOption>
@@ -63,7 +77,7 @@ const ProductList = () => {
             <FilterOption>Google Pixel 3a</FilterOption>
             <FilterOption>Google Pixel 4 XL</FilterOption>
           </ProductListSelect>
-          <ProductListSelect>
+          <ProductListSelect name='color' onChange={handleFilters}>
             <FilterOption disabled selected>
               Color
             </FilterOption>
