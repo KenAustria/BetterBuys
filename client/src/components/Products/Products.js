@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Product from './Product';
-import { trendingProducts } from '../../data';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -13,6 +12,7 @@ const ProductsContainer = styled.div`
 
 const Products = ({ category, filters, sort }) => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -30,9 +30,20 @@ const Products = ({ category, filters, sort }) => {
     getProducts();
   }, [category]);
 
+  useEffect(() => {
+    category &&
+      setFilteredProducts(
+        products.filter(product =>
+          Object.entries(filters).every(([key, value]) =>
+            product[key].includes(value)
+          )
+        )
+      );
+  }, [products, category, filters]);
+
   return (
     <ProductsContainer>
-      {trendingProducts.map(trendingProduct => (
+      {filteredProducts.map(trendingProduct => (
         <Product key={trendingProduct.id} trendingProduct={trendingProduct} />
       ))}
     </ProductsContainer>
