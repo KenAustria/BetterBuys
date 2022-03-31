@@ -1,7 +1,7 @@
-import Announcement from '../components/Announcement';
-import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
-import Newsletter from '../components/Newsletter';
+import Promotion from '../../components/Promotion/Promotion';
+import Footer from '../../components/Footer/Footer';
+import Navbar from '../../components/Navbar/Navbar';
+import Newsletter from '../../components/Newsletter/Newsletter';
 import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
 import { mobile } from '../../responsive';
@@ -118,7 +118,7 @@ const Product = () => {
   return (
     <ProductProfileContainer>
       <Navbar />
-      <Announcement />
+      <Promotion />
       <ProductProfileWrapper>
         <ProductImageContainer>
           <ProductImage src='https://ibb.co/bmGcSPJ' />

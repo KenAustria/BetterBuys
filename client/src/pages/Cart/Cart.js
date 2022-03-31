@@ -1,6 +1,6 @@
-import Announcement from '../components/Announcement';
-import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
+import Promotion from '../../components/Promotion/Promotion';
+import Footer from '../../components/Footer/Footer';
+import Navbar from '../../components/Navbar/Navbar';
 import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
 import { mobile } from '../../responsive';
@@ -157,7 +157,7 @@ const Cart = () => {
   return (
     <CartContainer>
       <Navbar />
-      <Announcement />
+      <Promotion />
       <CartWrapper>
         <CartTitle>YOUR BAG</CartTitle>
         <CartTop>

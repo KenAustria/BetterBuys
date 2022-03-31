@@ -1,8 +1,8 @@
-import Navbar from '../../components/Navbar';
+import Navbar from '../../components/Navbar/Navbar';
 import Promotion from '../../components/Promotion/Promotion';
-import Products from '../../components/Products';
-import Newsletter from '../../components/Newsletter';
-import Footer from '../../components/Footer';
+import Products from '../../components/Products/Products';
+import Newsletter from '../../components/Newsletter/Newsletter';
+import Footer from '../../components/Footer/Footer';
 import styled from 'styled-components';
 import { mobile } from '../.././responsive';
 
