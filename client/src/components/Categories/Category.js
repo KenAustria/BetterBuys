@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { mobile } from '../.././responsive';
 
 const CategoryContainer = styled.div`
@@ -44,11 +45,13 @@ const CategoryButton = styled.button`
 const Category = ({ category }) => {
   return (
     <CategoryContainer>
-      <CategoryImage src={category.img} />
-      <CategoryInfo>
-        <CategoryTitle>{category.title}</CategoryTitle>
-        <CategoryButton>SHOP NOW</CategoryButton>
-      </CategoryInfo>
+      <Link to={`/products/${category.category}`}>
+        <CategoryImage src={category.img} />
+        <CategoryInfo>
+          <CategoryTitle>{category.title}</CategoryTitle>
+          <CategoryButton>SHOP NOW</CategoryButton>
+        </CategoryInfo>
+      </Link>
     </CategoryContainer>
   );
 };

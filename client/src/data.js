@@ -27,16 +27,19 @@ export const categories = [
     id: 1,
     img: 'https://ibb.co/dbLyVmB',
     title: 'Apple iPhone',
+    category: 'iphone',
   },
   {
     id: 2,
     img: 'https://ibb.co/SBfQVXd',
     title: 'Samsung Galaxy',
+    category: 'galaxy',
   },
   {
     id: 3,
     img: 'https://ibb.co/VNTZY6c',
     title: 'Google Pixel',
+    category: 'pixel',
   },
 ];
 
