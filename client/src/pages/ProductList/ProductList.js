@@ -42,7 +42,8 @@ const ProductList = () => {
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState('newest');
   const location = useLocation();
-  console.log(location.pathname.split('/')[2]);
+  const category = location.pathname.split('/')[2];
+  console.log(category);
 
   const handleFilters = event => {
     const value = event.target.value;
@@ -52,13 +53,11 @@ const ProductList = () => {
     });
   };
 
-  console.log(filters);
-  console.log(sort);
   return (
     <ProductListContainer>
       <Navbar />
       <Promotion />
-      <ProductListTitle>Phones</ProductListTitle>
+      <ProductListTitle>{category}</ProductListTitle>
       <ProductListFilterContainer>
         <ProductListFilter>
           <ProductListFilterText>Filter Products:</ProductListFilterText>
@@ -102,7 +101,7 @@ const ProductList = () => {
           </ProductListSelect>
         </ProductListFilter>
       </ProductListFilterContainer>
-      <Products />
+      <Products category={category} filters={filters} sort={sort} />
       <Newsletter />
       <Footer />
     </ProductListContainer>
