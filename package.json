@@ -1,28 +1,8 @@
 {
-  "name": "betterbuys",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KenAustria/BetterBuys.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/KenAustria/BetterBuys/issues"
-  },
-  "homepage": "https://github.com/KenAustria/BetterBuys#readme",
   "dependencies": {
-    "crypto-js": "^4.1.1",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.2",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.1",
-    "nodemon": "^2.0.15"
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "react-router-dom": "^6.2.2",
+    "styled-components": "^5.3.5"
   }
 }
