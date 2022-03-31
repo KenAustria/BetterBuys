@@ -40,6 +40,7 @@ const FilterOption = styled.option``;
 
 const ProductList = () => {
   const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState('newest');
   const location = useLocation();
   console.log(location.pathname.split('/')[2]);
 
@@ -50,7 +51,9 @@ const ProductList = () => {
       [event.target.name]: value,
     });
   };
+
   console.log(filters);
+  console.log(sort);
   return (
     <ProductListContainer>
       <Navbar />
@@ -90,10 +93,12 @@ const ProductList = () => {
         </ProductListFilter>
         <ProductListFilter>
           <ProductListFilterText>Sort Products:</ProductListFilterText>
-          <ProductListSelect>
-            <FilterOption selected>Newest</FilterOption>
-            <FilterOption>Price (asc)</FilterOption>
-            <FilterOption>Price (desc)</FilterOption>
+          <ProductListSelect onChange={event => setSort(event.target.value)}>
+            <FilterOption value='newest' selected>
+              Newest
+            </FilterOption>
+            <FilterOption value='asc'>Price (asc)</FilterOption>
+            <FilterOption value='desc'>Price (desc)</FilterOption>
           </ProductListSelect>
         </ProductListFilter>
       </ProductListFilterContainer>
