@@ -141,23 +141,15 @@ const Product = () => {
           <ProductImage src={product.productImage} />
         </ProductImageContainer>
         <InfoContainer>
-          <ProductTitle>Apple iPhone 13</ProductTitle>
-          <ProductDescription>
-            Space, the final frontier. These are the voyages of the Starship
-            Enterprise. Its five-year mission: to explore strange new worlds, to
-            seek out new life and new civilizations, to boldly go where no man
-            has gone before. Many say exploration is part of our destiny, but it
-            is actually our duty to future generations and their quest to ensure
-            the survival of the human species.
-          </ProductDescription>
-          <ProductPrice>$1200</ProductPrice>
+          <ProductTitle>{product.productTitle}</ProductTitle>
+          <ProductDescription>{product.productDescription}</ProductDescription>
+          <ProductPrice>{product.productPrice}</ProductPrice>
           <ProductFilterContainer>
             <ProductFilter>
               <ProductFilterTitle>Color</ProductFilterTitle>
-              <ProductFilterColor color='silver' />
-              <ProductFilterColor color='green' />
-              <ProductFilterColor color='gold' />
-              <ProductFilterColor color='black' />
+              {product.productColor.map(color => (
+                <ProductFilterColor key={color} color={color} />
+              ))}
             </ProductFilter>
             <ProductFilter>
               <ProductFilterTitle>Size</ProductFilterTitle>
