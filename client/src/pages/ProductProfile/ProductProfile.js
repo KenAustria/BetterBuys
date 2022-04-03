@@ -119,6 +119,9 @@ const AddToCartButton = styled.button`
 
 const Product = () => {
   const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState('');
+  const [size, setSize] = useState('');
   const location = useLocation();
   const id = location.pathname.split('/')[2];
 
@@ -131,6 +134,14 @@ const Product = () => {
     };
     getProduct();
   }, [id]);
+
+  const handleQuantity = type => {
+    if (type === 'decrease') {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
 
   return (
     <ProductProfileContainer>
@@ -147,17 +158,19 @@ const Product = () => {
           <ProductFilterContainer>
             <ProductFilter>
               <ProductFilterTitle>Color</ProductFilterTitle>
-              {product.productColor.map(productColor => (
+              {product.productColor?.map(productColor => (
                 <ProductFilterColor
                   key={productColor}
                   productColor={productColor}
+                  onClick={() => setColor(productColor)}
                 />
               ))}
             </ProductFilter>
             <ProductFilter>
               <ProductFilterTitle>Size</ProductFilterTitle>
-              <ProductFilterSize>
-                {product.productSize.map(productSize => (
+              <ProductFilterSize
+                onChange={event => setSize(event.target.value)}>
+                {product.productSize?.map(productSize => (
                   <ProductFilterSizeOption key={productSize}>
                     {productSize}
                   </ProductFilterSizeOption>
@@ -167,9 +180,9 @@ const Product = () => {
           </ProductFilterContainer>
           <ProductAddContainer>
             <ProductAmountContainer>
-              <Remove />
-              <ProductAmount>1</ProductAmount>
-              <Add />
+              <Remove onClick={() => handleQuantity('decrease')} />
+              <ProductAmount>{quantity}</ProductAmount>
+              <Add onClick={() => handleQuantity('increase')} />
             </ProductAmountContainer>
             <AddToCartButton>ADD TO CART</AddToCartButton>
           </ProductAddContainer>
