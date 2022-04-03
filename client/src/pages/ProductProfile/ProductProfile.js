@@ -1,10 +1,13 @@
+import { useEffect, useState } from 'react';
 import Promotion from '../../components/Promotion/Promotion';
 import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
 import Newsletter from '../../components/Newsletter/Newsletter';
 import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
+import { useLocation } from 'react-router-dom';
 import { mobile } from '../../responsive';
+import { publicRequest } from '../../requestMethods';
 
 const ProductProfileContainer = styled.div``;
 
@@ -115,13 +118,27 @@ const AddToCartButton = styled.button`
 `;
 
 const Product = () => {
+  const [product, setProduct] = useState({});
+  const location = useLocation();
+  const id = location.pathname.split('/')[2];
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get('/products/find/' + id);
+        setProduct(res.data);
+      } catch {}
+    };
+    getProduct();
+  }, [id]);
+
   return (
     <ProductProfileContainer>
       <Navbar />
       <Promotion />
       <ProductProfileWrapper>
         <ProductImageContainer>
-          <ProductImage src='https://i.ibb.co/jfjncTR/finishes-1-alpine-green-bxgqurawflau-large.jpg' />
+          <ProductImage src={product.productImage} />
         </ProductImageContainer>
         <InfoContainer>
           <ProductTitle>Apple iPhone 13</ProductTitle>
