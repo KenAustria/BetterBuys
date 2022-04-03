@@ -121,7 +121,7 @@ const Product = () => {
       <Promotion />
       <ProductProfileWrapper>
         <ProductImageContainer>
-          <ProductImage src='https://ibb.co/bmGcSPJ' />
+          <ProductImage src='https://i.ibb.co/jfjncTR/finishes-1-alpine-green-bxgqurawflau-large.jpg' />
         </ProductImageContainer>
         <InfoContainer>
           <ProductTitle>Apple iPhone 13</ProductTitle>

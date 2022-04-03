@@ -172,7 +172,7 @@ const Cart = () => {
           <CartInfo>
             <CartProduct>
               <CartProductDetail>
-                <CartImage src='https://ibb.co/zPL2ynn' />
+                <CartImage src='https://i.ibb.co/P1bW7mm/finishes-1-sierra-blue-cn414556pbv6-large.jpg' />
                 <CartDetails>
                   <CartProductName>
                     <b>Product:</b> IPHONE 13
@@ -198,7 +198,7 @@ const Cart = () => {
             <Hr />
             <CartProduct>
               <CartProductDetail>
-                <CartImage src='https://ibb.co/zP4DYPM' />
+                <CartImage src='https://i.ibb.co/QYKtRYg/finishes-1-graphite-cjq97aaf2yfm-large.jpg' />
                 <CartDetails>
                   <CartProductName>
                     <b>Product:</b> IPHONE 13 MINI

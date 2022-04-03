@@ -8,7 +8,7 @@ const SignupContainer = styled.div`
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url('https://ibb.co/svQykGz') center;
+    url('https://i.ibb.co/XZpSNgM/pexels-photomix-company-1038628.jpg') center;
   background-size: cover;
   display: flex;
   align-items: center;
