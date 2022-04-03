@@ -147,15 +147,21 @@ const Product = () => {
           <ProductFilterContainer>
             <ProductFilter>
               <ProductFilterTitle>Color</ProductFilterTitle>
-              {product.productColor.map(color => (
-                <ProductFilterColor key={color} color={color} />
+              {product.productColor.map(productColor => (
+                <ProductFilterColor
+                  key={productColor}
+                  productColor={productColor}
+                />
               ))}
             </ProductFilter>
             <ProductFilter>
               <ProductFilterTitle>Size</ProductFilterTitle>
               <ProductFilterSize>
-                <ProductFilterSizeOption>Standard</ProductFilterSizeOption>
-                <ProductFilterSizeOption>Mini</ProductFilterSizeOption>
+                {product.productSize.map(productSize => (
+                  <ProductFilterSizeOption key={productSize}>
+                    {productSize}
+                  </ProductFilterSizeOption>
+                ))}
               </ProductFilterSize>
             </ProductFilter>
           </ProductFilterContainer>
