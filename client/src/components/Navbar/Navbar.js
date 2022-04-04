@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Badge } from '@material-ui/core';
 import { Search, ShoppingCartOutlined } from '@material-ui/icons';
@@ -86,9 +87,13 @@ const Navbar = () => {
         <NavRight>
           <MenuItem>SIGN UP</MenuItem>
           <MenuItem>LOGIN</MenuItem>
-          <Badge badgeContent={cartQuantity} color='primary'>
-            <ShoppingCartOutlined />
-          </Badge>
+          <Link to='/cart'>
+            <MenuItem>
+              <Badge badgeContent={cartQuantity} color='primary'>
+                <ShoppingCartOutlined />
+              </Badge>
+            </MenuItem>
+          </Link>
         </NavRight>
       </NavbarWrapper>
     </NavbarContainer>

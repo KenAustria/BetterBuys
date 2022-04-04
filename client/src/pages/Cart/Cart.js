@@ -3,6 +3,7 @@ import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
 import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
+import { useSelector } from 'react-redux';
 import { mobile } from '../../responsive';
 
 const CartContainer = styled.div``;
@@ -154,6 +155,8 @@ const CartButton = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector(state => state.cart);
+
   return (
     <CartContainer>
       <Navbar />
@@ -170,63 +173,44 @@ const Cart = () => {
         </CartTop>
         <CartBottom>
           <CartInfo>
-            <CartProduct>
-              <CartProductDetail>
-                <CartImage src='https://i.ibb.co/P1bW7mm/finishes-1-sierra-blue-cn414556pbv6-large.jpg' />
-                <CartDetails>
-                  <CartProductName>
-                    <b>Product:</b> IPHONE 13
-                  </CartProductName>
-                  <CartProductId>
-                    <b>ID:</b> 9635987109832
-                  </CartProductId>
-                  <CartProductColor color='blue' />
-                  <CartProductSize>
-                    <b>Size:</b> Regular
-                  </CartProductSize>
-                </CartDetails>
-              </CartProductDetail>
-              <CartPriceDetail>
-                <CartProductAmountContainer>
-                  <Add />
-                  <CartProductAmount>2</CartProductAmount>
-                  <Remove />
-                </CartProductAmountContainer>
-                <CartProductPrice>$ 1299</CartProductPrice>
-              </CartPriceDetail>
-            </CartProduct>
+            {cart.products.map(product => (
+              <CartProduct>
+                <CartProductDetail>
+                  <CartImage src={product.productImage} />
+                  <CartDetails>
+                    <CartProductName>
+                      <b>Product:</b> {product.productTitle}
+                    </CartProductName>
+                    <CartProductId>
+                      <b>ID:</b> {product._id}
+                    </CartProductId>
+                    <CartProductColor color={product.productColor} />
+                    <CartProductSize>
+                      <b>Size:</b> {product.productSize}
+                    </CartProductSize>
+                  </CartDetails>
+                </CartProductDetail>
+                <CartPriceDetail>
+                  <CartProductAmountContainer>
+                    <Remove />
+                    <CartProductAmount>
+                      {product.productQuantity}
+                    </CartProductAmount>
+                    <Add />
+                  </CartProductAmountContainer>
+                  <CartProductPrice>
+                    $ {product.productPrice * product.productQuantity}
+                  </CartProductPrice>
+                </CartPriceDetail>
+              </CartProduct>
+            ))}
             <Hr />
-            <CartProduct>
-              <CartProductDetail>
-                <CartImage src='https://i.ibb.co/QYKtRYg/finishes-1-graphite-cjq97aaf2yfm-large.jpg' />
-                <CartDetails>
-                  <CartProductName>
-                    <b>Product:</b> IPHONE 13 MINI
-                  </CartProductName>
-                  <CartProductId>
-                    <b>ID:</b> 1953903483982
-                  </CartProductId>
-                  <CartProductColor color='gray' />
-                  <CartProductSize>
-                    <b>Size:</b> MINI
-                  </CartProductSize>
-                </CartDetails>
-              </CartProductDetail>
-              <CartPriceDetail>
-                <CartProductAmountContainer>
-                  <Add />
-                  <CartProductAmount>1</CartProductAmount>
-                  <Remove />
-                </CartProductAmountContainer>
-                <CartProductPrice>$ 999</CartProductPrice>
-              </CartPriceDetail>
-            </CartProduct>
           </CartInfo>
           <CartSummary>
             <CartSummaryTitle>ORDER SUMMARY</CartSummaryTitle>
             <CartSummaryItem>
               <CartSummaryItemText>Subtotal</CartSummaryItemText>
-              <CartSummaryItemPrice>$ 3597</CartSummaryItemPrice>
+              <CartSummaryItemPrice>$ {cart.total}</CartSummaryItemPrice>
             </CartSummaryItem>
             <CartSummaryItem>
               <CartSummaryItemText>Estimated Shipping</CartSummaryItemText>
@@ -238,7 +222,7 @@ const Cart = () => {
             </CartSummaryItem>
             <CartSummaryItem type='total'>
               <CartSummaryItemText>Total</CartSummaryItemText>
-              <CartSummaryItemPrice>$ 3597</CartSummaryItemPrice>
+              <CartSummaryItemPrice>$ {cart.total}</CartSummaryItemPrice>
             </CartSummaryItem>
             <CartButton>CHECKOUT NOW</CartButton>
           </CartSummary>
