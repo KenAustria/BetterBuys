@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Promotion from '../../components/Promotion/Promotion';
 import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
@@ -5,6 +6,11 @@ import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
 import { useSelector } from 'react-redux';
 import { mobile } from '../../responsive';
+import StripeCheckout from 'react-stripe-checkout';
+import { userRequest } from '../../requestMethods';
+import { useNavigate } from 'react-router-dom';
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 const CartContainer = styled.div``;
 
@@ -155,7 +161,29 @@ const CartButton = styled.button`
 `;
 
 const Cart = () => {
+  const [stripeToken, setStripeToken] = useState(null);
   const cart = useSelector(state => state.cart);
+  const navigate = useNavigate();
+
+  const onToken = token => {
+    setStripeToken(token);
+  };
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest.post('/checkout/payment', {
+          tokenId: stripeToken.id,
+          amount: 500,
+        });
+        navigate('/success', {
+          stripeData: res.data,
+          products: cart,
+        });
+      } catch {}
+    };
+    stripeToken && makeRequest();
+  }, [stripeToken, cart, navigate]);
 
   return (
     <CartContainer>
@@ -174,7 +202,7 @@ const Cart = () => {
         <CartBottom>
           <CartInfo>
             {cart.products.map(product => (
-              <CartProduct>
+              <CartProduct key={product._id}>
                 <CartProductDetail>
                   <CartImage src={product.productImage} />
                   <CartDetails>
@@ -224,7 +252,17 @@ const Cart = () => {
               <CartSummaryItemText>Total</CartSummaryItemText>
               <CartSummaryItemPrice>$ {cart.total}</CartSummaryItemPrice>
             </CartSummaryItem>
-            <CartButton>CHECKOUT NOW</CartButton>
+            <StripeCheckout
+              name='Better Buys'
+              image='https://i.ibb.co/TRR3Ggn/cellphonecartoon.png'
+              billingAddress
+              shippingAddress
+              description={`Your total is $${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey={KEY}>
+              <CartButton>CHECKOUT NOW</CartButton>
+            </StripeCheckout>
           </CartSummary>
         </CartBottom>
       </CartWrapper>

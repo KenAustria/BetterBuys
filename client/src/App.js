@@ -4,6 +4,7 @@ import Home from './pages/Home/Home';
 import ProductList from './pages/ProductList/ProductList';
 import ProductProfile from './pages/ProductProfile/ProductProfile';
 import Cart from './pages/Cart/Cart';
+import Success from './pages/Success/Success';
 import {
   BrowserRouter as Router,
   Routes,
@@ -20,6 +21,7 @@ function App() {
         <Route path='/products/:category' element={<ProductList />} />
         <Route path='/product/:id' element={<ProductProfile />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/success' element={<Success />} />
         <Route
           path='/signin'
           element={user ? <Navigate to='/' /> : <Signin />}
