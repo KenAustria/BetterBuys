@@ -154,14 +154,14 @@ const Product = () => {
         <InfoContainer>
           <ProductTitle>{product.productTitle}</ProductTitle>
           <ProductDescription>{product.productDescription}</ProductDescription>
-          <ProductPrice>{product.productPrice}</ProductPrice>
+          <ProductPrice>${product.productPrice}</ProductPrice>
           <ProductFilterContainer>
             <ProductFilter>
               <ProductFilterTitle>Color</ProductFilterTitle>
               {product.productColor?.map(productColor => (
                 <ProductFilterColor
                   key={productColor}
-                  productColor={productColor}
+                  color={productColor}
                   onClick={() => setColor(productColor)}
                 />
               ))}
