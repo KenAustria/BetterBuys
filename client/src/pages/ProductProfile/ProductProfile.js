@@ -121,7 +121,7 @@ const AddToCartButton = styled.button`
 
 const Product = () => {
   const [product, setProduct] = useState({});
-  const [quantity, setQuantity] = useState(1);
+  const [productQuantity, setProductQuantity] = useState(1);
   const [color, setColor] = useState('');
   const [size, setSize] = useState('');
   const location = useLocation();
@@ -138,11 +138,11 @@ const Product = () => {
     getProduct();
   }, [id]);
 
-  const handleQuantity = type => {
+  const handleProductQuantity = type => {
     if (type === 'decrease') {
-      quantity > 1 && setQuantity(quantity - 1);
+      productQuantity > 1 && setProductQuantity(productQuantity - 1);
     } else {
-      setQuantity(quantity + 1);
+      setProductQuantity(productQuantity + 1);
     }
   };
 
@@ -150,10 +150,10 @@ const Product = () => {
     dispatch(
       addProduct({
         ...product,
-        quantity,
+        productQuantity,
         color,
         size,
-        price: product.productPrice * quantity,
+        price: product.productPrice * productQuantity,
       })
     );
   };
@@ -195,9 +195,9 @@ const Product = () => {
           </ProductFilterContainer>
           <ProductAddContainer>
             <ProductAmountContainer>
-              <Remove onClick={() => handleQuantity('decrease')} />
-              <ProductAmount>{quantity}</ProductAmount>
-              <Add onClick={() => handleQuantity('increase')} />
+              <Remove onClick={() => handleProductQuantity('decrease')} />
+              <ProductAmount>{productQuantity}</ProductAmount>
+              <Add onClick={() => handleProductQuantity('increase')} />
             </ProductAmountContainer>
             <AddToCartButton onClick={handleAddToCart}>
               ADD TO CART
