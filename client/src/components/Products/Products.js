@@ -23,8 +23,8 @@ const Products = ({ category, filters, sort }) => {
             : `http://localhost:9000/api/products`
         );
         setProducts(res.data);
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        console.log(error);
       }
     };
     getProducts();

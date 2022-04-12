@@ -6,7 +6,7 @@ import Newsletter from '../../components/Newsletter/Newsletter';
 import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
 import { useLocation } from 'react-router-dom';
-import { addProduct } from '../../redux/cartRedux';
+import { addProduct } from '../../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { publicRequest } from '../../requestMethods';
 import { mobile } from '../../responsive';

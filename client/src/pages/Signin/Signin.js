@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { mobile } from '../.././responsive';
+import { signin } from '../../apiCalls';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SigninContainer = styled.div`
   width: 100vw;
@@ -47,6 +50,10 @@ const SigninButton = styled.button`
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
+  &:disabled {
+    color: green;
+    cursor: not-allowed;
+  }
 `;
 
 const SigninLink = styled.a`
@@ -56,15 +63,40 @@ const SigninLink = styled.a`
   cursor: pointer;
 `;
 
+const Error = styled.span`
+  color: red;
+`;
+
 const Signin = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector(state => state.user);
+
+  const handleSignin = event => {
+    event.preventDefault();
+    signin(dispatch, { username, password });
+  };
+
   return (
     <SigninContainer>
       <SigninWrapper>
         <SigninTitle>SIGN IN</SigninTitle>
         <SigninForm>
-          <SigninInput placeholder='username' />
-          <SigninInput placeholder='password' />
-          <SigninButton>Signin</SigninButton>
+          <SigninInput
+            placeholder='username'
+            type='text'
+            onChange={event => setUsername(event.target.value)}
+          />
+          <SigninInput
+            placeholder='password'
+            type='password'
+            onChange={event => setPassword(event.target.value)}
+          />
+          <SigninButton onClick={handleSignin} disabled={isFetching}>
+            Signin
+          </SigninButton>
+          {error && <Error>Something went wrong...</Error>}
           <SigninLink>FORGOT THE PASSWORD?</SigninLink>
           <SigninLink>CREATE A NEW ACCOUNT</SigninLink>
         </SigninForm>
