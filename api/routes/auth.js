@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 
 // SIGNUP
 router.post('/signup', async (req, res) => {
+	// use User model to create new user
+	// encrypt password before user is saved
   const newUser = new User({
     username: req.body.username,
     email: req.body.email,
@@ -14,8 +16,10 @@ router.post('/signup', async (req, res) => {
     ).toString(),
   });
 
+	// use async await to await user to being saved, otherwise catch error
   try {
     const savedUser = await newUser.save();
+		// send user to client side and respond successfully added
     res.status(201).json(savedUser);
   } catch (error) {
     res.status(500).json(error);
@@ -24,6 +28,7 @@ router.post('/signup', async (req, res) => {
 
 // SIGNIN
 router.post('/signin', async (req, res) => {
+	// find user by username inside db
   try {
     const user = await User.findOne({ username: req.body.username });
     // if user does not exist
