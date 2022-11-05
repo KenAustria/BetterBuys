@@ -37,7 +37,7 @@ const CartTopButton = styled.button`
   cursor: pointer;
   border: ${props => props.type === 'filled' && 'none'};
   background-color: ${props =>
-    props.type === 'filled' ? 'black' : 'transparent'};
+		props.type === 'filled' ? 'black' : 'transparent'};
   color: ${props => props.type === 'filled' && 'white'};
 `;
 
@@ -161,114 +161,114 @@ const CartButton = styled.button`
 `;
 
 const Cart = () => {
-  const [stripeToken, setStripeToken] = useState(null);
-  const cart = useSelector(state => state.cart);
-  const navigate = useNavigate();
+	const [stripeToken, setStripeToken] = useState(null);
+	const cart = useSelector(state => state.cart);
+	const navigate = useNavigate();
 
-  const onToken = token => {
-    setStripeToken(token);
-  };
+	const onToken = token => {
+		setStripeToken(token);
+	};
 
-  useEffect(() => {
-    const makeRequest = async () => {
-      try {
-        const res = await userRequest.post('/checkout/payment', {
-          tokenId: stripeToken.id,
-          amount: 500,
-        });
-        navigate('/success', {
-          stripeData: res.data,
-          products: cart,
-        });
-      } catch {}
-    };
-    stripeToken && makeRequest();
-  }, [stripeToken, cart, navigate]);
+	useEffect(() => {
+		const makeRequest = async () => {
+			try {
+				const res = await userRequest.post('/checkout/payment', {
+					tokenId: stripeToken.id,
+					amount: 500,
+				});
+				navigate('/success', {
+					stripeData: res.data,
+					products: cart,
+				});
+			} catch { }
+		};
+		stripeToken && makeRequest();
+	}, [stripeToken, cart, navigate]);
 
-  return (
-    <CartContainer>
-      <Navbar />
-      <Promotion />
-      <CartWrapper>
-        <CartTitle>YOUR BAG</CartTitle>
-        <CartTop>
-          <CartTopButton>CONTINUE SHOPPING</CartTopButton>
-          <CartTopTexts>
-            <CartTopText>Shopping Bag(2)</CartTopText>
-            <CartTopText>Your Wishlist (0)</CartTopText>
-          </CartTopTexts>
-          <CartTopButton type='filled'>CHECKOUT NOW</CartTopButton>
-        </CartTop>
-        <CartBottom>
-          <CartInfo>
-            {cart.products.map(product => (
-              <CartProduct key={product._id}>
-                <CartProductDetail>
-                  <CartImage src={product.productImage} />
-                  <CartDetails>
-                    <CartProductName>
-                      <b>Product:</b> {product.productTitle}
-                    </CartProductName>
-                    <CartProductId>
-                      <b>ID:</b> {product._id}
-                    </CartProductId>
-                    <CartProductColor color={product.productColor} />
-                    <CartProductSize>
-                      <b>Size:</b> {product.productSize}
-                    </CartProductSize>
-                  </CartDetails>
-                </CartProductDetail>
-                <CartPriceDetail>
-                  <CartProductAmountContainer>
-                    <Remove />
-                    <CartProductAmount>
-                      {product.productQuantity}
-                    </CartProductAmount>
-                    <Add />
-                  </CartProductAmountContainer>
-                  <CartProductPrice>
-                    $ {product.productPrice * product.productQuantity}
-                  </CartProductPrice>
-                </CartPriceDetail>
-              </CartProduct>
-            ))}
-            <Hr />
-          </CartInfo>
-          <CartSummary>
-            <CartSummaryTitle>ORDER SUMMARY</CartSummaryTitle>
-            <CartSummaryItem>
-              <CartSummaryItemText>Subtotal</CartSummaryItemText>
-              <CartSummaryItemPrice>$ {cart.total}</CartSummaryItemPrice>
-            </CartSummaryItem>
-            <CartSummaryItem>
-              <CartSummaryItemText>Estimated Shipping</CartSummaryItemText>
-              <CartSummaryItemPrice>$ 5.90</CartSummaryItemPrice>
-            </CartSummaryItem>
-            <CartSummaryItem>
-              <CartSummaryItemText>Shipping Discount</CartSummaryItemText>
-              <CartSummaryItemPrice>$ -5.90</CartSummaryItemPrice>
-            </CartSummaryItem>
-            <CartSummaryItem type='total'>
-              <CartSummaryItemText>Total</CartSummaryItemText>
-              <CartSummaryItemPrice>$ {cart.total}</CartSummaryItemPrice>
-            </CartSummaryItem>
-            <StripeCheckout
-              name='Better Buys'
-              image='https://i.ibb.co/TRR3Ggn/cellphonecartoon.png'
-              billingAddress
-              shippingAddress
-              description={`Your total is $${cart.total}`}
-              amount={cart.total * 100}
-              token={onToken}
-              stripeKey={KEY}>
-              <CartButton>CHECKOUT NOW</CartButton>
-            </StripeCheckout>
-          </CartSummary>
-        </CartBottom>
-      </CartWrapper>
-      <Footer />
-    </CartContainer>
-  );
+	return (
+		<CartContainer>
+			<Navbar />
+			<Promotion />
+			<CartWrapper>
+				<CartTitle>YOUR BAG</CartTitle>
+				<CartTop>
+					<CartTopButton>CONTINUE SHOPPING</CartTopButton>
+					<CartTopTexts>
+						<CartTopText>Shopping Bag(2)</CartTopText>
+						<CartTopText>Your Wishlist (0)</CartTopText>
+					</CartTopTexts>
+					<CartTopButton type='filled'>CHECKOUT NOW</CartTopButton>
+				</CartTop>
+				<CartBottom>
+					<CartInfo>
+						{cart.products.map(product => (
+							<CartProduct key={product._id}>
+								<CartProductDetail>
+									<CartImage src={product.productImage} />
+									<CartDetails>
+										<CartProductName>
+											<b>Product:</b> {product.productTitle}
+										</CartProductName>
+										<CartProductId>
+											<b>ID:</b> {product._id}
+										</CartProductId>
+										<CartProductColor color={product.productColor} />
+										<CartProductSize>
+											<b>Size:</b> {product.productSize}
+										</CartProductSize>
+									</CartDetails>
+								</CartProductDetail>
+								<CartPriceDetail>
+									<CartProductAmountContainer>
+										<Remove />
+										<CartProductAmount>
+											{product.productQuantity}
+										</CartProductAmount>
+										<Add />
+									</CartProductAmountContainer>
+									<CartProductPrice>
+										$ {product.productPrice * product.productQuantity}
+									</CartProductPrice>
+								</CartPriceDetail>
+							</CartProduct>
+						))}
+						<Hr />
+					</CartInfo>
+					<CartSummary>
+						<CartSummaryTitle>ORDER SUMMARY</CartSummaryTitle>
+						<CartSummaryItem>
+							<CartSummaryItemText>Subtotal</CartSummaryItemText>
+							<CartSummaryItemPrice>$ {cart.total}</CartSummaryItemPrice>
+						</CartSummaryItem>
+						<CartSummaryItem>
+							<CartSummaryItemText>Estimated Shipping</CartSummaryItemText>
+							<CartSummaryItemPrice>$ 5.90</CartSummaryItemPrice>
+						</CartSummaryItem>
+						<CartSummaryItem>
+							<CartSummaryItemText>Shipping Discount</CartSummaryItemText>
+							<CartSummaryItemPrice>$ -5.90</CartSummaryItemPrice>
+						</CartSummaryItem>
+						<CartSummaryItem type='total'>
+							<CartSummaryItemText>Total</CartSummaryItemText>
+							<CartSummaryItemPrice>$ {cart.total}</CartSummaryItemPrice>
+						</CartSummaryItem>
+						<StripeCheckout
+							name='Better Buys'
+							image='https://i.ibb.co/TRR3Ggn/cellphonecartoon.png'
+							billingAddress
+							shippingAddress
+							description={`Your total is $${cart.total}`}
+							amount={cart.total * 100}
+							token={onToken}
+							stripeKey={KEY}>
+							<CartButton>CHECKOUT NOW</CartButton>
+						</StripeCheckout>
+					</CartSummary>
+				</CartBottom>
+			</CartWrapper>
+			<Footer />
+		</CartContainer>
+	);
 };
 
 export default Cart;

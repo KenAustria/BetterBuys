@@ -119,96 +119,97 @@ const AddToCartButton = styled.button`
   }
 `;
 
-const Product = () => {
-  const [product, setProduct] = useState({});
-  const [productQuantity, setProductQuantity] = useState(1);
-  const [color, setColor] = useState('');
-  const [size, setSize] = useState('');
-  const location = useLocation();
-  const id = location.pathname.split('/')[2];
-  const dispatch = useDispatch();
+const ProductProfile = () => {
+	const [product, setProduct] = useState({});
+	const [productQuantity, setProductQuantity] = useState(1);
+	const [color, setColor] = useState('');
+	const [size, setSize] = useState('');
+	const location = useLocation();
+	const id = location.pathname.split('/')[2];
+	const dispatch = useDispatch();
 
-  useEffect(() => {
-    const getProduct = async () => {
-      try {
-        const res = await publicRequest.get('/products/find/' + id);
-        setProduct(res.data);
-      } catch {}
-    };
-    getProduct();
-  }, [id]);
+	useEffect(() => {
+		const getProduct = async () => {
+			try {
+				const res = await publicRequest.get('/products/find/' + id);
+				setProduct(res.data);
+			} catch { }
+		};
+		getProduct();
+	}, [id]);
 
-  const handleProductQuantity = type => {
-    if (type === 'decrease') {
-      productQuantity > 1 && setProductQuantity(productQuantity - 1);
-    } else {
-      setProductQuantity(productQuantity + 1);
-    }
-  };
+	// prevent negative quantity, only decrease quantity if greater than 1
+	const handleProductQuantity = type => {
+		if (type === 'decrease') {
+			productQuantity > 1 && setProductQuantity(productQuantity - 1);
+		} else {
+			setProductQuantity(productQuantity + 1);
+		}
+	};
 
-  const handleAddToCart = () => {
-    dispatch(
-      addProduct({
-        ...product,
-        productQuantity,
-        color,
-        size,
-        price: product.productPrice * productQuantity,
-      })
-    );
-  };
+	const handleAddToCart = () => {
+		dispatch(
+			addProduct({
+				...product,
+				productQuantity,
+				color,
+				size,
+				price: product.productPrice * productQuantity,
+			})
+		);
+	};
 
-  return (
-    <ProductProfileContainer>
-      <Navbar />
-      <Promotion />
-      <ProductProfileWrapper>
-        <ProductImageContainer>
-          <ProductImage src={product.productImage} />
-        </ProductImageContainer>
-        <InfoContainer>
-          <ProductTitle>{product.productTitle}</ProductTitle>
-          <ProductDescription>{product.productDescription}</ProductDescription>
-          <ProductPrice>${product.productPrice}</ProductPrice>
-          <ProductFilterContainer>
-            <ProductFilter>
-              <ProductFilterTitle>Color</ProductFilterTitle>
-              {product.productColor?.map(productColor => (
-                <ProductFilterColor
-                  key={productColor}
-                  color={productColor}
-                  onClick={() => setColor(productColor)}
-                />
-              ))}
-            </ProductFilter>
-            <ProductFilter>
-              <ProductFilterTitle>Size</ProductFilterTitle>
-              <ProductFilterSize
-                onChange={event => setSize(event.target.value)}>
-                {product.productSize?.map(productSize => (
-                  <ProductFilterSizeOption key={productSize}>
-                    {productSize}
-                  </ProductFilterSizeOption>
-                ))}
-              </ProductFilterSize>
-            </ProductFilter>
-          </ProductFilterContainer>
-          <ProductAddContainer>
-            <ProductAmountContainer>
-              <Remove onClick={() => handleProductQuantity('decrease')} />
-              <ProductAmount>{productQuantity}</ProductAmount>
-              <Add onClick={() => handleProductQuantity('increase')} />
-            </ProductAmountContainer>
-            <AddToCartButton onClick={handleAddToCart}>
-              ADD TO CART
-            </AddToCartButton>
-          </ProductAddContainer>
-        </InfoContainer>
-      </ProductProfileWrapper>
-      <Newsletter />
-      <Footer />
-    </ProductProfileContainer>
-  );
+	return (
+		<ProductProfileContainer>
+			<Navbar />
+			<Promotion />
+			<ProductProfileWrapper>
+				<ProductImageContainer>
+					<ProductImage src={product.productImage} />
+				</ProductImageContainer>
+				<InfoContainer>
+					<ProductTitle>{product.productTitle}</ProductTitle>
+					<ProductDescription>{product.productDescription}</ProductDescription>
+					<ProductPrice>${product.productPrice}</ProductPrice>
+					<ProductFilterContainer>
+						<ProductFilter>
+							<ProductFilterTitle>Color</ProductFilterTitle>
+							{product.productColor?.map(productColor => (
+								<ProductFilterColor
+									key={productColor}
+									color={productColor}
+									onClick={() => setColor(productColor)}
+								/>
+							))}
+						</ProductFilter>
+						<ProductFilter>
+							<ProductFilterTitle>Size</ProductFilterTitle>
+							<ProductFilterSize
+								onChange={event => setSize(event.target.value)}>
+								{product.productSize?.map(productSize => (
+									<ProductFilterSizeOption key={productSize}>
+										{productSize}
+									</ProductFilterSizeOption>
+								))}
+							</ProductFilterSize>
+						</ProductFilter>
+					</ProductFilterContainer>
+					<ProductAddContainer>
+						<ProductAmountContainer>
+							<Remove onClick={() => handleProductQuantity('decrease')} />
+							<ProductAmount>{productQuantity}</ProductAmount>
+							<Add onClick={() => handleProductQuantity('increase')} />
+						</ProductAmountContainer>
+						<AddToCartButton onClick={handleAddToCart}>
+							ADD TO CART
+						</AddToCartButton>
+					</ProductAddContainer>
+				</InfoContainer>
+			</ProductProfileWrapper>
+			<Newsletter />
+			<Footer />
+		</ProductProfileContainer>
+	);
 };
 
-export default Product;
+export default ProductProfile;

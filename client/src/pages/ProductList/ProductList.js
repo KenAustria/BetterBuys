@@ -39,73 +39,73 @@ const ProductListSelect = styled.select`
 const FilterOption = styled.option``;
 
 const ProductList = () => {
-  const [filters, setFilters] = useState({});
-  const [sort, setSort] = useState('newest');
-  const location = useLocation();
-  const category = location.pathname.split('/')[2];
-  console.log(category);
+	const [filters, setFilters] = useState({});
+	const [sort, setSort] = useState('newest');
+	const location = useLocation();
+	const category = location.pathname.split('/')[2]; // iphone, galaxy, pixel
 
-  const handleFilters = event => {
-    const value = event.target.value;
-    setFilters({
-      ...filters,
-      [event.target.name]: value,
-    });
-  };
+	// create object and change values inside object
+	const handleFilters = event => {
+		const value = event.target.value;
+		setFilters({
+			...filters, // to update both phone and color filters
+			[event.target.name]: value,
+		});
+	};
 
-  return (
-    <ProductListContainer>
-      <Navbar />
-      <Promotion />
-      <ProductListTitle>{category}</ProductListTitle>
-      <ProductListFilterContainer>
-        <ProductListFilter>
-          <ProductListFilterText>Filter Products:</ProductListFilterText>
-          <ProductListSelect name='phone' onChange={handleFilters}>
-            <FilterOption disabled selected>
-              Phones
-            </FilterOption>
-            <FilterOption>Apple iPhone 12</FilterOption>
-            <FilterOption>Apple iPhone SE</FilterOption>
-            <FilterOption>Apple iPhone 13</FilterOption>
-            <FilterOption>Apple iPhone 13 Pro</FilterOption>
-            <FilterOption>Galaxy Z Flip3 5G</FilterOption>
-            <FilterOption>Galaxy A53</FilterOption>
-            <FilterOption>Galaxy S22+</FilterOption>
-            <FilterOption>Galaxy S22 Ultra</FilterOption>
-            <FilterOption>Google Pixel 4a</FilterOption>
-            <FilterOption>Google Pixel 3</FilterOption>
-            <FilterOption>Google Pixel 5</FilterOption>
-            <FilterOption>Google Pixel 3a</FilterOption>
-            <FilterOption>Google Pixel 4 XL</FilterOption>
-          </ProductListSelect>
-          <ProductListSelect name='color' onChange={handleFilters}>
-            <FilterOption disabled selected>
-              Color
-            </FilterOption>
-            <FilterOption>Silver</FilterOption>
-            <FilterOption>Black</FilterOption>
-            <FilterOption>Green</FilterOption>
-            <FilterOption>Grey</FilterOption>
-            <FilterOption>Gold</FilterOption>
-          </ProductListSelect>
-        </ProductListFilter>
-        <ProductListFilter>
-          <ProductListFilterText>Sort Products:</ProductListFilterText>
-          <ProductListSelect onChange={event => setSort(event.target.value)}>
-            <FilterOption value='newest' selected>
-              Newest
-            </FilterOption>
-            <FilterOption value='asc'>Price (asc)</FilterOption>
-            <FilterOption value='desc'>Price (desc)</FilterOption>
-          </ProductListSelect>
-        </ProductListFilter>
-      </ProductListFilterContainer>
-      <Products category={category} filters={filters} sort={sort} />
-      <Newsletter />
-      <Footer />
-    </ProductListContainer>
-  );
+	return (
+		<ProductListContainer>
+			<Navbar />
+			<Promotion />
+			<ProductListTitle>{category}</ProductListTitle>
+			<ProductListFilterContainer>
+				<ProductListFilter>
+					<ProductListFilterText>Filter Products:</ProductListFilterText>
+					<ProductListSelect name='phone' onChange={handleFilters}>
+						<FilterOption disabled selected>
+							Phones
+						</FilterOption>
+						<FilterOption>Apple iPhone 12</FilterOption>
+						<FilterOption>Apple iPhone SE</FilterOption>
+						<FilterOption>Apple iPhone 13</FilterOption>
+						<FilterOption>Apple iPhone 13 Pro</FilterOption>
+						<FilterOption>Galaxy Z Flip3 5G</FilterOption>
+						<FilterOption>Galaxy A53</FilterOption>
+						<FilterOption>Galaxy S22+</FilterOption>
+						<FilterOption>Galaxy S22 Ultra</FilterOption>
+						<FilterOption>Google Pixel 4a</FilterOption>
+						<FilterOption>Google Pixel 3</FilterOption>
+						<FilterOption>Google Pixel 5</FilterOption>
+						<FilterOption>Google Pixel 3a</FilterOption>
+						<FilterOption>Google Pixel 4 XL</FilterOption>
+					</ProductListSelect>
+					<ProductListSelect name='color' onChange={handleFilters}>
+						<FilterOption disabled selected>
+							Color
+						</FilterOption>
+						<FilterOption>Silver</FilterOption>
+						<FilterOption>Black</FilterOption>
+						<FilterOption>Green</FilterOption>
+						<FilterOption>Grey</FilterOption>
+						<FilterOption>Gold</FilterOption>
+					</ProductListSelect>
+				</ProductListFilter>
+				<ProductListFilter>
+					<ProductListFilterText>Sort Products:</ProductListFilterText>
+					<ProductListSelect onChange={event => setSort(event.target.value)}>
+						<FilterOption value='newest' selected>
+							Newest
+						</FilterOption>
+						<FilterOption value='asc'>Price (asc)</FilterOption>
+						<FilterOption value='desc'>Price (desc)</FilterOption>
+					</ProductListSelect>
+				</ProductListFilter>
+			</ProductListFilterContainer>
+			<Products category={category} filters={filters} sort={sort} />
+			<Newsletter />
+			<Footer />
+		</ProductListContainer>
+	);
 };
 
 export default ProductList;
