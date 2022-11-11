@@ -69,35 +69,43 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
-  const cartQuantity = useSelector(state => state.cart.cartQuantity);
+	const cartQuantity = useSelector(state => state.cart.cartQuantity);
 
-  return (
-    <NavbarContainer>
-      <NavbarWrapper>
-        <NavLeft>
-          <Language>EN</Language>
-          <SearchContainer>
-            <SearchInput />
-            <Search style={{ color: 'gray', fontSize: 16 }} />
-          </SearchContainer>
-        </NavLeft>
-        <NavCenter>
-          <Logo>Better Buys</Logo>
-        </NavCenter>
-        <NavRight>
-          <MenuItem>SIGN UP</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
-          <Link to='/cart'>
-            <MenuItem>
-              <Badge badgeContent={cartQuantity} color='primary'>
-                <ShoppingCartOutlined />
-              </Badge>
-            </MenuItem>
-          </Link>
-        </NavRight>
-      </NavbarWrapper>
-    </NavbarContainer>
-  );
+	return (
+		<NavbarContainer>
+			<NavbarWrapper>
+				<NavLeft>
+					<Language>EN</Language>
+					<SearchContainer>
+						<SearchInput />
+						<Search style={{ color: 'gray', fontSize: 16 }} />
+					</SearchContainer>
+				</NavLeft>
+				<NavCenter>
+					<Logo>Better Buys</Logo>
+				</NavCenter>
+				<NavRight>
+					<Link to='/signup' style={{ textDecoration: 'none' }}>
+						<MenuItem>
+							SIGN UP
+						</MenuItem>
+					</Link>
+					<Link to='signin' style={{ textDecoration: 'none' }}>
+						<MenuItem>
+							SIGN IN
+						</MenuItem>
+					</Link>
+					<Link to='/cart'>
+						<MenuItem>
+							<Badge badgeContent={cartQuantity} color='primary'>
+								<ShoppingCartOutlined />
+							</Badge>
+						</MenuItem>
+					</Link>
+				</NavRight>
+			</NavbarWrapper>
+		</NavbarContainer>
+	);
 };
 
 export default Navbar;
