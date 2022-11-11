@@ -6,7 +6,7 @@ import { Search, ShoppingCartOutlined } from '@material-ui/icons';
 import { mobile } from '../.././responsive';
 
 const NavbarContainer = styled.div`
-  height: 60px;
+  height: 90px;
   ${mobile({ height: '50px' })}
 `;
 
