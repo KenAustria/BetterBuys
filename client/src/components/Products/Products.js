@@ -11,6 +11,7 @@ const ProductsContainer = styled.div`
 `;
 
 const Products = ({ category, filters, sort }) => {
+	console.log(category, filters, sort)
 	const [products, setProducts] = useState([]);
 	const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -50,14 +51,14 @@ const Products = ({ category, filters, sort }) => {
 				[...prev].sort((a, b) => a.createdAt - b.createdAt)
 			);
 		} else if (sort === 'asc') {
-			setFilteredProducts(prev => [...prev].sort((a, b) => a.price - b.price));
+			setFilteredProducts(prev => [...prev].sort((a, b) => a.productPrice - b.productPrice));
 		} else {
-			setFilteredProducts(prev => [...prev].sort((a, b) => b.price - a.price));
+			setFilteredProducts(prev => [...prev].sort((a, b) => b.productPrice - a.productPrice));
 		}
 	}, [sort]);
 
 	/* display filtered products if a category is chosen
-	otherwise, display a maximum of 8 products from products array */
+	otherwise, display a maximum of 4 products from products array */
 	return (
 		<ProductsContainer>
 			{category
@@ -65,7 +66,7 @@ const Products = ({ category, filters, sort }) => {
 					<Product key={product.id} product={product} />
 				))
 				: products
-					.slice(0, 8)
+					.slice(0, 4)
 					.map(product => <Product key={product.id} product={product} />)}
 		</ProductsContainer>
 	);

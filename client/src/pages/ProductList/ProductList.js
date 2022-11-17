@@ -51,6 +51,7 @@ const ProductList = () => {
 			...filters, // to update both phone and color filters
 			[event.target.name]: value,
 		});
+		console.log(filters)
 	};
 
 	return (
@@ -61,14 +62,14 @@ const ProductList = () => {
 			<ProductListFilterContainer>
 				<ProductListFilter>
 					<ProductListFilterText>Filter Products:</ProductListFilterText>
-					<ProductListSelect name='phone' onChange={handleFilters}>
-						<FilterOption disabled selected>
+					<ProductListSelect name='productCategories' onChange={handleFilters}>
+						<FilterOption value='' selected>
 							Phones
 						</FilterOption>
-						<FilterOption>Apple iPhone 12</FilterOption>
-						<FilterOption>Apple iPhone SE</FilterOption>
 						<FilterOption>Apple iPhone 13</FilterOption>
+						<FilterOption>Apple iPhone 13 Mini</FilterOption>
 						<FilterOption>Apple iPhone 13 Pro</FilterOption>
+						<FilterOption>Apple iPhone 13 Max</FilterOption>
 						<FilterOption>Galaxy Z Flip3 5G</FilterOption>
 						<FilterOption>Galaxy A53</FilterOption>
 						<FilterOption>Galaxy S22+</FilterOption>
@@ -79,8 +80,8 @@ const ProductList = () => {
 						<FilterOption>Google Pixel 3a</FilterOption>
 						<FilterOption>Google Pixel 4 XL</FilterOption>
 					</ProductListSelect>
-					<ProductListSelect name='color' onChange={handleFilters}>
-						<FilterOption disabled selected>
+					<ProductListSelect name='productColor' onChange={handleFilters}>
+						<FilterOption value='' selected>
 							Color
 						</FilterOption>
 						<FilterOption>Silver</FilterOption>

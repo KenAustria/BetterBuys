@@ -71,7 +71,7 @@ const ProductFilterColor = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: ${props => props.color};
+  background-color: ${props => props.productColor};
   margin: 0px 5px;
   cursor: pointer;
 `;
@@ -122,7 +122,7 @@ const AddToCartButton = styled.button`
 const ProductProfile = () => {
 	const [product, setProduct] = useState({});
 	const [productQuantity, setProductQuantity] = useState(1);
-	const [color, setColor] = useState('');
+	const [productColor, setProductColor] = useState('');
 	const [size, setSize] = useState('');
 	const location = useLocation();
 	const id = location.pathname.split('/')[2];
@@ -152,7 +152,7 @@ const ProductProfile = () => {
 			addProduct({
 				...product,
 				productQuantity,
-				color,
+				productColor,
 				size,
 				price: product.productPrice * productQuantity,
 			})
@@ -177,8 +177,8 @@ const ProductProfile = () => {
 							{product.productColor?.map(productColor => (
 								<ProductFilterColor
 									key={productColor}
-									color={productColor}
-									onClick={() => setColor(productColor)}
+									productColor={productColor}
+									onClick={() => setProductColor(productColor)}
 								/>
 							))}
 						</ProductFilter>
