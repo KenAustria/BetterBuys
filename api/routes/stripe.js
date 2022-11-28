@@ -1,8 +1,9 @@
 const router = require('express').Router();
+require("dotenv").config();
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 
 // when a payment is made in client side, stripe will return a tokenid
-// make a payment request to node server with tokenid
+// then a payment request is made to node server with tokenid to verify payment
 router.post('/payment', (req, res) => {
 	stripe.charges.create( // create Stripe object
 		{
@@ -12,6 +13,7 @@ router.post('/payment', (req, res) => {
 		},
 		(stripeError, stripeResponse) => {
 			if (stripeError) {
+				console.log(stripeError)
 				res.status(500).json(stripeError);
 			} else {
 				res.status(200).json(stripeResponse);

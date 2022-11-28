@@ -12,9 +12,9 @@ const cors = require('cors');
 dotenv.config();
 
 mongoose
-  .connect(process.env.MONDODB_URL)
-  .then(() => console.log('MongoDB connection successful'))
-  .catch(error => console.log(error));
+	.connect(process.env.MONDODB_URL)
+	.then(() => console.log('MongoDB connection successful'))
+	.catch(error => console.log(error));
 
 app.use(cors());
 app.use(express.json());
@@ -26,5 +26,5 @@ app.use('/api/orders', orderRoute);
 app.use('/api/checkout', stripeRoute);
 
 app.listen(process.env.PORT || 9000, () => {
-  console.log('Server is running sucessfully');
+	console.log('Server is running sucessfully');
 });
