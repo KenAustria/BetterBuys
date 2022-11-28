@@ -10,6 +10,7 @@ import { addProduct } from '../../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { publicRequest } from '../../requestMethods';
 import { mobile } from '../../responsive';
+import { v4 as uuidv4 } from 'uuid';
 
 const ProductProfileContainer = styled.div``;
 
@@ -128,6 +129,7 @@ const ProductProfile = () => {
 	const id = location.pathname.split('/')[2];
 	const dispatch = useDispatch();
 
+	// no need to be user to fetch product
 	useEffect(() => {
 		const getProduct = async () => {
 			try {
@@ -147,6 +149,7 @@ const ProductProfile = () => {
 		}
 	};
 
+	// using Redux for updating Cart from ProductProfile for instant transition
 	const handleAddToCart = () => {
 		dispatch(
 			addProduct({
@@ -174,9 +177,10 @@ const ProductProfile = () => {
 					<ProductFilterContainer>
 						<ProductFilter>
 							<ProductFilterTitle>Color</ProductFilterTitle>
+							{/* ? to prevent undefined map TypeError*/}
 							{product.productColor?.map(productColor => (
 								<ProductFilterColor
-									key={productColor}
+									key={uuidv4()}
 									productColor={productColor}
 									onClick={() => setProductColor(productColor)}
 								/>
@@ -187,7 +191,7 @@ const ProductProfile = () => {
 							<ProductFilterSize
 								onChange={event => setSize(event.target.value)}>
 								{product.productSize?.map(productSize => (
-									<ProductFilterSizeOption key={productSize}>
+									<ProductFilterSizeOption key={uuidv4()}>
 										{productSize}
 									</ProductFilterSizeOption>
 								))}
@@ -196,6 +200,7 @@ const ProductProfile = () => {
 					</ProductFilterContainer>
 					<ProductAddContainer>
 						<ProductAmountContainer>
+							{/* type parameter for fn */}
 							<Remove onClick={() => handleProductQuantity('decrease')} />
 							<ProductAmount>{productQuantity}</ProductAmount>
 							<Add onClick={() => handleProductQuantity('increase')} />

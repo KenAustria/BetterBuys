@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons';
 import { carouselSlides } from '../../data';
 import { mobile } from '../.././responsive';
+import { v4 as uuidv4 } from 'uuid';
 
 const CarouselContainer = styled.div`
   width: 100%;
@@ -26,7 +27,7 @@ const CarouselArrow = styled.div`
   bottom: 0;
   left: ${props => props.direction === 'left' && '10px'}; // if left, then 10px
   right: ${props =>
-    props.direction === 'right' && '10px'}; // if right, then 10px
+		props.direction === 'right' && '10px'}; // if right, then 10px
   margin: auto;
   cursor: pointer;
   opacity: 0.5;
@@ -83,39 +84,39 @@ const CarouselButton = styled.button`
 `;
 
 const Carousel = () => {
-  const [slideIndex, setSlideIndex] = useState(0);
-  const handleClick = direction => {
-    if (direction === 'left') {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2); // if not first slide, then -1, else last
-    } else {
-      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0); // if not last slide, then +1, else first
-    }
-  };
+	const [slideIndex, setSlideIndex] = useState(0);
+	const handleClick = direction => {
+		if (direction === 'left') {
+			setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2); // if not first slide, then -1, else last
+		} else {
+			setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0); // if not last slide, then +1, else first
+		}
+	};
 
-  return (
-    <CarouselContainer>
-      <CarouselArrow direction='left' onClick={() => handleClick('left')}>
-        <ArrowLeftOutlined />
-      </CarouselArrow>
-      <CarouselWrapper slideIndex={slideIndex}>
-        {carouselSlides.map(carouselSlide => (
-          <CarouselSlide bg={carouselSlide.bg} key={carouselSlide.id}>
-            <CarouselImgContainer>
-              <CarouselImage src={carouselSlide.img} />
-            </CarouselImgContainer>
-            <CarouselInfoContainer>
-              <CarouselSlideTitle>{carouselSlide.title}</CarouselSlideTitle>
-              <CarouselSlideDesc>{carouselSlide.desc}</CarouselSlideDesc>
-              <CarouselButton>SHOW NOW</CarouselButton>
-            </CarouselInfoContainer>
-          </CarouselSlide>
-        ))}
-      </CarouselWrapper>
-      <CarouselArrow direction='right' onClick={() => handleClick('right')}>
-        <ArrowRightOutlined />
-      </CarouselArrow>
-    </CarouselContainer>
-  );
+	return (
+		<CarouselContainer>
+			<CarouselArrow direction='left' onClick={() => handleClick('left')}>
+				<ArrowLeftOutlined />
+			</CarouselArrow>
+			<CarouselWrapper slideIndex={slideIndex}>
+				{carouselSlides.map(carouselSlide => (
+					<CarouselSlide bg={carouselSlide.bg} key={uuidv4()}>
+						<CarouselImgContainer>
+							<CarouselImage src={carouselSlide.img} />
+						</CarouselImgContainer>
+						<CarouselInfoContainer>
+							<CarouselSlideTitle>{carouselSlide.title}</CarouselSlideTitle>
+							<CarouselSlideDesc>{carouselSlide.desc}</CarouselSlideDesc>
+							<CarouselButton>SHOW NOW</CarouselButton>
+						</CarouselInfoContainer>
+					</CarouselSlide>
+				))}
+			</CarouselWrapper>
+			<CarouselArrow direction='right' onClick={() => handleClick('right')}>
+				<ArrowRightOutlined />
+			</CarouselArrow>
+		</CarouselContainer>
+	);
 };
 
 export default Carousel;

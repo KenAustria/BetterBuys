@@ -9,6 +9,7 @@ import { mobile } from '../../responsive';
 import StripeCheckout from 'react-stripe-checkout';
 import { userRequest } from '../../requestMethods';
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -168,21 +169,25 @@ const Cart = () => {
 	const onToken = token => {
 		setStripeToken(token);
 	};
+	console.log(stripeToken)
 
 	useEffect(() => {
 		const makeRequest = async () => {
 			try {
 				const res = await userRequest.post('/checkout/payment', {
 					tokenId: stripeToken.id,
-					amount: 500,
+					amount: cart.total * 100,
 				});
+				console.log(res.data)
 				navigate('/success', {
 					stripeData: res.data,
 					products: cart,
 				});
-			} catch { }
+			} catch (err) {
+				console.log(err)
+			}
 		};
-		stripeToken && makeRequest();
+		stripeToken && makeRequest(); // only make request when token is available
 	}, [stripeToken, cart, navigate]);
 
 	return (
@@ -194,7 +199,7 @@ const Cart = () => {
 				<CartTop>
 					<CartTopButton>CONTINUE SHOPPING</CartTopButton>
 					<CartTopTexts>
-						<CartTopText>Shopping Bag(2)</CartTopText>
+						<CartTopText>Shopping Bag(0)</CartTopText>
 						<CartTopText>Your Wishlist (0)</CartTopText>
 					</CartTopTexts>
 					<CartTopButton type='filled'>CHECKOUT NOW</CartTopButton>
@@ -202,7 +207,7 @@ const Cart = () => {
 				<CartBottom>
 					<CartInfo>
 						{cart.products.map(product => (
-							<CartProduct key={product._id}>
+							<CartProduct key={uuidv4()}>
 								<CartProductDetail>
 									<CartImage src={product.productImage} />
 									<CartDetails>
@@ -210,7 +215,7 @@ const Cart = () => {
 											<b>Product:</b> {product.productTitle}
 										</CartProductName>
 										<CartProductId>
-											<b>ID:</b> {product._id}
+											<b>ID:</b> {uuidv4()}
 										</CartProductId>
 										<CartProductColor color={product.productColor} />
 										<CartProductSize>

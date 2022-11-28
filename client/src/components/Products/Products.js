@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Product from './Product';
 import styled from 'styled-components';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const ProductsContainer = styled.div`
   padding: 20px;
@@ -63,11 +64,11 @@ const Products = ({ category, filters, sort }) => {
 		<ProductsContainer>
 			{category
 				? filteredProducts.map(product => (
-					<Product key={product.id} product={product} />
+					<Product key={uuidv4()} product={product} />
 				))
 				: products
 					.slice(0, 4)
-					.map(product => <Product key={product.id} product={product} />)}
+					.map(product => <Product key={uuidv4()} product={product} />)}
 		</ProductsContainer>
 	);
 };
