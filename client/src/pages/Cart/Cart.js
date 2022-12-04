@@ -180,7 +180,7 @@ const Cart = () => {
 				});
 				console.log(res.data)
 				navigate('/success', {
-					stripeData: res.data,
+					state: res.data,
 					products: cart,
 				});
 			} catch (err) {
