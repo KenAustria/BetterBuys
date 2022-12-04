@@ -1,5 +1,49 @@
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router'
+import { userRequest } from '../../../src/requestMethods'
+import { Link } from 'react-router-dom';
+
 const Success = () => {
-  return <div>successfull</div>;
+	const location = useLocation()
+	const data = location.state
+	const cart = location.state.amount
+	const [orderId, setOrderId] = useState(null)
+
+	useEffect(() => {
+		const createOrder = async () => {
+			try {
+				const res = await userRequest.post("/orders", {
+					products: cart.products.map(item => ({
+						productId: item._id,
+						quantity: item._quantity,
+					})),
+					amount: cart.total,
+					address: data.billing_details.address,
+				})
+				setOrderId(res.data._id)
+			} catch { }
+		}
+		data && createOrder()
+	}, [cart, data])
+
+	return (
+		<div
+			style={{
+				height: "100vh",
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				justifyContent: "center",
+			}}
+		>
+			{orderId
+				? `Order has been created successfully. Your order number is ${orderId}`
+				: `Successfull. Your order is being prepared...`}
+			<Link to='/' style={{ textDecoration: 'none' }}>
+				<button style={{ padding: 10, marginTop: 20 }}>Go to Homepage</button>
+			</Link>
+		</div>
+	);
 };
 
 export default Success;
