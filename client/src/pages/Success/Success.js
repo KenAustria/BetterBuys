@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router'
 import { userRequest } from '../../../src/requestMethods'
 import { Link } from 'react-router-dom';
@@ -7,12 +8,14 @@ const Success = () => {
 	const location = useLocation()
 	const data = location.state
 	const cart = location.state.amount
+	const currentUser = useSelector(state => state.user.currentUser)
 	const [orderId, setOrderId] = useState(null)
 
 	useEffect(() => {
 		const createOrder = async () => {
 			try {
 				const res = await userRequest.post("/orders", {
+					userId: currentUser._id,
 					products: cart.products.map(item => ({
 						productId: item._id,
 						quantity: item._quantity,
@@ -24,7 +27,7 @@ const Success = () => {
 			} catch { }
 		}
 		data && createOrder()
-	}, [cart, data])
+	}, [cart, data, currentUser])
 
 	return (
 		<div
