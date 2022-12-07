@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import styled from 'styled-components';
 import { mobile } from '../.././responsive';
+import { signup } from '../../apiCalls'
+import { useDispatch, useSelector } from 'react-redux'
 
 const SignupContainer = styled.div`
   width: 100vw;
@@ -53,27 +56,40 @@ const SignupButton = styled.button`
   cursor: pointer;
 `;
 
+const Error = styled.span`
+  color: red;
+`;
+
 const Signup = () => {
-  return (
-    <SignupContainer>
-      <SignupWrapper>
-        <SignupTitle>CREATE AN ACCOUNT</SignupTitle>
-        <SignupForm>
-          <SignupInput placeholder='name' />
-          <SignupInput placeholder='last name' />
-          <SignupInput placeholder='username' />
-          <SignupInput placeholder='email' />
-          <SignupInput placeholder='password' />
-          <SignupInput placeholder='confirm password' />
-          <SignupAgreement>
-            By creating an account, I consent to the processing of my personal
-            data in accordance with the <b>PRIVACY POLICY</b>
-          </SignupAgreement>
-          <SignupButton>SIGNUP</SignupButton>
-        </SignupForm>
-      </SignupWrapper>
-    </SignupContainer>
-  );
+	const [username, setUsername] = useState('')
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const dispatch = useDispatch();
+	const { isFetching, error } = useSelector(state => state.user);
+
+	const handleSignup = event => {
+		event.preventDefault()
+		signup(dispatch, { username, email, password })
+	}
+
+	return (
+		<SignupContainer>
+			<SignupWrapper>
+				<SignupTitle>CREATE AN ACCOUNT</SignupTitle>
+				<SignupForm>
+					<SignupInput placeholder='username' type='text' onChange={event => setUsername(event.target.value)} />
+					<SignupInput placeholder='email' type='text' onChange={event => setEmail(event.target.value)} />
+					<SignupInput placeholder='password' type='password' onChange={event => setPassword(event.target.value)} />
+					<SignupAgreement>
+						By creating an account, I consent to the processing of my personal
+						data in accordance with the <b>PRIVACY POLICY</b>
+					</SignupAgreement>
+					<SignupButton onClick={handleSignup} disabled={isFetching}>SIGNUP</SignupButton>
+					{error && <Error>Something went wrong...</Error>}
+				</SignupForm>
+			</SignupWrapper>
+		</SignupContainer>
+	);
 };
 
 export default Signup;
