@@ -70,6 +70,7 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
 	const cartQuantity = useSelector(state => state.cart.cartQuantity);
+	const { currentUser } = useSelector(state => state.user);
 
 	return (
 		<NavbarContainer>
@@ -84,7 +85,7 @@ const Navbar = () => {
 				<NavCenter>
 					<Logo>Better Buys</Logo>
 				</NavCenter>
-				<NavRight>
+				{!currentUser ? (<NavRight>
 					<Link to='/signup' style={{ textDecoration: 'none' }}>
 						<MenuItem>
 							SIGN UP
@@ -102,7 +103,15 @@ const Navbar = () => {
 							</Badge>
 						</MenuItem>
 					</Link>
-				</NavRight>
+				</NavRight>) : (<NavRight>
+					<Link to='/cart'>
+						<MenuItem>
+							<Badge badgeContent={cartQuantity} color='primary'>
+								<ShoppingCartOutlined />
+							</Badge>
+						</MenuItem>
+					</Link>
+				</NavRight>)}
 			</NavbarWrapper>
 		</NavbarContainer>
 	);
