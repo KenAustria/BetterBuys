@@ -124,7 +124,7 @@ const ProductProfile = () => {
 	const [product, setProduct] = useState({});
 	const [productQuantity, setProductQuantity] = useState(1);
 	const [productColor, setProductColor] = useState('');
-	const [size, setSize] = useState('');
+	const [productSize, setProductSize] = useState('');
 	const location = useLocation();
 	const id = location.pathname.split('/')[2];
 	const dispatch = useDispatch();
@@ -156,7 +156,7 @@ const ProductProfile = () => {
 				...product,
 				productQuantity,
 				productColor,
-				size,
+				productSize,
 				price: product.productPrice * productQuantity,
 			})
 		);
@@ -188,8 +188,7 @@ const ProductProfile = () => {
 						</ProductFilter>
 						<ProductFilter>
 							<ProductFilterTitle>Size</ProductFilterTitle>
-							<ProductFilterSize
-								onChange={event => setSize(event.target.value)}>
+							<ProductFilterSize onChange={event => setProductSize(event.target.value)}>
 								{product.productSize?.map(productSize => (
 									<ProductFilterSizeOption key={uuidv4()}>
 										{productSize}
