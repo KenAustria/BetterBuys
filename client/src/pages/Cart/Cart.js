@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Promotion from '../../components/Promotion/Promotion';
-import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
 import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
@@ -268,7 +267,6 @@ const Cart = () => {
 					</CartSummary>
 				</CartBottom>
 			</CartWrapper>
-			<Footer />
 		</CartContainer>
 	);
 };

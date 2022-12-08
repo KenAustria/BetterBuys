@@ -2,8 +2,6 @@ import { useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Promotion from '../../components/Promotion/Promotion';
 import Products from '../../components/Products/Products';
-import Newsletter from '../../components/Newsletter/Newsletter';
-import Footer from '../../components/Footer/Footer';
 import styled from 'styled-components';
 import { useLocation } from 'react-router';
 import { mobile } from '../.././responsive';
@@ -103,8 +101,6 @@ const ProductList = () => {
 				</ProductListFilter>
 			</ProductListFilterContainer>
 			<Products category={category} filters={filters} sort={sort} />
-			<Newsletter />
-			<Footer />
 		</ProductListContainer>
 	);
 };

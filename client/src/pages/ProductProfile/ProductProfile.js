@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import Promotion from '../../components/Promotion/Promotion';
-import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
-import Newsletter from '../../components/Newsletter/Newsletter';
 import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
 import { useLocation } from 'react-router-dom';
@@ -210,8 +208,6 @@ const ProductProfile = () => {
 					</ProductAddContainer>
 				</InfoContainer>
 			</ProductProfileWrapper>
-			<Newsletter />
-			<Footer />
 		</ProductProfileContainer>
 	);
 };
