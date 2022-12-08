@@ -202,7 +202,7 @@ const Cart = () => {
 						<CartTopText>Shopping Bag(0)</CartTopText>
 						<CartTopText>Your Wishlist (0)</CartTopText>
 					</CartTopTexts>
-					<CartTopButton type='filled'>CHECKOUT NOW</CartTopButton>
+					<CartTopButton type='filled'>APPLY COUPON</CartTopButton>
 				</CartTop>
 				<CartBottom>
 					<CartInfo>
