@@ -86,8 +86,6 @@ const CartDetails = styled.div`
 
 const CartProductName = styled.span``;
 
-const CartProductId = styled.span``;
-
 const CartProductColor = styled.div`
   width: 20px;
   height: 20px;
@@ -214,9 +212,6 @@ const Cart = () => {
 										<CartProductName>
 											<b>Product:</b> {product.productTitle}
 										</CartProductName>
-										<CartProductId>
-											<b>ID:</b> {uuidv4()}
-										</CartProductId>
 										<CartProductColor color={product.productColor} />
 										<CartProductSize>
 											<b>Size:</b> {product.productSize}
