@@ -2,8 +2,6 @@ import { useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Promotion from '../../components/Promotion/Promotion';
 import Products from '../../components/Products/Products';
-import Newsletter from '../../components/Newsletter/Newsletter';
-import Footer from '../../components/Footer/Footer';
 import styled from 'styled-components';
 import { useLocation } from 'react-router';
 import { mobile } from '../.././responsive';
@@ -63,9 +61,7 @@ const ProductList = () => {
 				<ProductListFilter>
 					<ProductListFilterText>Filter Products:</ProductListFilterText>
 					<ProductListSelect name='productCategories' onChange={handleFilters}>
-						<FilterOption value='' selected>
-							Phones
-						</FilterOption>
+						<FilterOption value='' defaultValue>Phones</FilterOption>
 						<FilterOption>Apple iPhone 13</FilterOption>
 						<FilterOption>Apple iPhone 13 Mini</FilterOption>
 						<FilterOption>Apple iPhone 13 Pro</FilterOption>
@@ -80,21 +76,11 @@ const ProductList = () => {
 						<FilterOption>Google Pixel 3a</FilterOption>
 						<FilterOption>Google Pixel 4 XL</FilterOption>
 					</ProductListSelect>
-					<ProductListSelect name='productColor' onChange={handleFilters}>
-						<FilterOption value='' selected>
-							Color
-						</FilterOption>
-						<FilterOption>Silver</FilterOption>
-						<FilterOption>Black</FilterOption>
-						<FilterOption>Green</FilterOption>
-						<FilterOption>Grey</FilterOption>
-						<FilterOption>Gold</FilterOption>
-					</ProductListSelect>
 				</ProductListFilter>
 				<ProductListFilter>
 					<ProductListFilterText>Sort Products:</ProductListFilterText>
 					<ProductListSelect onChange={event => setSort(event.target.value)}>
-						<FilterOption value='newest' selected>
+						<FilterOption value='newest' defaultValue>
 							Newest
 						</FilterOption>
 						<FilterOption value='asc'>Price (asc)</FilterOption>
@@ -103,8 +89,6 @@ const ProductList = () => {
 				</ProductListFilter>
 			</ProductListFilterContainer>
 			<Products category={category} filters={filters} sort={sort} />
-			<Newsletter />
-			<Footer />
 		</ProductListContainer>
 	);
 };

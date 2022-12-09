@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Promotion from '../../components/Promotion/Promotion';
-import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
 import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
@@ -8,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { mobile } from '../../responsive';
 import StripeCheckout from 'react-stripe-checkout';
 import { userRequest } from '../../requestMethods';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 const KEY = process.env.REACT_APP_STRIPE;
@@ -85,8 +84,6 @@ const CartDetails = styled.div`
 `;
 
 const CartProductName = styled.span``;
-
-const CartProductId = styled.span``;
 
 const CartProductColor = styled.div`
   width: 20px;
@@ -197,12 +194,14 @@ const Cart = () => {
 			<CartWrapper>
 				<CartTitle>YOUR BAG</CartTitle>
 				<CartTop>
-					<CartTopButton>CONTINUE SHOPPING</CartTopButton>
+					<Link to='/'>
+						<CartTopButton>CONTINUE SHOPPING</CartTopButton>
+					</Link>
 					<CartTopTexts>
 						<CartTopText>Shopping Bag(0)</CartTopText>
 						<CartTopText>Your Wishlist (0)</CartTopText>
 					</CartTopTexts>
-					<CartTopButton type='filled'>CHECKOUT NOW</CartTopButton>
+					<CartTopButton type='filled'>APPLY COUPON</CartTopButton>
 				</CartTop>
 				<CartBottom>
 					<CartInfo>
@@ -214,9 +213,6 @@ const Cart = () => {
 										<CartProductName>
 											<b>Product:</b> {product.productTitle}
 										</CartProductName>
-										<CartProductId>
-											<b>ID:</b> {uuidv4()}
-										</CartProductId>
 										<CartProductColor color={product.productColor} />
 										<CartProductSize>
 											<b>Size:</b> {product.productSize}
@@ -271,7 +267,6 @@ const Cart = () => {
 					</CartSummary>
 				</CartBottom>
 			</CartWrapper>
-			<Footer />
 		</CartContainer>
 	);
 };

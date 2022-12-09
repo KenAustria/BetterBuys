@@ -76,13 +76,6 @@ const CarouselSlideDesc = styled.p`
   letter-spacing: 3px;
 `;
 
-const CarouselButton = styled.button`
-  padding: 10px;
-  font-size: 20px;
-  background-color: transparent;
-  cursor: pointer;
-`;
-
 const Carousel = () => {
 	const [slideIndex, setSlideIndex] = useState(0);
 	const handleClick = direction => {
@@ -107,7 +100,6 @@ const Carousel = () => {
 						<CarouselInfoContainer>
 							<CarouselSlideTitle>{carouselSlide.title}</CarouselSlideTitle>
 							<CarouselSlideDesc>{carouselSlide.desc}</CarouselSlideDesc>
-							<CarouselButton>SHOW NOW</CarouselButton>
 						</CarouselInfoContainer>
 					</CarouselSlide>
 				))}
