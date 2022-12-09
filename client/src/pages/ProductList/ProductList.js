@@ -61,9 +61,7 @@ const ProductList = () => {
 				<ProductListFilter>
 					<ProductListFilterText>Filter Products:</ProductListFilterText>
 					<ProductListSelect name='productCategories' onChange={handleFilters}>
-						<FilterOption value='' defaultValue>
-							Phones
-						</FilterOption>
+						<FilterOption value='' defaultValue>Phones</FilterOption>
 						<FilterOption>Apple iPhone 13</FilterOption>
 						<FilterOption>Apple iPhone 13 Mini</FilterOption>
 						<FilterOption>Apple iPhone 13 Pro</FilterOption>
@@ -77,16 +75,6 @@ const ProductList = () => {
 						<FilterOption>Google Pixel 5</FilterOption>
 						<FilterOption>Google Pixel 3a</FilterOption>
 						<FilterOption>Google Pixel 4 XL</FilterOption>
-					</ProductListSelect>
-					<ProductListSelect name='productColor' onChange={handleFilters}>
-						<FilterOption value='' defaultValue>
-							Color
-						</FilterOption>
-						<FilterOption>Silver</FilterOption>
-						<FilterOption>Black</FilterOption>
-						<FilterOption>Green</FilterOption>
-						<FilterOption>Grey</FilterOption>
-						<FilterOption>Gold</FilterOption>
 					</ProductListSelect>
 				</ProductListFilter>
 				<ProductListFilter>
