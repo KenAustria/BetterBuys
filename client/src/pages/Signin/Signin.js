@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { mobile } from '../.././responsive';
 import { signin } from '../../apiCalls';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const SigninContainer = styled.div`
   width: 100vw;
@@ -56,7 +57,7 @@ const SigninButton = styled.button`
   }
 `;
 
-const SigninLink = styled.a`
+const LinkButton = styled.a`
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;
@@ -68,41 +69,43 @@ const Error = styled.span`
 `;
 
 const Signin = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
-  const { isFetching, error } = useSelector(state => state.user);
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+	const dispatch = useDispatch();
+	const { isFetching, error } = useSelector(state => state.user);
 
-  const handleSignin = event => {
-    event.preventDefault();
-    signin(dispatch, { username, password });
-  };
+	const handleSignin = event => {
+		event.preventDefault();
+		signin(dispatch, { username, password });
+	};
 
-  return (
-    <SigninContainer>
-      <SigninWrapper>
-        <SigninTitle>SIGN IN</SigninTitle>
-        <SigninForm>
-          <SigninInput
-            placeholder='username'
-            type='text'
-            onChange={event => setUsername(event.target.value)}
-          />
-          <SigninInput
-            placeholder='password'
-            type='password'
-            onChange={event => setPassword(event.target.value)}
-          />
-          <SigninButton onClick={handleSignin} disabled={isFetching}>
-            Signin
-          </SigninButton>
-          {error && <Error>Something went wrong...</Error>}
-          <SigninLink>FORGOT THE PASSWORD?</SigninLink>
-          <SigninLink>CREATE A NEW ACCOUNT</SigninLink>
-        </SigninForm>
-      </SigninWrapper>
-    </SigninContainer>
-  );
+	return (
+		<SigninContainer>
+			<SigninWrapper>
+				<SigninTitle>SIGN IN</SigninTitle>
+				<SigninForm>
+					<SigninInput
+						placeholder='username'
+						type='text'
+						onChange={event => setUsername(event.target.value)}
+					/>
+					<SigninInput
+						placeholder='password'
+						type='password'
+						onChange={event => setPassword(event.target.value)}
+					/>
+					<SigninButton onClick={handleSignin} disabled={isFetching}>
+						Signin
+					</SigninButton>
+					{error && <Error>Something went wrong...</Error>}
+					<LinkButton>FORGOT THE PASSWORD?</LinkButton>
+					<Link to='/signup' style={{ textDecoration: 'none' }}>
+						<LinkButton>CREATE A NEW ACCOUNT</LinkButton>
+					</Link>
+				</SigninForm>
+			</SigninWrapper>
+		</SigninContainer>
+	);
 };
 
 export default Signin;
