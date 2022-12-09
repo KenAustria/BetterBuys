@@ -61,7 +61,7 @@ const ProductList = () => {
 				<ProductListFilter>
 					<ProductListFilterText>Filter Products:</ProductListFilterText>
 					<ProductListSelect name='productCategories' onChange={handleFilters}>
-						<FilterOption value='' selected>
+						<FilterOption value='' defaultValue>
 							Phones
 						</FilterOption>
 						<FilterOption>Apple iPhone 13</FilterOption>
@@ -79,7 +79,7 @@ const ProductList = () => {
 						<FilterOption>Google Pixel 4 XL</FilterOption>
 					</ProductListSelect>
 					<ProductListSelect name='productColor' onChange={handleFilters}>
-						<FilterOption value='' selected>
+						<FilterOption value='' defaultValue>
 							Color
 						</FilterOption>
 						<FilterOption>Silver</FilterOption>
@@ -92,7 +92,7 @@ const ProductList = () => {
 				<ProductListFilter>
 					<ProductListFilterText>Sort Products:</ProductListFilterText>
 					<ProductListSelect onChange={event => setSort(event.target.value)}>
-						<FilterOption value='newest' selected>
+						<FilterOption value='newest' defaultValue>
 							Newest
 						</FilterOption>
 						<FilterOption value='asc'>Price (asc)</FilterOption>
