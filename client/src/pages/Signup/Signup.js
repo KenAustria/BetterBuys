@@ -56,6 +56,13 @@ const SignupButton = styled.button`
   cursor: pointer;
 `;
 
+const LinkButton = styled.a`
+  margin: 5px 0px;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
 const Error = styled.span`
   color: red;
 `;
@@ -86,6 +93,7 @@ const Signup = () => {
 					</SignupAgreement>
 					<SignupButton onClick={handleSignup} disabled={isFetching}>SIGNUP</SignupButton>
 					{error && <Error>Something went wrong...</Error>}
+					<LinkButton>SIGNIN ACCOUNT</LinkButton>
 				</SignupForm>
 			</SignupWrapper>
 		</SignupContainer>
