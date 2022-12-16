@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import styled from 'styled-components';
-import { mobile } from '../.././responsive';
+import { mobile, tablet } from '../.././responsive';
 import { signup } from '../../apiCalls'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 
 const SignupContainer = styled.div`
   width: 100vw;
@@ -23,11 +24,13 @@ const SignupWrapper = styled.div`
   padding: 20px;
   background-color: white;
   ${mobile({ width: '75%' })}
+	${tablet({ width: '60%', height: '45%' })}
 `;
 
 const SignupTitle = styled.h1`
   font-size: 24px;
   font-weight: 300;
+	${tablet({ fontSize: '30px' })}
 `;
 
 const SignupForm = styled.form`
@@ -40,6 +43,7 @@ const SignupInput = styled.input`
   min-width: 40%;
   margin: 20px 10px 0px 0px;
   padding: 10px;
+	${tablet({ fontSize: '23px', margin: '10px 1px' })}
 `;
 
 const SignupAgreement = styled.span`
@@ -54,6 +58,8 @@ const SignupButton = styled.button`
   background-color: teal;
   color: white;
   cursor: pointer;
+	${mobile({ width: '100%' })};
+	${tablet({ width: '100%', fontSize: '23px' })};
 `;
 
 const LinkButton = styled.a`
@@ -61,6 +67,7 @@ const LinkButton = styled.a`
   font-size: 12px;
   text-decoration: underline;
   cursor: pointer;
+	${tablet({ fontSize: '17px' })}
 `;
 
 const Error = styled.span`
@@ -93,7 +100,9 @@ const Signup = () => {
 					</SignupAgreement>
 					<SignupButton onClick={handleSignup} disabled={isFetching}>SIGNUP</SignupButton>
 					{error && <Error>Something went wrong...</Error>}
-					<LinkButton>SIGNIN ACCOUNT</LinkButton>
+					<Link to='/signin' style={{ margin: '10px 0px' }}>
+						<LinkButton>SIGNIN ACCOUNT</LinkButton>
+					</Link>
 				</SignupForm>
 			</SignupWrapper>
 		</SignupContainer>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { mobile } from '../.././responsive';
+import { mobile, tablet } from '../.././responsive';
 import { signin } from '../../apiCalls';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -23,12 +23,14 @@ const SigninWrapper = styled.div`
   width: 25%;
   padding: 20px;
   background-color: white;
-  ${mobile({ width: '75%' })}
+  ${mobile({ width: '75%' })};
+	${tablet({ width: '60%', height: '40%' })}
 `;
 
 const SigninTitle = styled.h1`
   font-size: 24px;
   font-weight: 300;
+	${tablet({ fontSize: '30px' })}
 `;
 
 const SigninForm = styled.form`
@@ -41,6 +43,7 @@ const SigninInput = styled.input`
   min-width: 40%;
   margin: 10px 0;
   padding: 10px;
+	${tablet({ fontSize: '23px', margin: '10px 1px' })}
 `;
 
 const SigninButton = styled.button`
@@ -55,6 +58,8 @@ const SigninButton = styled.button`
     color: green;
     cursor: not-allowed;
   }
+	${mobile({ width: '100%' })};
+	${tablet({ width: '100%', fontSize: '23px' })};
 `;
 
 const LinkButton = styled.a`
@@ -62,6 +67,7 @@ const LinkButton = styled.a`
   font-size: 12px;
   text-decoration: underline;
   cursor: pointer;
+	${tablet({ fontSize: '17px' })}
 `;
 
 const Error = styled.span`
@@ -98,9 +104,11 @@ const Signin = () => {
 						Signin
 					</SigninButton>
 					{error && <Error>Something went wrong...</Error>}
-					<LinkButton>FORGOT THE PASSWORD?</LinkButton>
-					<Link to='/signup' style={{ textDecoration: 'none' }}>
-						<LinkButton>CREATE A NEW ACCOUNT</LinkButton>
+					<LinkButton >FORGOT THE PASSWORD?</LinkButton>
+					<Link to='/signup'>
+						<LinkButton style={{ textDecoration: 'none' }}>
+							CREATE A NEW ACCOUNT
+						</LinkButton>
 					</Link>
 				</SigninForm>
 			</SigninWrapper>
