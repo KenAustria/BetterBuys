@@ -9,6 +9,7 @@ const NewsletterContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+	${mobile({ height: '40vh' })}
 `;
 const NewsletterTitle = styled.h1`
   font-size: 70px;
@@ -46,20 +47,20 @@ const NewsletterButton = styled.button`
 `;
 
 const Newsletter = () => {
-  return (
-    <NewsletterContainer>
-      <NewsletterTitle>Newsletter</NewsletterTitle>
-      <NewsletterDescription>
-        Keep up with our latest news. Sent once a week. Every week.
-      </NewsletterDescription>
-      <NewsletterInputContainer>
-        <NewsletterInput placeholder='Email' />
-        <NewsletterButton>
-          <Send />
-        </NewsletterButton>
-      </NewsletterInputContainer>
-    </NewsletterContainer>
-  );
+	return (
+		<NewsletterContainer>
+			<NewsletterTitle>Newsletter</NewsletterTitle>
+			<NewsletterDescription>
+				Keep up with our latest news. Sent once a week. Every week.
+			</NewsletterDescription>
+			<NewsletterInputContainer>
+				<NewsletterInput placeholder='Email' />
+				<NewsletterButton>
+					<Send />
+				</NewsletterButton>
+			</NewsletterInputContainer>
+		</NewsletterContainer>
+	);
 };
 
 export default Newsletter;

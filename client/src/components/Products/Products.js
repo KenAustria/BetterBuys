@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Product from './Product';
 import styled from 'styled-components';
 import axios from 'axios';
+import { mobile } from '../.././responsive';
 import { v4 as uuidv4 } from 'uuid';
 
 const ProductsContainer = styled.div`
@@ -9,6 +10,7 @@ const ProductsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+	${mobile({ padding: '0px' })}
 `;
 
 const Products = ({ category, filters, sort }) => {
