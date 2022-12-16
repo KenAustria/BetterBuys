@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components';
-import { mobile, tablet } from '../.././responsive';
+import { mobile, tablet, desktop } from '../.././responsive';
 import { signup } from '../../apiCalls'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
@@ -25,12 +25,14 @@ const SignupWrapper = styled.div`
   background-color: white;
   ${mobile({ width: '75%' })}
 	${tablet({ width: '60%', height: '45%' })}
+	${desktop({ width: '75%', height: '40%' })}
 `;
 
 const SignupTitle = styled.h1`
   font-size: 24px;
   font-weight: 300;
-	${tablet({ fontSize: '30px' })}
+	${tablet({ fontSize: '30px' })};
+	${desktop({ fontSize: '40px' })}
 `;
 
 const SignupForm = styled.form`
@@ -44,11 +46,13 @@ const SignupInput = styled.input`
   margin: 20px 10px 0px 0px;
   padding: 10px;
 	${tablet({ fontSize: '23px', margin: '10px 1px' })}
+	${desktop({ fontSize: '30px', margin: '20px 3px' })}
 `;
 
 const SignupAgreement = styled.span`
   font-size: 12px;
   margin: 20px 0px;
+	${desktop({ fontSize: '20px' })}
 `;
 
 const SignupButton = styled.button`
@@ -60,6 +64,7 @@ const SignupButton = styled.button`
   cursor: pointer;
 	${mobile({ width: '100%' })};
 	${tablet({ width: '100%', fontSize: '23px' })};
+	${desktop({ width: '100%', fontSize: '30px' })};
 `;
 
 const LinkButton = styled.a`
@@ -68,6 +73,7 @@ const LinkButton = styled.a`
   text-decoration: underline;
   cursor: pointer;
 	${tablet({ fontSize: '17px' })}
+	${desktop({ fontSize: '24px', margin: '10px' })}
 `;
 
 const Error = styled.span`
