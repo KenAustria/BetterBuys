@@ -52,7 +52,7 @@ const SignupInput = styled.input`
 const SignupAgreement = styled.span`
   font-size: 12px;
   margin: 20px 0px;
-	${desktop({ fontSize: '20px' })}
+	${desktop({ fontSize: '14px' })}
 `;
 
 const SignupButton = styled.button`
