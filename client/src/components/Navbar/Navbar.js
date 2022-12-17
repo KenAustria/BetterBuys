@@ -22,6 +22,8 @@ const NavLeft = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+	/* ${mobile({ justifyContent: 'flex-start' })} */
+	${mobile({ display: 'none' })}
 `;
 
 const Language = styled.span`
@@ -46,11 +48,12 @@ const SearchInput = styled.input`
 const NavCenter = styled.div`
   flex: 1;
   text-align: center;
+	${mobile({ justifyContent: 'flex-end', textAlign: 'right' })}
 `;
 
 const Logo = styled.h1`
   font-weight: bold;
-  ${mobile({ fontSize: '24px' })}
+  ${mobile({ fontSize: '16px' })}
 `;
 
 const NavRight = styled.div`

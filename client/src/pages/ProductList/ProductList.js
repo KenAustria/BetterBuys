@@ -26,7 +26,7 @@ const ProductListFilterText = styled.span`
   font-size: 20px;
   font-weight: 600;
   margin-right: 20px;
-  ${mobile({ marginRight: '0px' })}
+  ${mobile({ marginRight: '0px', fontSize: '18px' })}
 `;
 
 const ProductListSelect = styled.select`

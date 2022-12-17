@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons';
 import { carouselSlides } from '../../data';
-import { mobile } from '../.././responsive';
+import { mobile, tablet } from '../.././responsive';
 import { v4 as uuidv4 } from 'uuid';
 
 const CarouselContainer = styled.div`
@@ -12,6 +12,7 @@ const CarouselContainer = styled.div`
   position: relative;
   overflow: hidden;
   ${mobile({ display: 'none' })}
+	${tablet({ display: 'none' })}
 `;
 
 const CarouselArrow = styled.div`

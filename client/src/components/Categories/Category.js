@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { mobile } from '../.././responsive';
+import { mobile, tablet } from '../.././responsive';
 
 const CategoryContainer = styled.div`
   flex: 1;
@@ -31,6 +31,7 @@ const CategoryInfo = styled.div`
 const CategoryTitle = styled.h1`
   color: white;
   margin-bottom: 20px;
+	${tablet({ fontSize: '28px' })}
 `;
 
 const CategoryButton = styled.button`
@@ -43,17 +44,17 @@ const CategoryButton = styled.button`
 `;
 
 const Category = ({ category }) => {
-  return (
-    <CategoryContainer>
-      <Link to={`/products/${category.category}`}>
-        <CategoryImage src={category.img} />
-        <CategoryInfo>
-          <CategoryTitle>{category.title}</CategoryTitle>
-          <CategoryButton>SHOP NOW</CategoryButton>
-        </CategoryInfo>
-      </Link>
-    </CategoryContainer>
-  );
+	return (
+		<CategoryContainer>
+			<Link to={`/products/${category.category}`}>
+				<CategoryImage src={category.img} />
+				<CategoryInfo>
+					<CategoryTitle>{category.title}</CategoryTitle>
+					<CategoryButton>SHOP NOW</CategoryButton>
+				</CategoryInfo>
+			</Link>
+		</CategoryContainer>
+	);
 };
 
 export default Category;
