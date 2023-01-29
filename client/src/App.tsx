@@ -11,7 +11,7 @@ import { useAppSelector } from './hooks';
 import { RootState } from './store';
 import React from 'react';
 
-export const App: React.FC = () => {
+export default function App() {
     const user = useAppSelector((state: RootState) => state.user.currentUser);
     return (
         <Router>
@@ -26,4 +26,4 @@ export const App: React.FC = () => {
             </Routes>
         </Router>
     );
-};
+}
