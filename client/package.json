@@ -7,7 +7,6 @@
     "@material-ui/icons": "^4.11.2",
     "@mui/icons-material": "^5.5.1",
     "@reduxjs/toolkit": "^1.8.1",
-    "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^29.4.0",
@@ -61,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
     "eslint-plugin-jest-dom": "^4.0.3"
   }
 }
