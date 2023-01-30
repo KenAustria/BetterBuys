@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import {
-  FavoriteBorderOutlined,
-  SearchOutlined,
-  ShoppingCartOutlined,
+	FavoriteBorderOutlined,
+	SearchOutlined,
+	ShoppingCartOutlined,
 } from '@material-ui/icons';
+import React from 'react';
 
 const ProductInfo = styled.div`
   opacity: 0;
@@ -66,26 +67,38 @@ const ProductIcon = styled.div`
   }
 `;
 
-const Product = ({ product }) => {
-  return (
-    <ProductContainer>
-      <ProductCircle />
-      <ProductImage src={product.productImage} />
-      <ProductInfo>
-        <ProductIcon>
-          <ShoppingCartOutlined />
-        </ProductIcon>
-        <ProductIcon>
-          <Link to={`/product/${product._id}`}>
-            <SearchOutlined />
-          </Link>
-        </ProductIcon>
-        <ProductIcon>
-          <FavoriteBorderOutlined />
-        </ProductIcon>
-      </ProductInfo>
-    </ProductContainer>
-  );
+interface ProductProps {
+	product: {
+		productTitle: string;
+		productDescription: string;
+		productImage: string;
+		productSize: Array<string>;
+		productColor: Array<string>;
+		productPrice: string;
+		productCategories: Array<string>;
+	};
+}
+
+const Product: React.FC<ProductProps> = ({ product }) => {
+	return (
+		<ProductContainer>
+			<ProductCircle />
+			<ProductImage src={product.productImage} />
+			<ProductInfo>
+				<ProductIcon>
+					<ShoppingCartOutlined />
+				</ProductIcon>
+				<ProductIcon>
+					<Link to={`/product/${product._id}`}>
+						<SearchOutlined />
+					</Link>
+				</ProductIcon>
+				<ProductIcon>
+					<FavoriteBorderOutlined />
+				</ProductIcon>
+			</ProductInfo>
+		</ProductContainer>
+	);
 };
 
-export default Product;
+export default Product

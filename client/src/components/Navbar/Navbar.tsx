@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { useAppSelector } from '../../hooks';
 // import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { Badge, Link } from '@material-ui/core';
 import { Badge } from '@material-ui/core';
+// import { Badge, Link } from '@material-ui/core';
 import { Search, ShoppingCartOutlined } from '@material-ui/icons';
 import { mobile } from '../../responsive';
 import { RootState } from '../../store';
@@ -75,7 +75,7 @@ const MenuItem = styled.div`
     ${mobile({ fontSize: '12px', marginLeft: '10px' })}
 `;
 
-export default function Navbar() {
+const Navbar: React.FC = () => {
     const cartQuantity = useAppSelector((state: RootState) => state.cart.cartQuantity);
     const { currentUser } = useAppSelector((state: RootState) => state.user);
 
@@ -122,4 +122,6 @@ export default function Navbar() {
             </NavbarWrapper>
         </NavbarContainer>
     );
-}
+};
+
+export default Navbar;

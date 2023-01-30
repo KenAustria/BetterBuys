@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -7,12 +8,12 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 14px
   font-weight: 500;
 `;
 
-const Promotion = () => {
-  return <Container>Flash Sale! Flash Sale! Flash Sale!</Container>;
+const Promotion: React.FC = () => {
+    return <Container>Flash Sale! Flash Sale! Flash Sale!</Container>;
 };
 
 export default Promotion;

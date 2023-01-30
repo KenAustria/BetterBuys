@@ -7,7 +7,7 @@ import Newsletter from '../../components/Newsletter/Newsletter';
 import Footer from '../../components/Footer/Footer';
 import React from 'react';
 
-export default function Home() {
+const Home: React.FC = () => {
     return (
         <div>
             <Navbar />
@@ -19,4 +19,6 @@ export default function Home() {
             <Footer />
         </div>
     );
-}
+};
+
+export default Home;
