@@ -16,7 +16,7 @@ const rootReducer = combineReducers({ user: userReducer, cart: cartReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+export default function setupStore(preloadedState?: PreloadedState<RootState>) {
     return configureStore({
         reducer: persistedReducer,
         middleware: (getDefaultMiddleware) =>
@@ -27,7 +27,20 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
             }),
         preloadedState,
     });
-};
+}
+
+// export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+//     return configureStore({
+//         reducer: persistedReducer,
+//         middleware: (getDefaultMiddleware) =>
+//             getDefaultMiddleware({
+//                 serializableCheck: {
+//                     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//                 },
+//             }),
+//         preloadedState,
+//     });
+// };
 
 // export const store = configureStore({
 //     reducer: persistedReducer,
@@ -47,4 +60,5 @@ export let persistor = persistStore(setupStore as any);
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore['dispatch'];
+// export type AppDispatch = AppStore['dispatch'];
+export type AppDispatch = Pick<AppStore, 'dispatch'>;

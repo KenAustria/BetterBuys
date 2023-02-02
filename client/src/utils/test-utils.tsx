@@ -4,7 +4,7 @@ import type { RenderOptions } from '@testing-library/react';
 // import { configureStore } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import { setupStore } from '../store';
+import setupStore from '../store';
 import type { AppStore, RootState } from '../store';
 // As a basic setup, import your same slice reducers
 // import userReducer from '../features/user/userSlice';
