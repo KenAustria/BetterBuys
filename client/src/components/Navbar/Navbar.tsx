@@ -1,13 +1,11 @@
+import React from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../hooks';
-// import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { Badge } from '@material-ui/core';
-// import { Badge, Link } from '@material-ui/core';
 import { Search, ShoppingCartOutlined } from '@material-ui/icons';
 import { mobile } from '../../responsive';
 import { RootState } from '../../store';
-import React from 'react';
 
 const NavbarContainer = styled.div`
     height: 90px;
@@ -26,7 +24,6 @@ const NavLeft = styled.div`
     flex: 1;
     display: flex;
     align-items: center;
-    /* ${mobile({ justifyContent: 'flex-start' })} */
     ${mobile({ display: 'none' })}
 `;
 
@@ -76,51 +73,63 @@ const MenuItem = styled.div`
 `;
 
 const Navbar: React.FC = () => {
+    // Use the `useAppSelector` hook to get the `cartQuantity` value from the Redux store
     const cartQuantity = useAppSelector((state: RootState) => state.cart.cartQuantity);
+    // Use the `useAppSelector` hook to get the `currentUser` value from the Redux store
     const { currentUser } = useAppSelector((state: RootState) => state.user);
 
     return (
-        <NavbarContainer>
-            <NavbarWrapper>
-                <NavLeft>
-                    <Language>EN</Language>
-                    <SearchContainer>
-                        <SearchInput />
-                        <Search style={{ color: 'gray', fontSize: 16 }} />
-                    </SearchContainer>
-                </NavLeft>
-                <NavCenter>
-                    <Logo>Better Buys</Logo>
-                </NavCenter>
-                {!currentUser ? (
-                    <NavRight>
-                        <Link to="/signup" style={{ textDecoration: 'none' }}>
-                            <MenuItem>SIGN UP</MenuItem>
-                        </Link>
-                        <Link to="signin" style={{ textDecoration: 'none' }}>
-                            <MenuItem>SIGN IN</MenuItem>
-                        </Link>
-                        <Link to="/cart">
-                            <MenuItem>
-                                <Badge badgeContent={cartQuantity} color="primary">
-                                    <ShoppingCartOutlined />
-                                </Badge>
-                            </MenuItem>
-                        </Link>
-                    </NavRight>
-                ) : (
-                    <NavRight>
-                        <Link to="/cart">
-                            <MenuItem>
-                                <Badge badgeContent={cartQuantity} color="primary">
-                                    <ShoppingCartOutlined />
-                                </Badge>
-                            </MenuItem>
-                        </Link>
-                    </NavRight>
-                )}
-            </NavbarWrapper>
-        </NavbarContainer>
+        <Router>
+            <NavbarContainer>
+                <NavbarWrapper>
+                    <NavLeft>
+                        <Language aria-label="language">EN</Language>
+                        <SearchContainer>
+                            <SearchInput />
+                            <Search
+                                style={{ color: 'gray', fontSize: 16 }}
+                                data-testid="search-icon"
+                                aria-label="search"
+                            />
+                        </SearchContainer>
+                    </NavLeft>
+                    <NavCenter>
+                        <Logo aria-label="Better Buys">Better Buys</Logo>
+                    </NavCenter>
+                    {!currentUser ? (
+                        /* If the currentUser is not logged in, display the links for
+                        Sign Up and Sign In, and a cart icon with the quantity of items in the cart */
+                        <NavRight>
+                            <Link to="/signup" style={{ textDecoration: 'none' }}>
+                                <MenuItem aria-label="Sign Up">SIGN UP</MenuItem>
+                            </Link>
+                            <Link to="signin" style={{ textDecoration: 'none' }}>
+                                <MenuItem aria-label="Sign In">SIGN IN</MenuItem>
+                            </Link>
+                            <Link to="/cart">
+                                <MenuItem aria-label={`Cart (${cartQuantity})`}>
+                                    <Badge badgeContent={cartQuantity} color="primary">
+                                        <ShoppingCartOutlined />
+                                    </Badge>
+                                </MenuItem>
+                            </Link>
+                        </NavRight>
+                    ) : (
+                        /* If the currentUser is logged in, only display the cart icon 
+                        with the quantity of items in the cart */
+                        <NavRight>
+                            <Link to="/cart">
+                                <MenuItem aria-label={`Cart (${cartQuantity})`}>
+                                    <Badge badgeContent={cartQuantity} color="primary">
+                                        <ShoppingCartOutlined data-testid="cart-icon" />
+                                    </Badge>
+                                </MenuItem>
+                            </Link>
+                        </NavRight>
+                    )}
+                </NavbarWrapper>
+            </NavbarContainer>
+        </Router>
     );
 };
 
