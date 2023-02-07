@@ -85,7 +85,7 @@ const Navbar: React.FC = () => {
                 <NavLeft>
                     <Language aria-label="language">EN</Language>
                     <SearchContainer>
-                        <SearchInput />
+                        <SearchInput aria-label="Search" />
                         <Search style={{ color: 'gray', fontSize: 16 }} data-testid="search-icon" aria-label="search" />
                     </SearchContainer>
                 </NavLeft>
