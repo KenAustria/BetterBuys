@@ -79,57 +79,53 @@ const Navbar: React.FC = () => {
     const { currentUser } = useAppSelector((state: RootState) => state.user);
 
     return (
-        <Router>
-            <NavbarContainer>
-                <NavbarWrapper>
-                    <NavLeft>
-                        <Language aria-label="language">EN</Language>
-                        <SearchContainer>
-                            <SearchInput />
-                            <Search
-                                style={{ color: 'gray', fontSize: 16 }}
-                                data-testid="search-icon"
-                                aria-label="search"
-                            />
-                        </SearchContainer>
-                    </NavLeft>
-                    <NavCenter>
-                        <Logo aria-label="Better Buys">Better Buys</Logo>
-                    </NavCenter>
-                    {!currentUser ? (
-                        /* If the currentUser is not logged in, display the links for
+        // <Router>
+        <NavbarContainer>
+            <NavbarWrapper>
+                <NavLeft>
+                    <Language aria-label="language">EN</Language>
+                    <SearchContainer>
+                        <SearchInput />
+                        <Search style={{ color: 'gray', fontSize: 16 }} data-testid="search-icon" aria-label="search" />
+                    </SearchContainer>
+                </NavLeft>
+                <NavCenter>
+                    <Logo aria-label="Better Buys">Better Buys</Logo>
+                </NavCenter>
+                {!currentUser ? (
+                    /* If the currentUser is not logged in, display the links for
                         Sign Up and Sign In, and a cart icon with the quantity of items in the cart */
-                        <NavRight>
-                            <Link to="/signup" style={{ textDecoration: 'none' }}>
-                                <MenuItem aria-label="Sign Up">SIGN UP</MenuItem>
-                            </Link>
-                            <Link to="signin" style={{ textDecoration: 'none' }}>
-                                <MenuItem aria-label="Sign In">SIGN IN</MenuItem>
-                            </Link>
-                            <Link to="/cart">
-                                <MenuItem aria-label={`Cart (${cartQuantity})`}>
-                                    <Badge badgeContent={cartQuantity} color="primary">
-                                        <ShoppingCartOutlined />
-                                    </Badge>
-                                </MenuItem>
-                            </Link>
-                        </NavRight>
-                    ) : (
-                        /* If the currentUser is logged in, only display the cart icon 
+                    <NavRight>
+                        <Link to="/signup" style={{ textDecoration: 'none' }}>
+                            <MenuItem aria-label="Sign Up">SIGN UP</MenuItem>
+                        </Link>
+                        <Link to="signin" style={{ textDecoration: 'none' }}>
+                            <MenuItem aria-label="Sign In">SIGN IN</MenuItem>
+                        </Link>
+                        <Link to="/cart">
+                            <MenuItem aria-label={`Cart (${cartQuantity})`}>
+                                <Badge badgeContent={cartQuantity} color="primary">
+                                    <ShoppingCartOutlined />
+                                </Badge>
+                            </MenuItem>
+                        </Link>
+                    </NavRight>
+                ) : (
+                    /* If the currentUser is logged in, only display the cart icon 
                         with the quantity of items in the cart */
-                        <NavRight>
-                            <Link to="/cart">
-                                <MenuItem aria-label={`Cart (${cartQuantity})`}>
-                                    <Badge badgeContent={cartQuantity} color="primary">
-                                        <ShoppingCartOutlined data-testid="cart-icon" />
-                                    </Badge>
-                                </MenuItem>
-                            </Link>
-                        </NavRight>
-                    )}
-                </NavbarWrapper>
-            </NavbarContainer>
-        </Router>
+                    <NavRight>
+                        <Link to="/cart">
+                            <MenuItem aria-label={`Cart (${cartQuantity})`}>
+                                <Badge badgeContent={cartQuantity} color="primary">
+                                    <ShoppingCartOutlined data-testid="cart-icon" />
+                                </Badge>
+                            </MenuItem>
+                        </Link>
+                    </NavRight>
+                )}
+            </NavbarWrapper>
+        </NavbarContainer>
+        // </Router>
     );
 };
 
