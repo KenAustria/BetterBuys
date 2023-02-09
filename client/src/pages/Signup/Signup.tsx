@@ -144,7 +144,7 @@ const Signup: React.FC = () => {
                         </Error>
                     )}
                     <Link to="/signin" style={{ margin: '10px 0px' }}>
-                        <LinkButton type="link" role="link" aria-label="sign in link">
+                        <LinkButton type="link" role="link" aria-label="sign up link">
                             SIGNIN ACCOUNT
                         </LinkButton>
                     </Link>

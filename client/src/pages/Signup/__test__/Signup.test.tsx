@@ -157,14 +157,14 @@ describe('<Signup />', () => {
 
     it('renders a link button with the correct text and aria-label for LinkButton', () => {
         renderWithProviders(
-            <LinkButton type="link" role="link" aria-label="sign in link">
+            <LinkButton type="link" role="link" aria-label="sign up link">
                 SIGNIN ACCOUNT
             </LinkButton>,
         );
 
         const linkButtonText = screen.getByText('SIGNIN ACCOUNT');
         expect(linkButtonText).toBeInTheDocument();
-        const linkButtonRole = screen.getByRole('link', { name: 'sign in link' });
+        const linkButtonRole = screen.getByRole('link', { name: 'sign up link' });
         expect(linkButtonRole).toBeInTheDocument();
     });
 });
