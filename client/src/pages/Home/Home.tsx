@@ -14,7 +14,19 @@ const Home: React.FC = () => {
             <Promotion />
             <Carousel />
             <Categories />
-            <Products />
+            <Products
+                category={{
+                    id: 0,
+                    img: '',
+                    title: '',
+                    category: '',
+                }}
+                filters={{
+                    productTitle: '',
+                    productColor: [],
+                }}
+                sort={''}
+            />
             <Newsletter />
             <Footer />
         </div>
