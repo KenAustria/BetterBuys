@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
-import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons';
+import React, { useState } from 'react';
 import { carouselSlides } from '../../data';
 import { mobile, tablet } from '../../responsive';
-import { v4 as uuidv4 } from 'uuid';
-import React from 'react';
+import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons';
 
-const CarouselContainer = styled.div`
+export const CarouselContainer = styled.div`
     width: 100%;
     height: 100vh;
     display: flex;
@@ -16,7 +15,7 @@ const CarouselContainer = styled.div`
     ${tablet({ display: 'none' })}
 `;
 
-const CarouselArrow = styled.div`
+export const CarouselArrow = styled.div`
     width: 50px;
     height: 50px;
     background-color: #fff7f7;
@@ -35,14 +34,14 @@ const CarouselArrow = styled.div`
     z-index: 2;
 `;
 
-const CarouselWrapper = styled.div`
+export const CarouselWrapper = styled.div`
     height: 100%;
     display: flex;
     transition: all 1.5s ease;
-    transform: translateX(${(props) => props.slideIndex * -100}vw); // direction on X-axis
+    transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
-const CarouselSlide = styled.div`
+export const CarouselSlide = styled.div`
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -50,25 +49,28 @@ const CarouselSlide = styled.div`
     background-color: #${(props) => props.bg};
 `;
 
-const CarouselImgContainer = styled.div`
+export const CarouselImgContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
     flex: 1;
 `;
 
-const CarouselImage = styled.img`
+export const CarouselImage = styled.img`
     height: 80%;
 `;
 
-const CarouselInfoContainer = styled.div`
+export const CarouselInfoContainer = styled.div`
     flex: 1;
     padding: 50px;
 `;
 
-const CarouselSlideTitle = styled.h1`
+export const CarouselSlideTitle = styled.h1`
     font-size: 70px;
 `;
 
-const CarouselSlideDesc = styled.p`
+export const CarouselSlideDesc = styled.p`
     margin: 50px 0px;
     font-size: 20px;
     font-weight: 500;
@@ -78,33 +80,61 @@ const CarouselSlideDesc = styled.p`
 const Carousel: React.FC = () => {
     const [slideIndex, setSlideIndex] = useState<number>(0);
 
-    const handleClick = (direction) => {
+    const handleClick = (direction: 'left' | 'right') => {
         if (direction === 'left') {
-            setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2); // if not first slide, then -1, else last
+            setSlideIndex((slideIndex - 1 + 3) % 3);
         } else {
-            setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0); // if not last slide, then +1, else first
+            setSlideIndex((slideIndex + 1) % 3);
+        }
+    };
+
+    const handleKeyDown = (direction: 'left' | 'right', event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            handleClick(direction);
         }
     };
 
     return (
         <CarouselContainer>
-            <CarouselArrow direction="left" onClick={() => handleClick('left')}>
+            <CarouselArrow
+                direction="left"
+                onClick={() => handleClick('left')}
+                onKeyDown={(event) => handleKeyDown('left', event)}
+                aria-label="Previous Slide"
+                tabIndex={0}
+            >
                 <ArrowLeftOutlined />
             </CarouselArrow>
             <CarouselWrapper slideIndex={slideIndex}>
-                {carouselSlides.map((carouselSlide) => (
-                    <CarouselSlide bg={carouselSlide.bg} key={uuidv4()}>
+                {carouselSlides.map((carouselSlide, index) => (
+                    <CarouselSlide
+                        bg={carouselSlide.bg}
+                        key={uuidv4()}
+                        role="listitem"
+                        aria-hidden={index !== slideIndex}
+                        aria-describedby={`slide-${index}-desc`}
+                    >
                         <CarouselImgContainer>
-                            <CarouselImage src={carouselSlide.img} />
+                            <CarouselImage src={carouselSlide.img} alt="carousel image" />
                         </CarouselImgContainer>
                         <CarouselInfoContainer>
-                            <CarouselSlideTitle>{carouselSlide.title}</CarouselSlideTitle>
-                            <CarouselSlideDesc>{carouselSlide.desc}</CarouselSlideDesc>
+                            <CarouselSlideTitle aria-label="carousel slide title">
+                                {carouselSlide.title}
+                            </CarouselSlideTitle>
+                            <CarouselSlideDesc id={`slide-${index}-desc`} aria-label="carousel slide desc">
+                                {carouselSlide.desc}
+                            </CarouselSlideDesc>
                         </CarouselInfoContainer>
                     </CarouselSlide>
                 ))}
             </CarouselWrapper>
-            <CarouselArrow direction="right" onClick={() => handleClick('right')}>
+            <CarouselArrow
+                direction="right"
+                onClick={() => handleClick('right')}
+                onKeyDown={(event) => handleKeyDown('right', event)}
+                aria-label="Next slide"
+                tabIndex={0}
+            >
                 <ArrowRightOutlined />
             </CarouselArrow>
         </CarouselContainer>
