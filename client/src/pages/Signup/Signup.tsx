@@ -28,7 +28,7 @@ const SignupWrapper = styled.div`
 	${desktop({ width: '75%', height: '40%' })}
 `;
 
-const SignupTitle = styled.h1`
+export const SignupTitle = styled.h1`
     font-size: 24px;
     font-weight: 300;
     ${tablet({ fontSize: '30px' })};
@@ -40,7 +40,7 @@ const SignupForm = styled.form`
     flex-wrap: wrap;
 `;
 
-const SignupInput = styled.input`
+export const SignupInput = styled.input`
     flex: 1;
     min-width: 40%;
     margin: 20px 10px 0px 0px;
@@ -49,13 +49,13 @@ const SignupInput = styled.input`
     ${desktop({ fontSize: '30px', margin: '20px 3px' })}
 `;
 
-const SignupAgreement = styled.span`
+export const SignupAgreement = styled.span`
     font-size: 12px;
     margin: 20px 0px;
     ${desktop({ fontSize: '14px' })}
 `;
 
-const SignupButton = styled.button`
+export const SignupButton = styled.button`
     width: 40%;
     border: none;
     padding: 15px 20px;

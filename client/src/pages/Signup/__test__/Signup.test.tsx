@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React from 'react';
-import Signup, { LinkButton } from '../Signup';
+import Signup, { SignupTitle, SignupInput, SignupAgreement, SignupButton, LinkButton } from '../Signup';
 import '@testing-library/jest-dom';
 import { renderWithProviders } from '../../../utils/test-utils';
 import { fireEvent, screen } from '@testing-library/react';
@@ -9,9 +9,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 describe('<Signup />', () => {
     it('should have the correct accessibility attributes for SignupTitle', () => {
         renderWithProviders(
-            <h1 aria-label="create an account heading" role="heading" tabIndex={0}>
-                CREATE AN ACCOUNT
-            </h1>,
+            <Router>
+                <SignupTitle aria-label="create an account heading" role="heading" tabIndex={0}>
+                    CREATE AN ACCOUNT
+                </SignupTitle>
+            </Router>,
         );
 
         const heading = screen.getByRole('heading');
@@ -36,7 +38,7 @@ describe('<Signup />', () => {
     it('should render the SignupInput field for username', () => {
         const { getByLabelText } = renderWithProviders(
             <Router>
-                <Signup
+                <SignupInput
                     id="username"
                     value=""
                     aria-label="username"
@@ -54,7 +56,14 @@ describe('<Signup />', () => {
     it('should render the SignupInput field for email', () => {
         const { getByLabelText } = renderWithProviders(
             <Router>
-                <Signup id="email" value="" aria-label="email" placeholder="email" type="text" onChange={() => {}} />
+                <SignupInput
+                    id="email"
+                    value=""
+                    aria-label="email"
+                    placeholder="email"
+                    type="text"
+                    onChange={() => {}}
+                />
             </Router>,
         );
 
@@ -65,7 +74,7 @@ describe('<Signup />', () => {
     it('should render the SignupInput field for password', () => {
         const { getByLabelText } = renderWithProviders(
             <Router>
-                <Signup
+                <SignupInput
                     id="password"
                     value=""
                     aria-label="password"
@@ -82,10 +91,12 @@ describe('<Signup />', () => {
 
     it('should have accessibility attributes for SignupAgreement', () => {
         renderWithProviders(
-            <span aria-label="agreement" aria-hidden={false}>
-                By creating an account, I consent to the processing of my personal data in accordance with the{' '}
-                <b>PRIVACY POLICY</b>
-            </span>,
+            <Router>
+                <SignupAgreement aria-label="agreement" aria-hidden={false}>
+                    By creating an account, I consent to the processing of my personal data in accordance with the{' '}
+                    <b>PRIVACY POLICY</b>
+                </SignupAgreement>
+            </Router>,
         );
 
         const agreement = screen.getByLabelText('agreement');
@@ -97,17 +108,19 @@ describe('<Signup />', () => {
 
     it('should render the SignupButton correctly', () => {
         renderWithProviders(
-            <button
-                type="submit"
-                aria-label="sign up button"
-                aria-disabled={false}
-                role="button"
-                tabIndex={0}
-                onClick={() => {}}
-                disabled={false}
-            >
-                SIGNUP
-            </button>,
+            <Router>
+                <SignupButton
+                    type="submit"
+                    aria-label="sign up button"
+                    aria-disabled={false}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => {}}
+                    disabled={false}
+                >
+                    SIGNUP
+                </SignupButton>
+            </Router>,
         );
 
         expect(screen.getByRole('button')).toHaveTextContent('SIGNUP');
@@ -116,17 +129,19 @@ describe('<Signup />', () => {
 
     it('should be disabled if the prop is set for SignupButton', () => {
         renderWithProviders(
-            <button
-                type="submit"
-                aria-label="sign up button"
-                aria-disabled={true}
-                role="button"
-                tabIndex={0}
-                onClick={() => {}}
-                disabled={true}
-            >
-                SIGNUP
-            </button>,
+            <Router>
+                <SignupButton
+                    type="submit"
+                    aria-label="sign up button"
+                    aria-disabled={true}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => {}}
+                    disabled={true}
+                >
+                    SIGNUP
+                </SignupButton>
+            </Router>,
         );
 
         expect(screen.getByRole('button')).toHaveTextContent('SIGNUP');
@@ -137,17 +152,19 @@ describe('<Signup />', () => {
         const handleClick = jest.fn();
 
         renderWithProviders(
-            <button
-                type="submit"
-                aria-label="sign up button"
-                aria-disabled={false}
-                role="button"
-                tabIndex={0}
-                onClick={handleClick}
-                disabled={false}
-            >
-                SIGNUP
-            </button>,
+            <Router>
+                <SignupButton
+                    type="submit"
+                    aria-label="sign up button"
+                    aria-disabled={false}
+                    role="button"
+                    tabIndex={0}
+                    onClick={handleClick}
+                    disabled={false}
+                >
+                    SIGNUP
+                </SignupButton>
+            </Router>,
         );
 
         fireEvent.click(screen.getByRole('button'));
