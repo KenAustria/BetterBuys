@@ -1,12 +1,12 @@
+import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { mobile, tablet, desktop } from '../../responsive';
 import { signup } from '../../apiCalls';
-import { useAppSelector, useAppDispatch } from '../../hooks';
-// import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../store';
-import React from 'react';
+import { mobile, tablet, desktop } from '../../responsive';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 const SignupContainer = styled.div`
     width: 100vw;
@@ -28,7 +28,7 @@ const SignupWrapper = styled.div`
 	${desktop({ width: '75%', height: '40%' })}
 `;
 
-const SignupTitle = styled.h1`
+export const SignupTitle = styled.h1`
     font-size: 24px;
     font-weight: 300;
     ${tablet({ fontSize: '30px' })};
@@ -40,7 +40,7 @@ const SignupForm = styled.form`
     flex-wrap: wrap;
 `;
 
-const SignupInput = styled.input`
+export const SignupInput = styled.input`
     flex: 1;
     min-width: 40%;
     margin: 20px 10px 0px 0px;
@@ -49,13 +49,13 @@ const SignupInput = styled.input`
     ${desktop({ fontSize: '30px', margin: '20px 3px' })}
 `;
 
-const SignupAgreement = styled.span`
+export const SignupAgreement = styled.span`
     font-size: 12px;
     margin: 20px 0px;
     ${desktop({ fontSize: '14px' })}
 `;
 
-const SignupButton = styled.button`
+export const SignupButton = styled.button`
     width: 40%;
     border: none;
     padding: 15px 20px;
@@ -67,7 +67,7 @@ const SignupButton = styled.button`
     ${desktop({ width: '100%', fontSize: '30px' })};
 `;
 
-const LinkButton = styled.a`
+export const LinkButton = styled.a`
     margin: 5px 0px;
     font-size: 12px;
     text-decoration: underline;
@@ -95,33 +95,58 @@ const Signup: React.FC = () => {
     return (
         <SignupContainer>
             <SignupWrapper>
-                <SignupTitle>CREATE AN ACCOUNT</SignupTitle>
-                <SignupForm>
+                <SignupTitle aria-label="create an account heading" role="heading" tabIndex={0}>
+                    CREATE AN ACCOUNT
+                </SignupTitle>
+                <SignupForm aria-label="Sign up form" role="form">
                     <SignupInput
+                        id="username"
+                        value={username}
+                        aria-label="username"
                         placeholder="username"
                         type="text"
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
                     />
                     <SignupInput
+                        id="email"
+                        value={email}
+                        aria-label="email"
                         placeholder="email"
                         type="text"
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
                     />
                     <SignupInput
+                        id="password"
+                        value={password}
+                        aria-label="password"
                         placeholder="password"
                         type="password"
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
                     />
-                    <SignupAgreement>
+                    <SignupAgreement aria-label="agreement" aria-hidden={false}>
                         By creating an account, I consent to the processing of my personal data in accordance with the{' '}
                         <b>PRIVACY POLICY</b>
                     </SignupAgreement>
-                    <SignupButton onClick={handleSignup} disabled={isFetching}>
+                    <SignupButton
+                        type="submit"
+                        aria-label="sign up button"
+                        aria-disabled={isFetching}
+                        role="button"
+                        tabIndex={0}
+                        onClick={handleSignup}
+                        disabled={isFetching}
+                    >
                         SIGNUP
                     </SignupButton>
-                    {error && <Error>Something went wrong...</Error>}
+                    {error && (
+                        <Error role="alert" aria-label="error">
+                            Something went wrong...
+                        </Error>
+                    )}
                     <Link to="/signin" style={{ margin: '10px 0px' }}>
-                        <LinkButton>SIGNIN ACCOUNT</LinkButton>
+                        <LinkButton type="link" role="link" aria-label="sign up link">
+                            SIGNIN ACCOUNT
+                        </LinkButton>
                     </Link>
                 </SignupForm>
             </SignupWrapper>

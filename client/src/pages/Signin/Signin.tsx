@@ -1,13 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { mobile, tablet, desktop } from '../../responsive';
-import { signin } from '../../apiCalls';
-import { useAppSelector, useAppDispatch } from '../../hooks';
-// import { useSelector, useDispatch } from 'react-redux';
-import {} from '../../hooks';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../store';
-import React from 'react';
+import { signin } from '../../apiCalls';
+import { mobile, tablet, desktop } from '../../responsive';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 const SigninContainer = styled.div`
     width: 100vw;
@@ -29,7 +27,7 @@ const SigninWrapper = styled.div`
     ${desktop({ width: '75%', height: '37%' })}
 `;
 
-const SigninTitle = styled.h1`
+export const SigninTitle = styled.h1`
     font-size: 24px;
     font-weight: 300;
     ${tablet({ fontSize: '30px' })};
@@ -41,7 +39,7 @@ const SigninForm = styled.form`
     flex-direction: column;
 `;
 
-const SigninInput = styled.input`
+export const SigninInput = styled.input`
     flex: 1;
     min-width: 40%;
     margin: 10px 0;
@@ -50,7 +48,7 @@ const SigninInput = styled.input`
     ${desktop({ fontSize: '30px', margin: '20px 3px' })}
 `;
 
-const SigninButton = styled.button`
+export const SigninButton = styled.button`
     width: 40%;
     border: none;
     padding: 15px 20px;
@@ -67,7 +65,7 @@ const SigninButton = styled.button`
     ${desktop({ width: '100%', fontSize: '30px' })};
 `;
 
-const LinkButton = styled.a`
+export const LinkButton = styled.a`
     margin: 5px 0px;
     font-size: 12px;
     text-decoration: underline;
@@ -94,25 +92,48 @@ const Signin: React.FC = () => {
     return (
         <SigninContainer>
             <SigninWrapper>
-                <SigninTitle>SIGN IN</SigninTitle>
-                <SigninForm>
+                <SigninTitle aria-label="signin heading" role="heading" tabIndex={0}>
+                    SIGN IN
+                </SigninTitle>
+                <SigninForm aria-label="Sign in form" role="form">
                     <SigninInput
+                        id="username"
+                        value={username}
+                        aria-label="username"
                         placeholder="username"
                         type="text"
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
                     />
                     <SigninInput
+                        id="password"
+                        value={password}
+                        aria-label="password"
                         placeholder="password"
                         type="password"
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
                     />
-                    <SigninButton onClick={handleSignin} disabled={isFetching}>
+                    <SigninButton
+                        type="submit"
+                        aria-label="sign up button"
+                        aria-disabled={isFetching}
+                        role="button"
+                        tabIndex={0}
+                        onClick={handleSignin}
+                        disabled={isFetching}
+                    >
                         Signin
                     </SigninButton>
                     {error && <Error>Something went wrong...</Error>}
                     <LinkButton>FORGOT THE PASSWORD?</LinkButton>
                     <Link to="/signup">
-                        <LinkButton style={{ textDecoration: 'none' }}>CREATE A NEW ACCOUNT</LinkButton>
+                        <LinkButton
+                            style={{ textDecoration: 'none' }}
+                            type="link"
+                            role="link"
+                            aria-label="sign in link"
+                        >
+                            CREATE A NEW ACCOUNT
+                        </LinkButton>
                     </Link>
                 </SigninForm>
             </SigninWrapper>

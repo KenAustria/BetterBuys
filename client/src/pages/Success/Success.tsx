@@ -1,16 +1,29 @@
-import { useState, useEffect } from 'react';
-import { useAppSelector } from '../../hooks';
-// import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { RootState } from '../../store';
+import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import { userRequest } from '../../requestMethods';
-import { Link } from 'react-router-dom';
-import { RootState } from '../../store';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAppSelector } from '../../hooks/useAppSelector';
+
+const SuccessContainer = styled.div`
+    height: '100vh';
+    display: 'flex';
+    flex-direction: 'column';
+    align-items: 'center';
+    justify-content: 'center';
+`;
+
+const SuccessButton = styled.div`
+    padding: 10;
+    margin-top: 20;
+`;
 
 const Success: React.FC = () => {
     const location = useLocation();
     const data = location.state;
-    const cart = location.state.amount;
+    // const cart = location.state.amount;
+    const cart = location.state && location.state.amount ? location.state.amount : 0;
     const currentUser = useAppSelector((state: RootState) => state.user.currentUser);
     const [orderId, setOrderId] = useState<number | null>(null);
 
@@ -33,22 +46,14 @@ const Success: React.FC = () => {
     }, [cart, data, currentUser]);
 
     return (
-        <div
-            style={{
-                height: '100vh',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}
-        >
+        <SuccessContainer>
             {orderId
                 ? `Order has been created successfully. Your order number is ${orderId}`
                 : `Successfull. Your order is being prepared...`}
             <Link to="/" style={{ textDecoration: 'none' }}>
-                <button style={{ padding: 10, marginTop: 20 }}>Go to Homepage</button>
+                <SuccessButton>Go to Homepage</SuccessButton>
             </Link>
-        </div>
+        </SuccessContainer>
     );
 };
 

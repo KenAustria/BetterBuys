@@ -1,13 +1,11 @@
+import React from 'react';
 import styled from 'styled-components';
-import { useAppSelector } from '../../hooks';
-// import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import { Link } from 'react-router-dom';
 import { Badge } from '@material-ui/core';
-// import { Badge, Link } from '@material-ui/core';
 import { Search, ShoppingCartOutlined } from '@material-ui/icons';
 import { mobile } from '../../responsive';
 import { RootState } from '../../store';
-import React from 'react';
 
 const NavbarContainer = styled.div`
     height: 90px;
@@ -26,11 +24,10 @@ const NavLeft = styled.div`
     flex: 1;
     display: flex;
     align-items: center;
-    /* ${mobile({ justifyContent: 'flex-start' })} */
     ${mobile({ display: 'none' })}
 `;
 
-const Language = styled.span`
+export const Language = styled.span`
     font-size: 14px;
     cursor: pointer;
     ${mobile({ display: 'none' })}
@@ -44,7 +41,7 @@ const SearchContainer = styled.div`
     padding: 5px;
 `;
 
-const SearchInput = styled.input`
+export const SearchInput = styled.input`
     border: none;
     ${mobile({ width: '50px' })}
 `;
@@ -55,7 +52,7 @@ const NavCenter = styled.div`
     ${mobile({ justifyContent: 'flex-end', textAlign: 'right' })}
 `;
 
-const Logo = styled.h1`
+export const Logo = styled.h1`
     font-weight: bold;
     ${mobile({ fontSize: '16px' })}
 `;
@@ -83,25 +80,27 @@ const Navbar: React.FC = () => {
         <NavbarContainer>
             <NavbarWrapper>
                 <NavLeft>
-                    <Language>EN</Language>
+                    <Language aria-label="language">EN</Language>
                     <SearchContainer>
-                        <SearchInput />
-                        <Search style={{ color: 'gray', fontSize: 16 }} />
+                        <SearchInput aria-label="Search" />
+                        <Search style={{ color: 'gray', fontSize: 16 }} data-testid="search-icon" aria-label="search" />
                     </SearchContainer>
                 </NavLeft>
                 <NavCenter>
-                    <Logo>Better Buys</Logo>
+                    <Logo role="heading" aria-label="Better Buys" tabIndex={0}>
+                        Better Buys
+                    </Logo>
                 </NavCenter>
                 {!currentUser ? (
                     <NavRight>
                         <Link to="/signup" style={{ textDecoration: 'none' }}>
-                            <MenuItem>SIGN UP</MenuItem>
+                            <MenuItem aria-label="Sign Up">SIGN UP</MenuItem>
                         </Link>
                         <Link to="signin" style={{ textDecoration: 'none' }}>
-                            <MenuItem>SIGN IN</MenuItem>
+                            <MenuItem aria-label="Sign In">SIGN IN</MenuItem>
                         </Link>
                         <Link to="/cart">
-                            <MenuItem>
+                            <MenuItem aria-label={`Cart (${cartQuantity})`}>
                                 <Badge badgeContent={cartQuantity} color="primary">
                                     <ShoppingCartOutlined />
                                 </Badge>
@@ -111,9 +110,9 @@ const Navbar: React.FC = () => {
                 ) : (
                     <NavRight>
                         <Link to="/cart">
-                            <MenuItem>
+                            <MenuItem aria-label={`Cart (${cartQuantity})`}>
                                 <Badge badgeContent={cartQuantity} color="primary">
-                                    <ShoppingCartOutlined />
+                                    <ShoppingCartOutlined data-testid="cart-icon" />
                                 </Badge>
                             </MenuItem>
                         </Link>

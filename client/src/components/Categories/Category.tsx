@@ -57,10 +57,10 @@ const Category: React.FC<CategoryProps> = ({ category }) => {
     return (
         <CategoryContainer>
             <Link to={`/products/${category.category}`}>
-                <CategoryImage src={category.img} />
-                <CategoryInfo>
-                    <CategoryTitle>{category.title}</CategoryTitle>
-                    <CategoryButton>SHOP NOW</CategoryButton>
+                <CategoryImage src={category.img} alt={category.title + ' image'} />
+                <CategoryInfo aria-label="category information">
+                    <CategoryTitle aria-label="category title">{category.title}</CategoryTitle>
+                    <CategoryButton aria-label="shop now button">SHOP NOW</CategoryButton>
                 </CategoryInfo>
             </Link>
         </CategoryContainer>

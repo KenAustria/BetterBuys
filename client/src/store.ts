@@ -2,7 +2,7 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import userReducer from './features/user/userSlice';
 import cartReducer from './features/cart/cartSlice';
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 // import { useDispatch } from 'react-redux';
 import storage from 'redux-persist/lib/storage';
 
@@ -52,7 +52,7 @@ export default function setupStore(preloadedState?: PreloadedState<RootState>) {
 //         }),
 // });
 
-export let persistor = persistStore(setupStore as any);
+// export let persistor = persistStore(setupStore as any);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 // export type RootState = ReturnType<typeof store.getState>;
