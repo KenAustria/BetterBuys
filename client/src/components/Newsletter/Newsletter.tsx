@@ -50,11 +50,13 @@ const NewsletterButton = styled.button`
 const Newsletter: React.FC = () => {
     return (
         <NewsletterContainer>
-            <NewsletterTitle>Newsletter</NewsletterTitle>
-            <NewsletterDescription>Keep up with our latest news. Sent once a week. Every week.</NewsletterDescription>
+            <NewsletterTitle aria-label="Newsletter">Newsletter</NewsletterTitle>
+            <NewsletterDescription aria-label="newsletter description">
+                Keep up with our latest news. Sent once a week. Every week.
+            </NewsletterDescription>
             <NewsletterInputContainer>
-                <NewsletterInput placeholder="Email" />
-                <NewsletterButton>
+                <NewsletterInput placeholder="Email" aria-label="Email" />
+                <NewsletterButton aria-label="Subscribe">
                     <Send />
                 </NewsletterButton>
             </NewsletterInputContainer>
