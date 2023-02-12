@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Product from './Product';
 import styled from 'styled-components';
-import axios from 'axios';
 import { mobile } from '../../responsive';
 import { v4 as uuidv4 } from 'uuid';
+import { useFetchProducts } from '../../hooks/useFetchProducts';
 
 const ProductsContainer = styled.div`
     padding: 20px;
@@ -27,16 +27,6 @@ interface ProductsProps {
     sort: string;
 }
 
-type ProductObj = {
-    productTitle: string;
-    productDescription: string;
-    productImage: string;
-    productSize: Array<string>;
-    productColor: Array<string>;
-    productPrice: string;
-    productCategories: Array<string>;
-};
-
 type FilteredProduct = {
     productTitle: string;
     productDescription: string;
@@ -49,45 +39,38 @@ type FilteredProduct = {
 
 const Products: React.FC<ProductsProps> = ({ category, filters, sort }) => {
     console.log(category, filters, sort);
-    const [products, setProducts] = useState<ProductObj[]>([]);
+    // const [products, setProducts] = useState<ProductObj[]>([]);
+    const products = useFetchProducts(category);
     const [filteredProducts, setFilteredProducts] = useState<FilteredProduct[]>([]);
-
-    // fetch all products if a category isn't chosen
-    useEffect(() => {
-        const getProducts = async () => {
-            try {
-                const res = await axios.get(
-                    category
-                        ? `http://localhost:9000/api/products?category=${category}`
-                        : `http://localhost:9000/api/products`,
-                );
-                setProducts(res.data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        getProducts();
-    }, [category]);
 
     // if category is chosen, set products of chosen category
     useEffect(() => {
-        category &&
+        const filterProducts = () => {
+            if (!category) return;
             setFilteredProducts(
                 products.filter((product) =>
                     Object.entries(filters).every(([key, value]) => product[key].includes(value)),
                 ),
             );
+        };
+        filterProducts();
     }, [products, category, filters]);
 
     // filter products by price
     useEffect(() => {
-        if (sort === 'newest') {
-            setFilteredProducts((prev) => [...prev].sort((a, b) => a.createdAt - b.createdAt));
-        } else if (sort === 'asc') {
-            setFilteredProducts((prev) => [...prev].sort((a, b) => a.productPrice - b.productPrice));
-        } else {
-            setFilteredProducts((prev) => [...prev].sort((a, b) => b.productPrice - a.productPrice));
-        }
+        const sortProducts = (sortType) => {
+            switch (sortType) {
+                case 'newest':
+                    return [...filteredProducts].sort((a, b) => a.createdAt - b.createdAt);
+                case 'asc':
+                    return [...filteredProducts].sort((a, b) => a.productPrice - b.productPrice);
+                case 'desc':
+                    return [...filteredProducts].sort((a, b) => b.productPrice - a.productPrice);
+                default:
+                    return filteredProducts;
+            }
+        };
+        setFilteredProducts(sortProducts(sort));
     }, [sort]);
 
     /* display filtered products if a category is chosen
