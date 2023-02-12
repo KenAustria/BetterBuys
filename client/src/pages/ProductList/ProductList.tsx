@@ -37,6 +37,7 @@ export const ProductListSelect = styled.select`
     margin-right: 20px;
     ${mobile({ margin: '10px 0px' })}
 `;
+
 export const FilterOption = styled.option``;
 
 export type Filters = {
