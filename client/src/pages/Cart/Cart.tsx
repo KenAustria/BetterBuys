@@ -137,7 +137,7 @@ const CartSummary = styled.div`
     height: 50vh;
 `;
 
-const CartSummaryTitle = styled.h1`
+const CartSummaryTitle = styled.h2`
     font-weight: 200;
 `;
 
@@ -195,23 +195,25 @@ const Cart: React.FC = () => {
             <Navbar />
             <Promotion />
             <CartWrapper>
-                <CartTitle>YOUR BAG</CartTitle>
+                <CartTitle aria-label="Cart Title">YOUR BAG</CartTitle>
                 <CartTop>
                     <Link to="/">
-                        <CartTopButton>CONTINUE SHOPPING</CartTopButton>
+                        <CartTopButton aria-label="Continue Shopping">CONTINUE SHOPPING</CartTopButton>
                     </Link>
                     <CartTopTexts>
-                        <CartTopText>Shopping Bag(0)</CartTopText>
-                        <CartTopText>Your Wishlist (0)</CartTopText>
+                        <CartTopText aria-label="Shopping Bag">Shopping Bag(0)</CartTopText>
+                        <CartTopText aria-label="Your Wishlist">Your Wishlist (0)</CartTopText>
                     </CartTopTexts>
-                    <CartTopButton type="filled">APPLY COUPON</CartTopButton>
+                    <CartTopButton aria-label="Apply Coupon" type="filled">
+                        APPLY COUPON
+                    </CartTopButton>
                 </CartTop>
                 <CartBottom>
                     <CartInfo>
                         {cart.products.map((product) => (
                             <CartProduct key={uuidv4()}>
                                 <CartProductDetail>
-                                    <CartImage src={product.productImage} />
+                                    <CartImage src={product.productImage} alt={product.productTitle} />
                                     <CartDetails>
                                         <CartProductName>
                                             <b>Product:</b> {product.productTitle}
@@ -224,11 +226,13 @@ const Cart: React.FC = () => {
                                 </CartProductDetail>
                                 <CartPriceDetail>
                                     <CartProductAmountContainer>
-                                        <Remove />
-                                        <CartProductAmount>{product.productQuantity}</CartProductAmount>
-                                        <Add />
+                                        <Remove aria-label="remove product quantity" />
+                                        <CartProductAmount aria-label="product quantity">
+                                            {product.productQuantity}
+                                        </CartProductAmount>
+                                        <Add aria-label="add product quantity" />
                                     </CartProductAmountContainer>
-                                    <CartProductPrice>
+                                    <CartProductPrice aria-label="cart price">
                                         $ {product.productPrice * product.productQuantity}
                                     </CartProductPrice>
                                 </CartPriceDetail>
@@ -237,22 +241,24 @@ const Cart: React.FC = () => {
                         <Hr />
                     </CartInfo>
                     <CartSummary>
-                        <CartSummaryTitle>ORDER SUMMARY</CartSummaryTitle>
+                        <CartSummaryTitle aria-label="order summary">ORDER SUMMARY</CartSummaryTitle>
                         <CartSummaryItem>
-                            <CartSummaryItemText>Subtotal</CartSummaryItemText>
-                            <CartSummaryItemPrice>$ {cart.total}</CartSummaryItemPrice>
+                            <CartSummaryItemText aria-label="subtotal">Subtotal</CartSummaryItemText>
+                            <CartSummaryItemPrice aria-label="cart total">$ {cart.total}</CartSummaryItemPrice>
                         </CartSummaryItem>
                         <CartSummaryItem>
-                            <CartSummaryItemText>Estimated Shipping</CartSummaryItemText>
-                            <CartSummaryItemPrice>$ 5.90</CartSummaryItemPrice>
+                            <CartSummaryItemText aria-label="estimated shipping">
+                                Estimated Shipping
+                            </CartSummaryItemText>
+                            <CartSummaryItemPrice aria-label="item shipping price">$ 5.90</CartSummaryItemPrice>
                         </CartSummaryItem>
                         <CartSummaryItem>
-                            <CartSummaryItemText>Shipping Discount</CartSummaryItemText>
-                            <CartSummaryItemPrice>$ -5.90</CartSummaryItemPrice>
+                            <CartSummaryItemText aria-label="shipping discount">Shipping Discount</CartSummaryItemText>
+                            <CartSummaryItemPrice aria-label="item shipping discount">$ -5.90</CartSummaryItemPrice>
                         </CartSummaryItem>
                         <CartSummaryItem type="total">
-                            <CartSummaryItemText>Total</CartSummaryItemText>
-                            <CartSummaryItemPrice>$ {cart.total}</CartSummaryItemPrice>
+                            <CartSummaryItemText aria-label="total">Total</CartSummaryItemText>
+                            <CartSummaryItemPrice aria-label="cart total">$ {cart.total}</CartSummaryItemPrice>
                         </CartSummaryItem>
                         <StripeCheckout
                             name="Better Buys"
@@ -264,7 +270,7 @@ const Cart: React.FC = () => {
                             token={onToken}
                             stripeKey={KEY}
                         >
-                            <CartButton>CHECKOUT NOW</CartButton>
+                            <CartButton aria-label="checkout">CHECKOUT NOW</CartButton>
                         </StripeCheckout>
                     </CartSummary>
                 </CartBottom>

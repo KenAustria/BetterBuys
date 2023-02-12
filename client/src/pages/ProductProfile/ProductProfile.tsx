@@ -137,7 +137,6 @@ const ProductProfile: React.FC = () => {
     const id = location.pathname.split('/')[2];
     const dispatch = useAppDispatch();
 
-    // no need to be user to fetch product
     useEffect(() => {
         const getProduct = async () => {
             try {
@@ -148,7 +147,6 @@ const ProductProfile: React.FC = () => {
         getProduct();
     }, [id]);
 
-    // prevent negative quantity, only decrease quantity if greater than 1
     const handleProductQuantity = (type) => {
         if (type === 'decrease') {
             productQuantity > 1 && setProductQuantity(productQuantity - 1);
@@ -157,7 +155,6 @@ const ProductProfile: React.FC = () => {
         }
     };
 
-    // using Redux for updating Cart from ProductProfile for instant transition
     const handleAddToCart = () => {
         dispatch(
             addProduct({
@@ -168,6 +165,27 @@ const ProductProfile: React.FC = () => {
                 price: product.productPrice * productQuantity,
             }),
         );
+    };
+
+    const handleKeyPress = (event, productColor) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            setProductColor(productColor);
+        }
+    };
+
+    const handleProductSizeKeyPress = (event: React.KeyboardEvent<HTMLSelectElement>) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.currentTarget.click();
+        }
+    };
+
+    const handleProductQuantityOnKeyPress = (
+        event: React.KeyboardEvent<SVGSVGElement>,
+        type: 'decrease' | 'increase',
+    ) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            handleProductQuantity(type);
+        }
     };
 
     return (
@@ -187,21 +205,27 @@ const ProductProfile: React.FC = () => {
                     <ProductFilterContainer>
                         <ProductFilter>
                             <ProductFilterTitle aria-label="color filter">Color</ProductFilterTitle>
-                            {/* ? to prevent undefined map TypeError*/}
                             {product.productColor?.map((productColor) => (
                                 <ProductFilterColor
                                     key={uuidv4()}
                                     productColor={productColor}
+                                    tabIndex={0}
+                                    role="button"
                                     onClick={() => setProductColor(productColor)}
+                                    onKeyPress={(event) => handleKeyPress(event, productColor)}
                                 />
                             ))}
                         </ProductFilter>
                         <ProductFilter>
                             <ProductFilterTitle aria-label="size filter">Size</ProductFilterTitle>
                             <ProductFilterSize
+                                id="productSize"
+                                name="productSize"
+                                aria-label="Filter products by size"
                                 onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
                                     setProductSize(event.target.value)
                                 }
+                                onKeyPress={handleProductSizeKeyPress}
                             >
                                 {product.productSize?.map((productSize) => (
                                     <ProductFilterSizeOption key={uuidv4()}>{productSize}</ProductFilterSizeOption>
@@ -211,14 +235,19 @@ const ProductProfile: React.FC = () => {
                     </ProductFilterContainer>
                     <ProductAddContainer>
                         <ProductAmountContainer>
-                            {/* type parameter for fn */}
                             <Remove
                                 role="button"
                                 aria-label="remove"
                                 onClick={() => handleProductQuantity('decrease')}
+                                onKeyPress={(event) => handleProductQuantityOnKeyPress(event, 'decrease')}
                             />
-                            <ProductAmount>{productQuantity}</ProductAmount>
-                            <Add role="button" aria-label="add" onClick={() => handleProductQuantity('increase')} />
+                            <ProductAmount aria-label="product quantity">{productQuantity}</ProductAmount>
+                            <Add
+                                role="button"
+                                aria-label="add"
+                                onClick={() => handleProductQuantity('increase')}
+                                onKeyPress={(event) => handleProductQuantityOnKeyPress(event, 'increase')}
+                            />
                         </ProductAmountContainer>
                         <AddToCartButton role="button" aria-label="add to cart" onClick={handleAddToCart}>
                             ADD TO CART
