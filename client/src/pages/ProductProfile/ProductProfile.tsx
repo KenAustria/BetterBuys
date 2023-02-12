@@ -1,16 +1,14 @@
-import { useEffect, useState } from 'react';
-import Promotion from '../../components/Promotion/Promotion';
-import Navbar from '../../components/Navbar/Navbar';
-import styled from 'styled-components';
-import { Add, Remove } from '@material-ui/icons';
-import { useLocation } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks';
-// import { useDispatch } from 'react-redux';
-import { addProduct } from '../../features/cart/cartSlice';
-import { publicRequest } from '../../requestMethods';
-import { mobile } from '../../responsive';
 import { v4 as uuidv4 } from 'uuid';
-import React from 'react';
+import styled from 'styled-components';
+import { mobile } from '../../responsive';
+import { useLocation } from 'react-router-dom';
+import { Add, Remove } from '@material-ui/icons';
+import React, { useEffect, useState } from 'react';
+import Navbar from '../../components/Navbar/Navbar';
+import { publicRequest } from '../../requestMethods';
+import { addProduct } from '../../features/cart/cartSlice';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import Promotion from '../../components/Promotion/Promotion';
 
 const ProductProfileContainer = styled.div``;
 
@@ -24,7 +22,7 @@ const ProductImageContainer = styled.div`
     flex: 1;
 `;
 
-const ProductImage = styled.img`
+export const ProductImage = styled.img`
     width: 100%;
     height: 90vh;
     object-fit: cover;
@@ -37,15 +35,15 @@ const InfoContainer = styled.div`
     ${mobile({ padding: '10px' })}
 `;
 
-const ProductTitle = styled.h1`
+export const ProductTitle = styled.h1`
     font-weight: 200;
 `;
 
-const ProductDescription = styled.p`
+export const ProductDescription = styled.p`
     margin: 20px 0px;
 `;
 
-const ProductPrice = styled.span`
+export const ProductPrice = styled.span`
     font-weight: 100;
     font-size: 40px;
 `;
@@ -63,7 +61,7 @@ const ProductFilter = styled.div`
     align-items: center;
 `;
 
-const ProductFilterTitle = styled.span`
+export const ProductFilterTitle = styled.span`
     font-size: 20px;
     font-weight: 200;
 `;
@@ -109,7 +107,7 @@ const ProductAmount = styled.span`
     margin: 0px 5px;
 `;
 
-const AddToCartButton = styled.button`
+export const AddToCartButton = styled.button`
     padding: 15px;
     border: 2px solid teal;
     background-color: white;
@@ -178,15 +176,17 @@ const ProductProfile: React.FC = () => {
             <Promotion />
             <ProductProfileWrapper>
                 <ProductImageContainer>
-                    <ProductImage src={product.productImage} />
+                    <ProductImage src={product.productImage} alt="product image" />
                 </ProductImageContainer>
                 <InfoContainer>
-                    <ProductTitle>{product.productTitle}</ProductTitle>
-                    <ProductDescription>{product.productDescription}</ProductDescription>
-                    <ProductPrice>${product.productPrice}</ProductPrice>
+                    <ProductTitle aria-label="product title">{product.productTitle}</ProductTitle>
+                    <ProductDescription aria-label="product description">
+                        {product.productDescription}
+                    </ProductDescription>
+                    <ProductPrice aria-label="product price">${product.productPrice}</ProductPrice>
                     <ProductFilterContainer>
                         <ProductFilter>
-                            <ProductFilterTitle>Color</ProductFilterTitle>
+                            <ProductFilterTitle aria-label="color filter">Color</ProductFilterTitle>
                             {/* ? to prevent undefined map TypeError*/}
                             {product.productColor?.map((productColor) => (
                                 <ProductFilterColor
@@ -197,7 +197,7 @@ const ProductProfile: React.FC = () => {
                             ))}
                         </ProductFilter>
                         <ProductFilter>
-                            <ProductFilterTitle>Size</ProductFilterTitle>
+                            <ProductFilterTitle aria-label="size filter">Size</ProductFilterTitle>
                             <ProductFilterSize
                                 onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
                                     setProductSize(event.target.value)
@@ -212,11 +212,17 @@ const ProductProfile: React.FC = () => {
                     <ProductAddContainer>
                         <ProductAmountContainer>
                             {/* type parameter for fn */}
-                            <Remove onClick={() => handleProductQuantity('decrease')} />
+                            <Remove
+                                role="button"
+                                aria-label="remove"
+                                onClick={() => handleProductQuantity('decrease')}
+                            />
                             <ProductAmount>{productQuantity}</ProductAmount>
-                            <Add onClick={() => handleProductQuantity('increase')} />
+                            <Add role="button" aria-label="add" onClick={() => handleProductQuantity('increase')} />
                         </ProductAmountContainer>
-                        <AddToCartButton onClick={handleAddToCart}>ADD TO CART</AddToCartButton>
+                        <AddToCartButton role="button" aria-label="add to cart" onClick={handleAddToCart}>
+                            ADD TO CART
+                        </AddToCartButton>
                     </ProductAddContainer>
                 </InfoContainer>
             </ProductProfileWrapper>
