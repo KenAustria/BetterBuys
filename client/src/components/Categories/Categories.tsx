@@ -14,9 +14,9 @@ const CategoriesContainer = styled.div`
 
 const Categories: React.FC = () => {
     return (
-        <CategoriesContainer>
+        <CategoriesContainer role="img" aria-label="categories container">
             {categories.map((category) => (
-                <Category category={category} key={uuidv4()} />
+                <Category category={category} key={uuidv4()} aria-label={`category-${category.title}`} />
             ))}
         </CategoriesContainer>
     );
