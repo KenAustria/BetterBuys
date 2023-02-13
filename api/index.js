@@ -28,9 +28,9 @@ app.use('/api/checkout', stripeRoute);
 app.get('/', (req, res) => {
 	res.send('Hello World!');
 });  
-const port = process.env.PORT || 9000;
+const PORT = process.env.PORT || 9000;
 const host = '0.0.0.0';
-app.listen(port, host, function() {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(PORT, host, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
