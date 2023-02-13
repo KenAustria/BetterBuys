@@ -29,7 +29,8 @@ app.get('/', (req, res) => {
 	res.send('Hello World!');
 });  
 const port = process.env.PORT || 9000;
-app.listen(port, () => {
+const host = '0.0.0.0';
+app.listen(port, host, function() {
   console.log(`Server is running on http://localhost:${port}`);
 });
 
