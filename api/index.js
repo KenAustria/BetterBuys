@@ -25,6 +25,11 @@ app.use('/api/carts', cartRoute);
 app.use('/api/orders', orderRoute);
 app.use('/api/checkout', stripeRoute);
 
-app.listen(process.env.PORT || 9000, () => {
-	console.log('Server is running sucessfully');
+app.get('/', (req, res) => {
+	res.send('Hello World!');
+});  
+const port = process.env.PORT || 9000;
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
+
