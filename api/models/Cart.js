@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+mongoose.set('strictQuery', false);
 const CartSchema = new mongoose.Schema(
   {
     userId: { type: String, required: true },

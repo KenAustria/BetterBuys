@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.set('strictQuery', false);
 const { boolean } = require('webidl-conversions');
 
 const UserSchema = new mongoose.Schema(

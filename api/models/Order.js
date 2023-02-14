@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+mongoose.set('strictQuery', false);
 const OrderSchema = new mongoose.Schema(
   {
     userId: { type: String, required: true },
