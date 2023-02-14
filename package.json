@@ -20,7 +20,7 @@
         "typescript": "^4.9.4"
     },
     "scripts": {
-        "start": "nodemon index.js",
+        "start": "nodemon api/index.js",
         "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
     },
     "husky": {
