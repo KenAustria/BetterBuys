@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/KenAustria/BetterBuys#readme",
   "dependencies": {
+    "@types/node": "^18.13.0",
     "axios": "^0.26.1",
+    "cjs": "^0.0.11",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^10.0.0",
