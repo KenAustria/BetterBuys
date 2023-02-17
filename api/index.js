@@ -28,7 +28,7 @@ app.use('/api/orders', orderRoute);
 app.use('/api/checkout', stripeRoute);
 
 app.get('/', (req, res) => {
-	res.send('Hello World!');	
+	res.send('Hello World from api.index.js!');	
 });  
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {
