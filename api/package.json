@@ -1,35 +1,36 @@
 {
-  "name": "betterbuys",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KenAustria/BetterBuys.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/KenAustria/BetterBuys/issues"
-  },
-  "homepage": "https://github.com/KenAustria/BetterBuys#readme",
-  "dependencies": {
-    "@types/node": "^18.13.0",
-    "axios": "^0.26.1",
-    "cjs": "^0.0.11",
-    "cors": "^2.8.5",
-    "crypto-js": "^4.1.1",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.2",
-    "jsonwebtoken": "^9.0.0",
-    "mongodb": "^5.0.1",
-    "mongoose": "^6.2.1",
-    "nodemon": "^2.0.20",
-    "simple-update-notifier": "^1.1.0",
-    "stripe": "^8.209.0"
-  }
+    "name": "betterbuys",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon index.js",
+        "dev": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/KenAustria/BetterBuys.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/KenAustria/BetterBuys/issues"
+    },
+    "homepage": "https://github.com/KenAustria/BetterBuys#readme",
+    "dependencies": {
+        "@types/node": "^18.13.0",
+        "axios": "^0.26.1",
+        "cjs": "^0.0.11",
+        "cors": "^2.8.5",
+        "crypto-js": "^4.1.1",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.2",
+        "jsonwebtoken": "^9.0.0",
+        "mongodb": "^5.0.1",
+        "mongoose": "^6.2.1",
+        "nodemon": "^2.0.20",
+        "simple-update-notifier": "^1.1.0",
+        "stripe": "^8.209.0"
+    }
 }
