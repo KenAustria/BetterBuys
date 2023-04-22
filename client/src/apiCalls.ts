@@ -1,3 +1,4 @@
+import { Dispatch } from 'redux';
 import {
     signupStart,
     signupSuccess,
@@ -9,7 +10,7 @@ import {
 import { publicRequest } from './requestMethods';
 
 export const signup = async (
-    dispatch,
+    dispatch: Dispatch,
     user: { username: string | false; email: string | false; password: string | false },
 ) => {
     dispatch(signupStart());
@@ -22,7 +23,7 @@ export const signup = async (
     }
 };
 
-export const signin = async (dispatch, user: { username: string | false; password: string | false }) => {
+export const signin = async (dispatch: Dispatch, user: { username: string | false; password: string | false }) => {
     dispatch(signinStart());
     try {
         const res = await publicRequest.post('/auth/signin', user);
