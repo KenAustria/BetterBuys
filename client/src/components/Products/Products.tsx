@@ -85,7 +85,9 @@ const Products: React.FC<ProductsProps> = ({ category, filters, sort }) => {
                     return filteredProducts;
             }
         };
-        setFilteredProducts(sortProducts(sort));
+        if (sort === 'newest' || sort === 'asc' || sort === 'desc') {
+            setFilteredProducts(sortProducts(sort));
+        }
     }, [sort]);
 
     /* display filtered products if a category is chosen
