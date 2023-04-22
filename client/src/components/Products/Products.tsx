@@ -30,7 +30,7 @@ interface ProductObj {
     productColor: Array<string>;
     productPrice: string;
     productCategories: Array<string>;
-    createdAt: number;
+    createdAt?: number;
 }
 
 type FilteredProduct = ProductObj & {
@@ -41,6 +41,7 @@ type FilteredProduct = ProductObj & {
     productColor: Array<string>;
     productPrice: string;
     productCategories: Array<string>;
+    createdAt?: number;
 };
 
 const Products: React.FC<ProductsProps> = ({ category, filters, sort }) => {
@@ -69,9 +70,9 @@ const Products: React.FC<ProductsProps> = ({ category, filters, sort }) => {
                 case 'newest':
                     return [...filteredProducts].sort((a, b) => a.createdAt - b.createdAt);
                 case 'asc':
-                    return [...filteredProducts].sort((a, b) => a.productPrice - b.productPrice);
+                    return [...filteredProducts].sort((a, b) => Number(a.productPrice) - Number(b.productPrice));
                 case 'desc':
-                    return [...filteredProducts].sort((a, b) => b.productPrice - a.productPrice);
+                    return [...filteredProducts].sort((a, b) => Number(b.productPrice) - Number(a.productPrice));
                 default:
                     return filteredProducts;
             }
