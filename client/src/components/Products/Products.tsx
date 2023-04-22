@@ -14,12 +14,7 @@ const ProductsContainer = styled.div`
 `;
 
 interface ProductsProps {
-    category: {
-        id: number;
-        img: string;
-        title: string;
-        category: string;
-    };
+    category: string;
     filters: {
         productTitle: string;
         productColor: Array<string>;
