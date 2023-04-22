@@ -34,6 +34,7 @@ interface ProductObj {
 }
 
 type FilteredProduct = ProductObj & {
+    _id: any;
     productTitle: string;
     productDescription: string;
     productImage: string;
