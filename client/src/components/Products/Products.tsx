@@ -22,7 +22,18 @@ interface ProductsProps {
     sort: string;
 }
 
-type FilteredProduct = {
+interface ProductObj {
+    productTitle: string;
+    productDescription: string;
+    productImage: string;
+    productSize: Array<string>;
+    productColor: Array<string>;
+    productPrice: string;
+    productCategories: Array<string>;
+    createdAt: number;
+}
+
+type FilteredProduct = ProductObj & {
     productTitle: string;
     productDescription: string;
     productImage: string;
