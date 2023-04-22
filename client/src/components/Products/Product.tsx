@@ -86,7 +86,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
                     <ShoppingCartOutlined role="button" name="add to cart" />
                 </ProductIcon>
                 <ProductIcon>
-                    <Link to={`/product/${product._id}`} role="link" name="view product details">
+                    <Link to={`/product/${product._id}`} role="link" aria-label="view product details">
                         <SearchOutlined />
                     </Link>
                 </ProductIcon>
