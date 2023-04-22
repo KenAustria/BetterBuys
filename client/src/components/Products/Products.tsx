@@ -68,7 +68,15 @@ const Products: React.FC<ProductsProps> = ({ category, filters, sort }) => {
         const sortProducts = (sortType: 'newest' | 'asc' | 'desc') => {
             switch (sortType) {
                 case 'newest':
-                    return [...filteredProducts].sort((a, b) => a.createdAt - b.createdAt);
+                    return [...filteredProducts].sort((a, b) => {
+                        if (a.createdAt && b.createdAt) {
+                            return a.createdAt - b.createdAt;
+                        } else if (a.createdAt) {
+                            return -1;
+                        } else {
+                            return 1;
+                        }
+                    });
                 case 'asc':
                     return [...filteredProducts].sort((a, b) => Number(a.productPrice) - Number(b.productPrice));
                 case 'desc':
