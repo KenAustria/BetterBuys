@@ -23,6 +23,7 @@ interface ProductsProps {
 }
 
 interface ProductObj {
+    _id: any;
     productTitle: string;
     productDescription: string;
     productImage: string;
@@ -56,9 +57,23 @@ const Products: React.FC<ProductsProps> = ({ category, filters, sort }) => {
         const filterProducts = () => {
             if (!category) return;
             setFilteredProducts(
-                products.filter((product) =>
-                    Object.entries(filters).every(([key, value]) => product[key].includes(value)),
-                ),
+                products
+                    .map((product) => ({
+                        ...product,
+                        _id: uuidv4(),
+                    }))
+                    .filter((product) => {
+                        if (filters.productTitle && !product.productTitle.includes(filters.productTitle)) {
+                            return false;
+                        }
+                        if (
+                            filters.productColor &&
+                            !filters.productColor.every((color) => product.productColor.includes(color))
+                        ) {
+                            return false;
+                        }
+                        return true;
+                    }),
             );
         };
         filterProducts();
