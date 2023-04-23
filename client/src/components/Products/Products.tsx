@@ -52,6 +52,17 @@ const Products: React.FC<ProductsProps> = ({ category, filters, sort }) => {
     const products = useFetchProducts(category);
     const [filteredProducts, setFilteredProducts] = useState<FilteredProduct[]>([]);
 
+    const product = {
+        _id: 'product-1',
+        productTitle: 'Product 1',
+        productDescription: 'This is the description for Product 1',
+        productImage: 'https://example.com/product-1.jpg',
+        productSize: ['Small', 'Medium', 'Large'],
+        productColor: ['Red', 'Green', 'Blue'],
+        productPrice: '10.00',
+        productCategories: ['Category A', 'Category B'],
+    };
+
     // if category is chosen, set products of chosen category
     useEffect(() => {
         const filterProducts = () => {
@@ -60,7 +71,7 @@ const Products: React.FC<ProductsProps> = ({ category, filters, sort }) => {
                 products
                     .map((product) => ({
                         ...product,
-                        _id: uuidv4(),
+                        _id: product._id || uuidv4(),
                     }))
                     .filter((product) => {
                         if (filters.productTitle && !product.productTitle.includes(filters.productTitle)) {
@@ -111,8 +122,8 @@ const Products: React.FC<ProductsProps> = ({ category, filters, sort }) => {
     return (
         <ProductsContainer>
             {category
-                ? filteredProducts.map((product) => <Product key={uuidv4()} product={product} />)
-                : products.slice(0, 4).map((product) => <Product key={uuidv4()} product={product} />)}
+                ? filteredProducts.map((product) => <Product key={product._id} product={product} />)
+                : products.slice(0, 4).map((product) => <Product key={product._id} product={product} />)}
         </ProductsContainer>
     );
 };

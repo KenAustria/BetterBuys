@@ -3,6 +3,17 @@ import { Link } from 'react-router-dom';
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@material-ui/icons';
 import React from 'react';
 
+export type ProductObj = {
+    _id: any;
+    productTitle: string;
+    productDescription: string;
+    productImage: string;
+    productSize: string[];
+    productColor: string[];
+    productPrice: string;
+    productCategories: string[];
+};
+
 const ProductInfo = styled.div`
     opacity: 0;
     width: 100%;
@@ -65,7 +76,7 @@ const ProductIcon = styled.div`
 
 export interface ProductProps {
     product: {
-        _id: any;
+        _id?: any;
         productTitle: string;
         productDescription: string;
         productImage: string;
