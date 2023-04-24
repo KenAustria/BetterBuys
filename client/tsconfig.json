@@ -15,7 +15,7 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
-        "types": ["styled-components", "uuid"]
+        "types": ["styled-components", "uuid", "node"]
     },
     "include": ["src"]
 }
