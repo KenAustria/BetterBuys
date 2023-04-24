@@ -16,6 +16,10 @@ import React from 'react';
 
 const KEY = process.env.REACT_APP_STRIPE;
 
+interface CartSummaryItemProps {
+    type?: string;
+}
+
 const CartContainer = styled.div``;
 
 const CartWrapper = styled.div`
@@ -141,7 +145,7 @@ const CartSummaryTitle = styled.h1`
     font-weight: 200;
 `;
 
-const CartSummaryItem = styled.div`
+const CartSummaryItem = styled.div<CartSummaryItemProps>`
     margin: 30px 0px;
     display: flex;
     justify-content: space-between;
