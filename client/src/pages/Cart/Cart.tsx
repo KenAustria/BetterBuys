@@ -35,7 +35,7 @@ const CartTop = styled.div`
     padding: 20px;
 `;
 
-const CartTopButton = styled.button`
+const CartTopButton = styled.button<{ type?: string }>`
     padding: 10px;
     font-weight: 600;
     cursor: pointer;
