@@ -39,9 +39,9 @@ const CartTopButton = styled.button`
     padding: 10px;
     font-weight: 600;
     cursor: pointer;
-    border: ${(props) => props.type === 'filled' && 'none'};
-    background-color: ${(props) => (props.type === 'filled' ? 'black' : 'transparent')};
-    color: ${(props) => props.type === 'filled' && 'white'};
+    border: ${(props) => props.type === 'button' && 'none'};
+    background-color: ${(props) => (props.type === 'button' ? 'black' : 'transparent')};
+    color: ${(props) => props.type === 'button' && 'white'};
 `;
 
 const CartTopTexts = styled.div`
