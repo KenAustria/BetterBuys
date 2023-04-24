@@ -20,6 +20,10 @@ interface CartSummaryItemProps {
     type?: string;
 }
 
+type StripeToken = {
+    id: string;
+};
+
 const CartContainer = styled.div``;
 
 const CartWrapper = styled.div`
@@ -166,11 +170,11 @@ const CartButton = styled.button`
 `;
 
 const Cart: React.FC = () => {
-    const [stripeToken, setStripeToken] = useState<number | null>(null);
+    const [stripeToken, setStripeToken] = useState<StripeToken | null>(null);
     const cart = useAppSelector((state: RootState) => state.cart);
     const navigate = useNavigate();
 
-    const onToken = (token) => {
+    const onToken = (token: any) => {
         setStripeToken(token);
     };
     console.log(stripeToken);
@@ -179,7 +183,7 @@ const Cart: React.FC = () => {
         const makeRequest = async () => {
             try {
                 const res = await userRequest.post('/checkout/payment', {
-                    tokenId: stripeToken.id,
+                    tokenId: stripeToken!.id,
                     amount: cart.total * 100,
                 });
                 console.log(res.data);
