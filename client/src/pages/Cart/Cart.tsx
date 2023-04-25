@@ -224,7 +224,9 @@ const Cart: React.FC = () => {
                                         <CartProductName>
                                             <b>Product:</b> {product.productTitle}
                                         </CartProductName>
-                                        <CartProductColor color={product.productColor} />
+                                        <CartProductColor
+                                            color={typeof product.productColor === 'string' ? product.productColor : ''}
+                                        />
                                         <CartProductSize>
                                             <b>Size:</b> {product.productSize}
                                         </CartProductSize>
