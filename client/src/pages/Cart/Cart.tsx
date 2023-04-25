@@ -237,7 +237,7 @@ const Cart: React.FC = () => {
                                         <Add />
                                     </CartProductAmountContainer>
                                     <CartProductPrice>
-                                        $ {product.productPrice * product.productQuantity}
+                                        $ {Number(product.productPrice) * product.productQuantity}
                                     </CartProductPrice>
                                 </CartPriceDetail>
                             </CartProduct>
