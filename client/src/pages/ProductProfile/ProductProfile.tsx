@@ -133,7 +133,7 @@ type Product = {
 };
 
 const ProductProfile: React.FC = () => {
-    const [product, setProduct] = useState<Product>({});
+    const [product, setProduct] = useState<Product | null>(null);
     const [productQuantity, setProductQuantity] = useState<number>(1);
     const [productColor, setProductColor] = useState<string | false>('');
     const [productSize, setProductSize] = useState<string | false>('');
@@ -153,7 +153,7 @@ const ProductProfile: React.FC = () => {
     }, [id]);
 
     // prevent negative quantity, only decrease quantity if greater than 1
-    const handleProductQuantity = (type) => {
+    const handleProductQuantity = (type: 'decrease' | 'increase') => {
         if (type === 'decrease') {
             productQuantity > 1 && setProductQuantity(productQuantity - 1);
         } else {
