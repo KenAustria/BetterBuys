@@ -32,7 +32,7 @@ const Success: React.FC = () => {
             try {
                 const res = await userRequest.post('/orders', {
                     userId: currentUser?._id,
-                    products: cart.products.map((item) => ({
+                    products: cart.products.map((item: { _id: string; _quantity: number }) => ({
                         productId: item._id,
                         quantity: item._quantity,
                     })),
