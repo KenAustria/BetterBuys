@@ -66,11 +66,7 @@ export const ProductFilterTitle = styled.span`
     font-weight: 200;
 `;
 
-interface ProductFilterColorProps {
-    productColor: string;
-}
-
-const ProductFilterColor = styled.div<ProductFilterColorProps>`
+const ProductFilterColor = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -133,7 +129,7 @@ type Product = {
 };
 
 const ProductProfile: React.FC = () => {
-    const [product, setProduct] = useState<Product | null>(null);
+    const [product, setProduct] = useState<Product>({});
     const [productQuantity, setProductQuantity] = useState<number>(1);
     const [productColor, setProductColor] = useState<string | false>('');
     const [productSize, setProductSize] = useState<string | false>('');
@@ -153,7 +149,7 @@ const ProductProfile: React.FC = () => {
     }, [id]);
 
     // prevent negative quantity, only decrease quantity if greater than 1
-    const handleProductQuantity = (type: 'decrease' | 'increase') => {
+    const handleProductQuantity = (type) => {
         if (type === 'decrease') {
             productQuantity > 1 && setProductQuantity(productQuantity - 1);
         } else {
