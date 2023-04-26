@@ -66,7 +66,11 @@ export const ProductFilterTitle = styled.span`
     font-weight: 200;
 `;
 
-const ProductFilterColor = styled.div`
+interface ProductFilterColorProps {
+    productColor: string;
+}
+
+const ProductFilterColor = styled.div<ProductFilterColorProps>`
     width: 20px;
     height: 20px;
     border-radius: 50%;
