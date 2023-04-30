@@ -1,6 +1,10 @@
-const router = require('express').Router();
-require("dotenv").config();
-const stripe = require('stripe')(process.env.STRIPE_KEY);
+import express from 'express';
+import dotenv from 'dotenv';
+import stripePackage from 'stripe';
+
+const router = express.Router();
+dotenv.config();
+const stripe = stripePackage(process.env.STRIPE_KEY);
 
 // when a payment is made in client side, stripe will return a tokenid
 // then a payment request is made to node server with tokenid to verify payment
@@ -22,4 +26,4 @@ router.post('/payment', (req, res) => {
 	);
 });
 
-module.exports = router;
+export default router;
