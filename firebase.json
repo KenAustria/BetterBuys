@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "BetterBuys",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
