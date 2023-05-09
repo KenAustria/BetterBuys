@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export type ProductObj = {
+    [key: string]: any; // the filters object is not guaranteed to have properties that exist on the ProductObj type
     productTitle: string;
     productDescription: string;
     productImage: string;

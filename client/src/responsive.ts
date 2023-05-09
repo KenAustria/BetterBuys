@@ -1,46 +1,6 @@
-import { css } from 'styled-components';
+import { css, CSSObject } from 'styled-components';
 
-export const extraSmallDevicePortrait = (props) => {
-    return css`
-        @media (min-width: 576px) {
-            ${props}
-        }
-    `;
-};
-
-export const smallDeviceLandscape = (props) => {
-    return css`
-        @media (min-width: 576px) {
-            ${props}
-        }
-    `;
-};
-
-export const mediumDevice = (props) => {
-    return css`
-        @media (min-width: 768px) {
-            ${props}
-        }
-    `;
-};
-
-export const largeDevice = (props) => {
-    return css`
-        @media (min-width: 992px) {
-            ${props}
-        }
-    `;
-};
-
-export const extraLargeDevice = (props) => {
-    return css`
-        @media (min-width: 1200px) {
-            ${props}
-        }
-    `;
-};
-
-export const mobile = (props) => {
+export const mobile = (props: CSSObject) => {
     return css`
         @media only screen and (max-width: 360px) {
             ${props}
@@ -48,7 +8,7 @@ export const mobile = (props) => {
     `;
 };
 
-export const tablet = (props) => {
+export const tablet = (props: CSSObject) => {
     return css`
         @media only screen and (max-width: 768px) {
             ${props}
@@ -56,7 +16,7 @@ export const tablet = (props) => {
     `;
 };
 
-export const desktop = (props) => {
+export const desktop = (props: CSSObject) => {
     return css`
         @media only screen and (max-width: 1366px) {
             ${props}

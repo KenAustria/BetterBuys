@@ -1,10 +1,12 @@
-const Cart = require('../models/Cart');
-const router = require('express').Router();
-const {
-	verifyToken,
-	verifyTokenAndAuthorization,
-	verifyTokenAndAdmin,
-} = require('./verifyToken');
+import express from 'express';
+import Cart from '../models/Cart.js';
+import { 
+  verifyToken, 
+  verifyTokenAndAuthorization, 
+  verifyTokenAndAdmin 
+} from './verifyToken.js';
+
+const router = express.Router();
 
 // CREATE CART
 router.post('/', verifyToken, async (req, res) => {
@@ -94,4 +96,4 @@ router.get('/income', verifyTokenAndAdmin, async (req, res) => {
 	}
 });
 
-module.exports = router;
+export default router;

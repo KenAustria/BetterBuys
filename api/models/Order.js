@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-mongoose.set('strictQuery', false);
+import mongoose from 'mongoose';
+
 const OrderSchema = new mongoose.Schema(
   {
     userId: { type: String, required: true },
@@ -21,4 +21,4 @@ const OrderSchema = new mongoose.Schema(
   { timestamp: true }
 );
 
-module.exports = mongoose.model('Order', OrderSchema);
+export default mongoose.model('Order', OrderSchema);

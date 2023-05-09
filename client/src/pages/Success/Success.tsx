@@ -31,8 +31,8 @@ const Success: React.FC = () => {
         const createOrder = async () => {
             try {
                 const res = await userRequest.post('/orders', {
-                    userId: currentUser._id,
-                    products: cart.products.map((item) => ({
+                    userId: currentUser?._id,
+                    products: cart.products.map((item: { _id: string; _quantity: number }) => ({
                         productId: item._id,
                         quantity: item._quantity,
                     })),

@@ -16,6 +16,14 @@ import React from 'react';
 
 const KEY = process.env.REACT_APP_STRIPE;
 
+interface CartSummaryItemProps {
+    type?: string;
+}
+
+type StripeToken = {
+    id: string;
+};
+
 const CartContainer = styled.div``;
 
 const CartWrapper = styled.div`
@@ -35,13 +43,13 @@ const CartTop = styled.div`
     padding: 20px;
 `;
 
-const CartTopButton = styled.button`
+const CartTopButton = styled.button<{ type?: string }>`
     padding: 10px;
     font-weight: 600;
     cursor: pointer;
-    border: ${(props) => props.type === 'filled' && 'none'};
-    background-color: ${(props) => (props.type === 'filled' ? 'black' : 'transparent')};
-    color: ${(props) => props.type === 'filled' && 'white'};
+    border: ${(props) => props.type === 'button' && 'none'};
+    background-color: ${(props) => (props.type === 'button' ? 'black' : 'transparent')};
+    color: ${(props) => props.type === 'button' && 'white'};
 `;
 
 const CartTopTexts = styled.div`
@@ -137,11 +145,11 @@ const CartSummary = styled.div`
     height: 50vh;
 `;
 
-const CartSummaryTitle = styled.h2`
+const CartSummaryTitle = styled.h1`
     font-weight: 200;
 `;
 
-const CartSummaryItem = styled.div`
+const CartSummaryItem = styled.div<CartSummaryItemProps>`
     margin: 30px 0px;
     display: flex;
     justify-content: space-between;
@@ -162,11 +170,11 @@ const CartButton = styled.button`
 `;
 
 const Cart: React.FC = () => {
-    const [stripeToken, setStripeToken] = useState<number | null>(null);
+    const [stripeToken, setStripeToken] = useState<StripeToken | null>(null);
     const cart = useAppSelector((state: RootState) => state.cart);
     const navigate = useNavigate();
 
-    const onToken = (token) => {
+    const onToken = (token: any) => {
         setStripeToken(token);
     };
     console.log(stripeToken);
@@ -175,7 +183,7 @@ const Cart: React.FC = () => {
         const makeRequest = async () => {
             try {
                 const res = await userRequest.post('/checkout/payment', {
-                    tokenId: stripeToken.id,
+                    tokenId: stripeToken!.id,
                     amount: cart.total * 100,
                 });
                 console.log(res.data);
@@ -195,30 +203,30 @@ const Cart: React.FC = () => {
             <Navbar />
             <Promotion />
             <CartWrapper>
-                <CartTitle aria-label="Cart Title">YOUR BAG</CartTitle>
+                <CartTitle>YOUR BAG</CartTitle>
                 <CartTop>
                     <Link to="/">
-                        <CartTopButton aria-label="Continue Shopping">CONTINUE SHOPPING</CartTopButton>
+                        <CartTopButton>CONTINUE SHOPPING</CartTopButton>
                     </Link>
                     <CartTopTexts>
-                        <CartTopText aria-label="Shopping Bag">Shopping Bag(0)</CartTopText>
-                        <CartTopText aria-label="Your Wishlist">Your Wishlist (0)</CartTopText>
+                        <CartTopText>Shopping Bag(0)</CartTopText>
+                        <CartTopText>Your Wishlist (0)</CartTopText>
                     </CartTopTexts>
-                    <CartTopButton aria-label="Apply Coupon" type="filled">
-                        APPLY COUPON
-                    </CartTopButton>
+                    <CartTopButton type="filled">APPLY COUPON</CartTopButton>
                 </CartTop>
                 <CartBottom>
                     <CartInfo>
                         {cart.products.map((product) => (
                             <CartProduct key={uuidv4()}>
                                 <CartProductDetail>
-                                    <CartImage src={product.productImage} alt={product.productTitle} />
+                                    <CartImage src={product.productImage} />
                                     <CartDetails>
                                         <CartProductName>
                                             <b>Product:</b> {product.productTitle}
                                         </CartProductName>
-                                        <CartProductColor color={product.productColor} />
+                                        <CartProductColor
+                                            color={typeof product.productColor === 'string' ? product.productColor : ''}
+                                        />
                                         <CartProductSize>
                                             <b>Size:</b> {product.productSize}
                                         </CartProductSize>
@@ -226,14 +234,12 @@ const Cart: React.FC = () => {
                                 </CartProductDetail>
                                 <CartPriceDetail>
                                     <CartProductAmountContainer>
-                                        <Remove aria-label="remove product quantity" />
-                                        <CartProductAmount aria-label="product quantity">
-                                            {product.productQuantity}
-                                        </CartProductAmount>
-                                        <Add aria-label="add product quantity" />
+                                        <Remove />
+                                        <CartProductAmount>{product.productQuantity}</CartProductAmount>
+                                        <Add />
                                     </CartProductAmountContainer>
-                                    <CartProductPrice aria-label="cart price">
-                                        $ {product.productPrice * product.productQuantity}
+                                    <CartProductPrice>
+                                        $ {Number(product.productPrice) * product.productQuantity}
                                     </CartProductPrice>
                                 </CartPriceDetail>
                             </CartProduct>
@@ -241,24 +247,22 @@ const Cart: React.FC = () => {
                         <Hr />
                     </CartInfo>
                     <CartSummary>
-                        <CartSummaryTitle aria-label="order summary">ORDER SUMMARY</CartSummaryTitle>
+                        <CartSummaryTitle>ORDER SUMMARY</CartSummaryTitle>
                         <CartSummaryItem>
-                            <CartSummaryItemText aria-label="subtotal">Subtotal</CartSummaryItemText>
-                            <CartSummaryItemPrice aria-label="cart total">$ {cart.total}</CartSummaryItemPrice>
+                            <CartSummaryItemText>Subtotal</CartSummaryItemText>
+                            <CartSummaryItemPrice>$ {cart.total}</CartSummaryItemPrice>
                         </CartSummaryItem>
                         <CartSummaryItem>
-                            <CartSummaryItemText aria-label="estimated shipping">
-                                Estimated Shipping
-                            </CartSummaryItemText>
-                            <CartSummaryItemPrice aria-label="item shipping price">$ 5.90</CartSummaryItemPrice>
+                            <CartSummaryItemText>Estimated Shipping</CartSummaryItemText>
+                            <CartSummaryItemPrice>$ 5.90</CartSummaryItemPrice>
                         </CartSummaryItem>
                         <CartSummaryItem>
-                            <CartSummaryItemText aria-label="shipping discount">Shipping Discount</CartSummaryItemText>
-                            <CartSummaryItemPrice aria-label="item shipping discount">$ -5.90</CartSummaryItemPrice>
+                            <CartSummaryItemText>Shipping Discount</CartSummaryItemText>
+                            <CartSummaryItemPrice>$ -5.90</CartSummaryItemPrice>
                         </CartSummaryItem>
                         <CartSummaryItem type="total">
-                            <CartSummaryItemText aria-label="total">Total</CartSummaryItemText>
-                            <CartSummaryItemPrice aria-label="cart total">$ {cart.total}</CartSummaryItemPrice>
+                            <CartSummaryItemText>Total</CartSummaryItemText>
+                            <CartSummaryItemPrice>$ {cart.total}</CartSummaryItemPrice>
                         </CartSummaryItem>
                         <StripeCheckout
                             name="Better Buys"
@@ -270,7 +274,7 @@ const Cart: React.FC = () => {
                             token={onToken}
                             stripeKey={KEY}
                         >
-                            <CartButton aria-label="checkout">CHECKOUT NOW</CartButton>
+                            <CartButton>CHECKOUT NOW</CartButton>
                         </StripeCheckout>
                     </CartSummary>
                 </CartBottom>

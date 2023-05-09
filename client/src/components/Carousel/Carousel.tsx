@@ -1,9 +1,22 @@
 import { v4 as uuidv4 } from 'uuid';
-import styled from 'styled-components';
+import { HTMLAttributes } from 'react';
 import React, { useState } from 'react';
 import { carouselSlides } from '../../data';
 import { mobile, tablet } from '../../responsive';
+import styled, { ThemedStyledProps } from 'styled-components';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons';
+
+interface CarouselArrowProps {
+    direction: 'left' | 'right';
+}
+
+type CarouselWrapperProps = {
+    slideIndex: number;
+};
+
+interface SlideProps extends HTMLAttributes<HTMLDivElement> {
+    bg: string;
+}
 
 export const CarouselContainer = styled.div`
     width: 100%;
@@ -15,7 +28,7 @@ export const CarouselContainer = styled.div`
     ${tablet({ display: 'none' })}
 `;
 
-export const CarouselArrow = styled.div`
+export const CarouselArrow = styled.div<CarouselArrowProps>`
     width: 50px;
     height: 50px;
     background-color: #fff7f7;
@@ -34,14 +47,14 @@ export const CarouselArrow = styled.div`
     z-index: 2;
 `;
 
-export const CarouselWrapper = styled.div`
+export const CarouselWrapper = styled.div<CarouselWrapperProps>`
     height: 100%;
     display: flex;
     transition: all 1.5s ease;
     transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
-export const CarouselSlide = styled.div`
+export const CarouselSlide = styled.div<SlideProps>`
     width: 100vw;
     height: 100vh;
     display: flex;

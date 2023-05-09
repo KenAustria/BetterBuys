@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-mongoose.set('strictQuery', false);
+import mongoose from 'mongoose';
+
 const ProductSchema = new mongoose.Schema(
 	{
 		productTitle: { type: String, required: true, unique: true },
@@ -14,4 +14,4 @@ const ProductSchema = new mongoose.Schema(
 	{ timestamp: true }
 );
 
-module.exports = mongoose.model('Product', ProductSchema);
+export default mongoose.model('Product', ProductSchema);

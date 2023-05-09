@@ -14,12 +14,7 @@ const ProductsContainer = styled.div`
 `;
 
 interface ProductsProps {
-    category: {
-        id: number;
-        img: string;
-        title: string;
-        category: string;
-    };
+    category: string;
     filters: {
         productTitle: string;
         productColor: Array<string>;
@@ -27,7 +22,8 @@ interface ProductsProps {
     sort: string;
 }
 
-type FilteredProduct = {
+interface ProductObj {
+    _id: any;
     productTitle: string;
     productDescription: string;
     productImage: string;
@@ -35,6 +31,19 @@ type FilteredProduct = {
     productColor: Array<string>;
     productPrice: string;
     productCategories: Array<string>;
+    createdAt?: number;
+}
+
+type FilteredProduct = ProductObj & {
+    _id: any;
+    productTitle: string;
+    productDescription: string;
+    productImage: string;
+    productSize: Array<string>;
+    productColor: Array<string>;
+    productPrice: string;
+    productCategories: Array<string>;
+    createdAt?: number;
 };
 
 const Products: React.FC<ProductsProps> = ({ category, filters, sort }) => {
@@ -43,14 +52,39 @@ const Products: React.FC<ProductsProps> = ({ category, filters, sort }) => {
     const products = useFetchProducts(category);
     const [filteredProducts, setFilteredProducts] = useState<FilteredProduct[]>([]);
 
+    const product = {
+        _id: 'product-1',
+        productTitle: 'Product 1',
+        productDescription: 'This is the description for Product 1',
+        productImage: 'https://example.com/product-1.jpg',
+        productSize: ['Small', 'Medium', 'Large'],
+        productColor: ['Red', 'Green', 'Blue'],
+        productPrice: '10.00',
+        productCategories: ['Category A', 'Category B'],
+    };
+
     // if category is chosen, set products of chosen category
     useEffect(() => {
         const filterProducts = () => {
             if (!category) return;
             setFilteredProducts(
-                products.filter((product) =>
-                    Object.entries(filters).every(([key, value]) => product[key].includes(value)),
-                ),
+                products
+                    .map((product) => ({
+                        ...product,
+                        _id: product._id || uuidv4(),
+                    }))
+                    .filter((product) => {
+                        if (filters.productTitle && !product.productTitle.includes(filters.productTitle)) {
+                            return false;
+                        }
+                        if (
+                            filters.productColor &&
+                            !filters.productColor.every((color) => product.productColor.includes(color))
+                        ) {
+                            return false;
+                        }
+                        return true;
+                    }),
             );
         };
         filterProducts();
@@ -58,19 +92,29 @@ const Products: React.FC<ProductsProps> = ({ category, filters, sort }) => {
 
     // filter products by price
     useEffect(() => {
-        const sortProducts = (sortType) => {
+        const sortProducts = (sortType: 'newest' | 'asc' | 'desc') => {
             switch (sortType) {
                 case 'newest':
-                    return [...filteredProducts].sort((a, b) => a.createdAt - b.createdAt);
+                    return [...filteredProducts].sort((a, b) => {
+                        if (a.createdAt && b.createdAt) {
+                            return a.createdAt - b.createdAt;
+                        } else if (a.createdAt) {
+                            return -1;
+                        } else {
+                            return 1;
+                        }
+                    });
                 case 'asc':
-                    return [...filteredProducts].sort((a, b) => a.productPrice - b.productPrice);
+                    return [...filteredProducts].sort((a, b) => Number(a.productPrice) - Number(b.productPrice));
                 case 'desc':
-                    return [...filteredProducts].sort((a, b) => b.productPrice - a.productPrice);
+                    return [...filteredProducts].sort((a, b) => Number(b.productPrice) - Number(a.productPrice));
                 default:
                     return filteredProducts;
             }
         };
-        setFilteredProducts(sortProducts(sort));
+        if (sort === 'newest' || sort === 'asc' || sort === 'desc') {
+            setFilteredProducts(sortProducts(sort));
+        }
     }, [sort]);
 
     /* display filtered products if a category is chosen
@@ -78,8 +122,8 @@ const Products: React.FC<ProductsProps> = ({ category, filters, sort }) => {
     return (
         <ProductsContainer>
             {category
-                ? filteredProducts.map((product) => <Product key={uuidv4()} product={product} />)
-                : products.slice(0, 4).map((product) => <Product key={uuidv4()} product={product} />)}
+                ? filteredProducts.map((product) => <Product key={product._id} product={product} />)
+                : products.slice(0, 4).map((product) => <Product key={product._id} product={product} />)}
         </ProductsContainer>
     );
 };

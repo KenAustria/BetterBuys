@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-mongoose.set('strictQuery', false);
+import mongoose from 'mongoose';
+
 const CartSchema = new mongoose.Schema(
   {
     userId: { type: String, required: true },
@@ -18,4 +18,4 @@ const CartSchema = new mongoose.Schema(
   { timestamp: true }
 );
 
-module.exports = mongoose.model('Cart', CartSchema);
+export default mongoose.model('Cart', CartSchema);

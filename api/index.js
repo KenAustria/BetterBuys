@@ -1,14 +1,14 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const authRoute = require('./routes/auth');
-const userRoute = require('./routes/user');
-const productRoute = require('./routes/product');
-const cartRoute = require('./routes/cart');
-const orderRoute = require('./routes/order');
-const stripeRoute = require('./routes/stripe');
-const cors = require('cors');
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import authRoute from './routes/auth.js';
+import userRoute from './routes/user.js';
+import productRoute from './routes/product.js';
+import cartRoute from './routes/cart.js';
+import orderRoute from './routes/order.js';
+import stripeRoute from './routes/stripe.js';
+import cors from 'cors';
 dotenv.config();
 
 mongoose.connect(process.env.MONDODB_URL, {
