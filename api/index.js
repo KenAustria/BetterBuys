@@ -11,10 +11,12 @@ import stripeRoute from './routes/stripe.js';
 import cors from 'cors';
 dotenv.config();
 
-mongoose
-	.connect(process.env.MONDODB_URL)
-	.then(() => console.log('MongoDB connection successful'))
-	.catch(error => console.log(error));
+mongoose.connect(process.env.MONDODB_URL, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+  })
+  .then(() => console.log('MongoDB connection successful'))
+  .catch(error => console.log(error));  
 
 app.use(cors());
 app.use(express.json());

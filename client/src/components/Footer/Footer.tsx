@@ -80,42 +80,55 @@ const Footer: React.FC = () => {
     return (
         <FooterContainer>
             <LeftFooter>
-                <FooterLogo>BETTER BUYS</FooterLogo>
-                <FooterDescription>
-                    Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at
-                    dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor.
-                    Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula
-                    lacinia aliquet.
+                <FooterLogo alt="Better Buys logo">BETTER BUYS</FooterLogo>
+                <FooterDescription hidden>
+                    Copyright © 2023 Better Buys. All rights reserved. Stay Connected with Us:
                 </FooterDescription>
-                <SocialContainer>
-                    <SocialIcon color="3B5999">
+                <SocialContainer role="presentation">
+                    <SocialIcon color="3B5999" title="Follow us on Facebook">
                         <Facebook />
                     </SocialIcon>
-                    <SocialIcon color="E4405F">
+                    <SocialIcon color="E4405F" title="Follow us on Instagram">
                         <Instagram />
                     </SocialIcon>
-                    <SocialIcon color="55ACEE">
+                    <SocialIcon color="55ACEE" title="Follow us on Twitter">
                         <Twitter />
                     </SocialIcon>
-                    <SocialIcon color="E60023">
+                    <SocialIcon color="E60023" title="Follow us on Pinterest">
                         <Pinterest />
                     </SocialIcon>
                 </SocialContainer>
             </LeftFooter>
-            <FooterCenter>
+            <FooterCenter role="complementary">
                 <FooterTitle>Useful Links</FooterTitle>
-                <FooterList>
-                    <FooterListItem>Home</FooterListItem>
-                    <FooterListItem>Cart</FooterListItem>
-                    <FooterListItem>Phones</FooterListItem>
-                    <FooterListItem>Accessories</FooterListItem>
-                    <FooterListItem>My Account</FooterListItem>
-                    <FooterListItem>Order Tracking</FooterListItem>
-                    <FooterListItem>Wishlist</FooterListItem>
-                    <FooterListItem>Terms</FooterListItem>
+                <FooterList aria-label="Footer Navigation">
+                    <FooterListItem>
+                        <a href="#home">Home</a>
+                    </FooterListItem>
+                    <FooterListItem>
+                        <a href="#cart">Cart</a>
+                    </FooterListItem>
+                    <FooterListItem>
+                        <a href="#phones">Phones</a>
+                    </FooterListItem>
+                    <FooterListItem>
+                        <a href="#accessories">Accessories</a>
+                    </FooterListItem>
+                    <FooterListItem>
+                        <a href="#my-account">My Account</a>
+                    </FooterListItem>
+                    <FooterListItem>
+                        <a href="#order-tracking">Order Tracking</a>
+                    </FooterListItem>
+                    <FooterListItem>
+                        <a href="#wishlist">Wishlist</a>
+                    </FooterListItem>
+                    <FooterListItem>
+                        <a href="#terms">Terms</a>
+                    </FooterListItem>
                 </FooterList>
             </FooterCenter>
-            <FooterRight>
+            <FooterRight role="complementary">
                 <FooterTitle>Contact</FooterTitle>
                 <ContactItem>
                     <Room style={{ marginRight: '10px' }} /> 123 Zzyzx Road, California 56789
@@ -126,7 +139,7 @@ const Footer: React.FC = () => {
                 <ContactItem>
                     <MailOutline style={{ marginRight: '10px' }} /> kenaustria@dev
                 </ContactItem>
-                <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
+                <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" alt="Accepted Payment Methods" />
             </FooterRight>
         </FooterContainer>
     );

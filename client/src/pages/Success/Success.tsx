@@ -51,7 +51,7 @@ const Success: React.FC = () => {
                 ? `Order has been created successfully. Your order number is ${orderId}`
                 : `Successfull. Your order is being prepared...`}
             <Link to="/" style={{ textDecoration: 'none' }}>
-                <SuccessButton>Go to Homepage</SuccessButton>
+                <SuccessButton aria-label="Go to Homepage">Go to Homepage</SuccessButton>
             </Link>
         </SuccessContainer>
     );
